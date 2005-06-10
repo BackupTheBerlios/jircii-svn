@@ -1,8 +1,11 @@
 package rero.util;
 
+import javax.swing.SwingUtilities;
+
 public class TimedEvent
 {
    protected TimerListener listener;
+   protected Runnable executeMe;
    protected long lastTouched;
    protected int  repeats;
 
@@ -24,6 +27,13 @@ public class TimedEvent
        lastTouched = System.currentTimeMillis();
        repeats = _repeats;
        waitTime = _waitTime;
+
+       executeMe = new Runnable() {
+           public void run()
+           {
+              listener.timerExecute();
+           }
+       };
    }
 
    public TimerListener getListener()
@@ -48,7 +58,7 @@ public class TimedEvent
 
    public void timerExecute()
    {
-      listener.timerExecute();
+      SwingUtilities.invokeLater(executeMe);
 
       lastTouched = System.currentTimeMillis();
 
