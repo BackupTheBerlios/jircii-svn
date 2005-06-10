@@ -231,6 +231,7 @@ public class Parsed1459 implements FrameworkConstants
       {
           String[] data = parser.getParsedStrings();
           eventInformation.put($SERVER$,  data[0]);
+          eventInformation.put($NICK$,    data[0]);
           eventInformation.put($SOURCE$,  data[0]);
 
           return eventInformation;
@@ -240,7 +241,7 @@ public class Parsed1459 implements FrameworkConstants
       if (parser.matches())
       {
           String[] data = parser.getParsedStrings();
-          eventInformation.put($NICK$,  data[0]);
+          eventInformation.put($NICK$,    data[0]);
           eventInformation.put($SOURCE$,  data[0]);
       }
 
