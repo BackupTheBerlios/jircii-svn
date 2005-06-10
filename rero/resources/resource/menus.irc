@@ -291,7 +291,7 @@ menubar "&Window"
       activateWindow("%STATUS%");
    }
 
-   @windows = getWindows();
+   @windows = subarray(getWindows(), 1);
 
    $x = 2;
    foreach $var (@windows)

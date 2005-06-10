@@ -20,7 +20,7 @@ public class NotifyData extends Feature implements ChatListener, TimerListener, 
    protected Set     signedon  = new HashSet();
    protected Lag     lag       = new Lag();
 
-   protected boolean isChecking = false;
+   protected int isChecking = 0;
 
    public void reset()
    {
@@ -146,7 +146,7 @@ public class NotifyData extends Feature implements ChatListener, TimerListener, 
    {
       if (getCapabilities().isConnected())
       {
-         isChecking = true;
+         isChecking++;
 
          StringBuffer temp = new StringBuffer("ISON :");
          Iterator i = users.keySet().iterator();
@@ -213,7 +213,7 @@ public class NotifyData extends Feature implements ChatListener, TimerListener, 
          signedon = newbatch;
       }
 
-      isChecking = false;
+      isChecking--;
 
       return EVENT_HALT;
    }
@@ -221,6 +221,6 @@ public class NotifyData extends Feature implements ChatListener, TimerListener, 
    public boolean isChatEvent(String eventId, HashMap eventDescription)
    {
       // :lug.mtu.edu 303 ^butang :shrunk mutilator `butane
-      return (isChecking && (eventId.equals("303") || eventId.equals("461"))) || eventId.equals("376");
+      return (isChecking > 0 && (eventId.equals("303") || eventId.equals("461"))) || eventId.equals("376");
    }
 }
