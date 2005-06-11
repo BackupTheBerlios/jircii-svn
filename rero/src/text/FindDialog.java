@@ -17,12 +17,14 @@ public class FindDialog extends JDialog implements ActionListener, KeyListener
  
    public void showDialog()
    {
+      rero.gui.KeyBindings.is_dialog_active = true;
       results = null;
       next.setEnabled(false);
       prev.setEnabled(true);
       pack();
       setLocationRelativeTo(display);
       setVisible(true);
+      search.requestFocus();
    }
 
    public FindDialog(Component comp, String title, WrappedDisplay _display, String text)
@@ -36,6 +38,12 @@ public class FindDialog extends JDialog implements ActionListener, KeyListener
        search = new JTextField(text, 20);
        search.addKeyListener(this);
        search.addActionListener(this);
+       search.addFocusListener(new FocusAdapter() {
+           public void focusLost(FocusEvent ev) 
+           {
+              search.requestFocus();
+           }
+       }); 
 
        JPanel panel = new JPanel();
        panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));       
@@ -64,7 +72,14 @@ public class FindDialog extends JDialog implements ActionListener, KeyListener
 
        getContentPane().add(buttons, BorderLayout.SOUTH);
 
-       setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+       addWindowListener(new WindowAdapter()
+       {
+          public void windowClosing(WindowEvent e)
+          {
+             rero.gui.KeyBindings.is_dialog_active = false;
+             setVisible(false);
+          }
+       });
    }
 
    public static void main(String args[])
@@ -80,7 +95,13 @@ public class FindDialog extends JDialog implements ActionListener, KeyListener
    public void keyPressed(KeyEvent ev) { }
    public void keyReleased(KeyEvent ev) 
    { 
-       if (!ev.isActionKey() && ev.getKeyCode() != KeyEvent.VK_ENTER)
+       if (ev.getKeyCode() == KeyEvent.VK_ESCAPE)
+       {
+          rero.gui.KeyBindings.is_dialog_active = false;
+          setVisible(false);
+          ev.consume();
+       }
+       else if (!ev.isActionKey() && ev.getKeyCode() != KeyEvent.VK_ENTER)
        {
           results = null;
           next.setEnabled(search.getText().length() > 0);

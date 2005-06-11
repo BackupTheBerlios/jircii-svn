@@ -2,6 +2,16 @@ Beta   35 Release 06.11.05
 ====
 - upgraded scripting library to Sleep 2.0-release candidate bringing 
   several bug fixes and a few new features
+  -- foreach loops now automatically convert hash parameters into their keyset.
+  -- added a new foreach syntax:
+     foreach $index => $value (source) { }
+  -- the remove() function now takes multiple parameters for multiple items to 
+      remove.
+  -- fixed a bug parsing tuple assignments in certain cases.
+  -- added a &subarray(@array, n, [m]) function for extracting an array slice
+  -- reworked the pack/unpack format strings to make them more useful
+  -- fixed a bug with the pack/unpack format string parser not assigning the 
+     specified integer to the last format character.
 - fixed Window menubar menu showing the Status window twice.
 - fixed bug with empty ison replies echo'ing to the status window (I think)
 - removed synchronization from the channel users data structure.  the 

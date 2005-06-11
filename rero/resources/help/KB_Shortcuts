@@ -73,3 +73,8 @@
 <br>
 <br>Scrolling through the contents of a window can be accomplished using Page Up and Page down.
 <br>
+<br><b>Search Scrollback Buffer</b></font>
+<br>
+<br>Searching through the scrollback buffer of a window can be accomplished using Alt+F, Ctrl+F, or Meta+F.  The window can be closed with the Escape key.
+<br>
+
