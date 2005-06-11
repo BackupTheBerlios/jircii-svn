@@ -1,5 +1,5 @@
  ------- -------------------- ---------   ---------------  ------- ---------
-jIRCii - Beta (34) 05.08.05 - README
+jIRCii - Beta (35) 06.11.05 - README
 -  ------------- -------- -   ---------------- --       -    -     -     - - -
 
 The official jIRCii homepage is at: http://jircii.hick.org

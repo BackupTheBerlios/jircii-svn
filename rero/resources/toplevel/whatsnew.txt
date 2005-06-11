@@ -1,3 +1,22 @@
+Beta   35 Release 06.11.05
+====
+- upgraded scripting library to Sleep 2.0-release candidate bringing 
+  several bug fixes and a few new features
+- fixed Window menubar menu showing the Status window twice.
+- fixed bug with empty ison replies echo'ing to the status window (I think)
+- removed synchronization from the channel users data structure.  the 
+  hope is to prevent a deadlock situation in the future.
+- setup all timer execution to happen in the swing event thread.  this 
+  has its pros and its cons.  main pro is it will mean a much more stable 
+  jIRCii (in theory) cons, heavy timer activity could cause jIRCii to take 
+  a performance hit.
+- fixed a bug with topic/mode changes by ChanServ not showing any nick as 
+  having changed the topic/mode.
+- made text selection y pt->line number translation more accurate
+- fixed bug where antialias hint was not being used to calculate font width 
+- hacked in a find dialog for searching jIRCii windows, use Ctrl+F, 
+  Alt+F, Meta+F to invoke it.
+
 Beta   34 Release 05.08.05
 ====
 - users who are no longer visible to the irc session (i.e. quits, people 
