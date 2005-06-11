@@ -2,6 +2,21 @@
 # menu.irc - Default jIRC Menu Items and Keyboard Shortcuts
 ##################################################################################
 
+bind Alt+F
+{
+   showSearchDialog(getActiveWindow());
+}
+
+bind Ctrl+F
+{
+   showSearchDialog(getActiveWindow());
+}
+
+bind Meta+F
+{
+   showSearchDialog(getActiveWindow());
+}
+
 bind Ctrl+X
 {
    cycleQuery();

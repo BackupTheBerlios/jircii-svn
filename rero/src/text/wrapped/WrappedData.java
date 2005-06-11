@@ -40,6 +40,40 @@ public class WrappedData implements BoundedRangeModel
         event = new ChangeEvent(this);
     }
 
+    public ListIterator find(String text)
+    {
+        LinkedList values = new LinkedList();
+
+        int x = 0;
+
+        WrappedContainer temp = last;
+        while (temp != null)
+        {
+           if (temp.getText().indexOf(text) > -1)
+           {
+               values.add(new Integer(x));
+           }
+
+           x++;
+           temp = temp.prev;
+        }
+
+        ListIterator i = values.listIterator();
+
+        while (i.hasNext())
+        {
+           int tempzz = ( (Integer)i.next() ).intValue();
+
+           if (tempzz >= currentValue) 
+           { 
+              i.previous();
+              break; 
+           }
+        }
+
+        return i;
+    }
+
     public void dirty()
     {
         WrappedContainer temp = last;

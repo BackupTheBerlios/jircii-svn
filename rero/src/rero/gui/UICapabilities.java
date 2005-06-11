@@ -256,4 +256,16 @@ public class UICapabilities
    {
       listeners = l;
    }
+
+   public void showSearchDialog(String window)
+   {
+      StatusWindow temp = clientSession.getWindow(window);
+
+      if (temp.isLegalWindow())
+      {
+         if (window.equals("%STATUS%")) { window = "Status"; }
+
+         temp.getDisplay().showSearchDialog("Search " + window);
+      }
+   }
 }

@@ -33,7 +33,8 @@ public class UIOperators implements Function, Loadable
           "&refreshMenubar",
           "&showOptionDialog",
           "&showHelpDialog",
-          "&showAboutDialog"
+          "&showAboutDialog",
+          "&showSearchDialog"
       };
 
       for (int x = 0; x < contents.length; x++)
@@ -106,6 +107,10 @@ public class UIOperators implements Function, Loadable
       else if (function.equals("&showAboutDialog"))
       {
           session.getCapabilities().getGlobalCapabilities().showAboutDialog();         
+      }
+      else if (function.equals("&showSearchDialog"))
+      {
+          session.getCapabilities().getUserInterface().showSearchDialog(BridgeUtilities.getString(locals, "%STATUS%"));
       }
   
       return SleepUtils.getEmptyScalar();

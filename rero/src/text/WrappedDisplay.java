@@ -19,6 +19,17 @@ public class WrappedDisplay extends JComponent implements MouseWheelListener, Mo
    protected WrappedDisplayComponent display;
    protected JScrollBar              scroller;
    protected WrappedData             data;
+   protected FindDialog              search = null;
+
+   public void showSearchDialog(String title)
+   {
+      if (search == null)
+      {
+         search = new FindDialog(this, title, this, "");
+      }
+
+      search.showDialog();
+   }
 
    public void addText(String text)
    {
@@ -40,9 +51,21 @@ public class WrappedDisplay extends JComponent implements MouseWheelListener, Mo
       data.reset();
    }
 
+   /** returns a linked list of integers indicating which lines the text was found at */
+   public ListIterator find(String text)
+   {
+      return data.find(text);
+   }
+
    public void scroll(int scrollSize)
    {
       data.setValue(data.getValue() + scrollSize);
+      repaint();
+   }
+
+   public void scrollTo(int specifics)
+   {
+      data.setValue(specifics);
       repaint();
    }
 
