@@ -36,8 +36,7 @@ public class Channel implements FrameworkConstants, Comparator
        this.name = name;
     }
 
-    protected SortedSet allusers  = new TreeSet(this); // was a synchronized sorted set, removed the synchronization
-                                                       // in hopes of fixing a possible deadlock condition -- rsm 10 Jun 05
+    protected SortedSet allusers  = Collections.synchronizedSortedSet(new TreeSet(this));  // keep this synchronized or bad things will happen
 
     public int compare(Object aa, Object bb)
     {
