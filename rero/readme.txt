@@ -42,3 +42,4 @@ The sleep library is available at http://jirc.hick.org/sleep/
 All of the jIRCii source code is released under the artistic license.  See 
 license.txt for more details.
 
+
