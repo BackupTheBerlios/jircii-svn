@@ -14,8 +14,6 @@ Beta   35 Release 06.11.05
      specified integer to the last format character.
 - fixed Window menubar menu showing the Status window twice.
 - fixed bug with empty ison replies echo'ing to the status window (I think)
-- removed synchronization from the channel users data structure.  the 
-  hope is to prevent a deadlock situation in the future.
 - setup all timer execution to happen in the swing event thread.  this 
   has its pros and its cons.  main pro is it will mean a much more stable 
   jIRCii (in theory) cons, heavy timer activity could cause jIRCii to take 
