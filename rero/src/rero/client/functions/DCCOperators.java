@@ -84,7 +84,7 @@ public class DCCOperators extends Feature implements Loadable
    {
       public Scalar evaluate(String f, ScriptInstance si, Stack locals)
       {
-         return SleepUtils.getScalar(new ListenDCC().getListenerPort());
+         return SleepUtils.getScalar(ListenDCC.getNextPort());
       }
    }
 
