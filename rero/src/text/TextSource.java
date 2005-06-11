@@ -163,9 +163,6 @@ public class TextSource
 
       public void rehashValue()
       {
-          clientFont  = ClientState.getClientState().getFont("ui.font", ClientDefaults.ui_font);
-          fontMetrics = new AdjustedFontMetrics(clientFont, Toolkit.getDefaultToolkit().getFontMetrics(clientFont));
-
           if (ClientState.getClientState().isOption("ui.antialias", ClientDefaults.ui_antialias))
           {
              antiAliasHint = RenderingHints.VALUE_TEXT_ANTIALIAS_ON;
@@ -174,6 +171,9 @@ public class TextSource
           {
              antiAliasHint = RenderingHints.VALUE_TEXT_ANTIALIAS_OFF;
           }
+
+          clientFont  = ClientState.getClientState().getFont("ui.font", ClientDefaults.ui_font);
+          fontMetrics = new AdjustedFontMetrics(clientFont, Toolkit.getDefaultToolkit().getFontMetrics(clientFont));
       }
 
       public void propertyChanged(String value, String parms)
@@ -203,7 +203,6 @@ public class TextSource
          context     = new FontRenderContext(null, antiAliasHint == RenderingHints.VALUE_TEXT_ANTIALIAS_ON, false);
          font        = wayneFonts;
 
-//         height      = (int)Math.round(font.getMaxCharBounds(context).getHeight());
          height      = adj_ascent + adj_descent;
       }
 
