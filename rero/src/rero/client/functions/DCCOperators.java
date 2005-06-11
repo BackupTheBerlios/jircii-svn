@@ -10,6 +10,7 @@ import rero.util.*;
 import java.util.*;
 
 import rero.dcc.*;
+import rero.client.dcc.*;
 
 public class DCCOperators extends Feature implements Loadable
 {
@@ -59,6 +60,9 @@ public class DCCOperators extends Feature implements Loadable
       script.getScriptEnvironment().getEnvironment().put("&getBytesReceived", new R_getBytesReceived());
       script.getScriptEnvironment().getEnvironment().put("&getExpectedSize", new R_getExpectedSize());
 
+      script.getScriptEnvironment().getEnvironment().put("&localip", new localip());
+      script.getScriptEnvironment().getEnvironment().put("&getNextPort", new getNextPort());
+
       return true;
    }
 
@@ -66,6 +70,24 @@ public class DCCOperators extends Feature implements Loadable
    {
       return true;
    }
+
+   private class localip implements Function
+   {
+      public Scalar evaluate(String f, ScriptInstance si, Stack locals)
+      {
+         LocalInfo linfo = (LocalInfo)getCapabilities().getDataStructure(DataStructures.LocalInfo);
+         return SleepUtils.getScalar(linfo.localip());
+      }
+   }
+
+   private static class getNextPort implements Function
+   {
+      public Scalar evaluate(String f, ScriptInstance si, Stack locals)
+      {
+         return SleepUtils.getScalar(new ListenDCC().getListenerPort());
+      }
+   }
+
 
    private class getActiveConnections implements Function
    {
