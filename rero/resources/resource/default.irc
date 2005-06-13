@@ -214,18 +214,18 @@ set CHANNEL_TOPIC_CHANGED
 
 set ACTION 
 { 
-   return "\C22\B*\B $nick $1-"; 
+   return "\C22\B*\B $nick $parms"; 
 }
 
 set PRIVACTION 
 { 
-   return "\C22\B*\B> $nick $1-"; 
+   return "\C22\B*\B> $nick $parms"; 
 }
 
 
 set ACTION_INACTIVE 
 {
-   return "\C22* $nick $+ \R:\R $+ $0 $1-";
+   return "\C22* $nick $+ \R:\R $+ $0 $parms";
 }
 
 set SEND_ACTION 
@@ -318,12 +318,12 @@ set SEND_NOTICE
 
 set SEND_WALL
 {
-   return "\c24\r[\rwall\r/\r\b $+ $0 $+ \b\r]:\r\c17 $1-";
+   return "\c24\r[\rwall\r/\r\b $+ $0 $+ \b\r]:\r\c17 $parms";
 }
 
 set SEND_WALLEX
 {
-   return "\c24\r[\rwall-x\r/\r\b $+ $0 $+ \b\r]:\r\c17 $1-";
+   return "\c24\r[\rwall-x\r/\r\b $+ $0 $+ \b\r]:\r\c17 $parms";
 }
 
 set NOTICE 
@@ -629,7 +629,7 @@ set DCC_REQUEST
 
 set CHATMSG
 {
-   return "\c31=\b $+ $0 $+ \b=\c17 $1-";
+   return "\c31=\b $+ $0 $+ \b=\c17 $parms";
 }
 
 set SEND_CHAT_ERROR
@@ -641,11 +641,11 @@ set SEND_CHAT
 {
    if (-iswindow ("=" . $0))
    {
-      return "\c31=\b $+ $me $+ \b=\c17 $1-";
+      return "\c31=\b $+ $me $+ \b=\c17 $parms";
    }
    else
    {
-      return "\c31-> =\b $+ $0 $+ \b=\c17 $1-";
+      return "\c31-> =\b $+ $0 $+ \b=\c17 $parms";
    }
 }
 
