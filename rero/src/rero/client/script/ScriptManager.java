@@ -67,7 +67,12 @@ public class ScriptManager extends Feature implements ClientStateListener, Runti
       i = load.iterator();
       while (i.hasNext())
       {
-         internalScriptLoad((String)i.next());
+         String tt = (String)i.next();
+         if (!loader.isLoaded(tt))
+         {   
+            internalScriptLoad(tt); // this check is overly redundant, however if a script loads a script while this operation is
+                                    // taking place things will have the potential to break, never any fun
+         }
       }
    }
 

@@ -97,6 +97,14 @@ public class TimerOperators extends Feature implements Loadable
 
       public void timerExecute()
       {
+         if (si == null || !si.isLoaded())
+         {
+            args = null;
+            si   = null;
+            func = null;
+            return;
+         }
+
          Stack arg_stack = new Stack();
          if (args != null)
             arg_stack.push(args);

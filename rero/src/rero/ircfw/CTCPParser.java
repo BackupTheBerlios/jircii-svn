@@ -19,7 +19,7 @@ import rero.util.StringParser;
 
 public class CTCPParser implements FrameworkConstants
 {
-   protected static String ctcpPattern = "\001(\\w++)\\s*(.*)\001";
+   protected static String ctcpPattern = "\001(\\w++)(\\s*)(.*)\001";
 
    protected static Pattern isCTCP = Pattern.compile(ctcpPattern);
 
@@ -46,7 +46,7 @@ public class CTCPParser implements FrameworkConstants
        }
        
        type       = parser.getParsedString(0); // thank god for regex's this would have taken forever
-       parameters = parser.getParsedString(1); // to code out before.
+       parameters = parser.getParsedString(2); // to code out before.
 
        parms = type + " " + parameters;
        data  = target + " " + parms;       
@@ -55,6 +55,14 @@ public class CTCPParser implements FrameworkConstants
        {
           event = "ACTION";
           data  = target + " " + parameters;       
+
+          String whitespace = parser.getParsedString(1);
+          if (whitespace.length() > 1)
+          {
+             parameters = whitespace.substring(1) + parameters;
+          }
+
+          parms = parameters;
        }
 
        if (event.equals("PRIVMSG"))

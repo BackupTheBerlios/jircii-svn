@@ -67,7 +67,7 @@ public class SelectionSpace
     {
        pixely -= 5;
        int height = TextSource.fontMetrics.getHeight() + 2;
-       return ((pixely) - ((pixely) % height)) / height;
+       return (pixely - (pixely % height)) / height;
     }
 
     protected int translateToPixel(int lineno)
@@ -181,7 +181,7 @@ public class SelectionSpace
              start = (int)changed.getY();
           }
 
-          int end   = translateToPixel(lineEnd + 1) - start;   
+          int end   = translateToPixel(lineEnd + 2) - start;   
 
           if (end < changed.getHeight())
           {

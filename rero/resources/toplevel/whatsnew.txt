@@ -1,3 +1,17 @@
+Beta   36 release 06.18.05
+====
+- added localip() function for retrieving local ip address used for dccs
+- added getNextPort() for retrieving the next dcc port to be used
+- fixed dcc chat, actions, etc. to preserve leading spaces.
+- resynchronized the sorted users stuff
+- added an overly redunant check to prevent scripts from being loaded twice.
+- implemented a check to ensure timers don't execute closures from unloaded
+  scripts.
+- fixed the find dialog (Ctrl+F) not working in certain look and feels
+- fixed $parms in actions from retaining the word ACTION
+- upgraded to Sleep 2.0-b9 (many many cool additions/changes)
+- fixed small selection bug
+
 Beta   35 Release 06.11.05
 ====
 - upgraded scripting library to Sleep 2.0-release candidate bringing 

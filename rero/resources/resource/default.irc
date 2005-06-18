@@ -759,7 +759,6 @@ set RECEIVE_START
 
 set SEND_START
 {
-   printf("Start of send to $nick");
    return "\c42$nnn Send to $nick has started";
 }
 

@@ -38,12 +38,6 @@ public class FindDialog extends JDialog implements ActionListener, KeyListener
        search = new JTextField(text, 20);
        search.addKeyListener(this);
        search.addActionListener(this);
-       search.addFocusListener(new FocusAdapter() {
-           public void focusLost(FocusEvent ev) 
-           {
-              search.requestFocus();
-           }
-       }); 
 
        JPanel panel = new JPanel();
        panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));       
@@ -142,5 +136,7 @@ public class FindDialog extends JDialog implements ActionListener, KeyListener
 
        next.setEnabled(results.hasNext());
        prev.setEnabled(results.hasPrevious());
+
+       search.requestFocus();
    }
 }

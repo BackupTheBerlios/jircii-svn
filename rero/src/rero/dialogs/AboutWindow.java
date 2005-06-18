@@ -217,12 +217,12 @@ public class AboutWindow extends JDialog
             }
             else if (buffer.toString().toLowerCase().equals(superEliteEncryption("jroon")))
             {
-               randomText = textTables[11];
+               randomText = textTables[9];
                activateEgg();
             }
             else if (buffer.toString().toLowerCase().equals(superEliteEncryption("sybbq")))
             {
-               randomText = textTables[10];
+               randomText = textTables[8];
                activateEgg();
             }
 
