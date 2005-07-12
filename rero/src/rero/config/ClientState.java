@@ -339,7 +339,8 @@ public class ClientState
 
    public URL getResource(String fileName)
    {
-      return this.getClass().getResource("/resource/"+fileName);
+      return getPackagedResource(fileName, "resource");
+//      return this.getClass().getResource("/resource/"+fileName);
    }
 
    public String getHelpString(String topic)
@@ -377,7 +378,7 @@ public class ClientState
    {
       try
       {
-         File check = new File(new File(getBaseDirectory(), subDir), fileName);
+         File check = new File(getBaseDirectory(), fileName);
          if (check.exists())
          {
             return check.toURL();

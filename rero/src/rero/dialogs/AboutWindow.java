@@ -122,10 +122,10 @@ public class AboutWindow extends JDialog
             editor.setEditable(false);
             editor.setOpaque(false);
 
-//            if (!randomText.equals(textTables[10]) && !randomText.equals(textTables[6]))
-//            {
-//               editor.setFont(new Font("Monospaced", Font.PLAIN, 12));
-//            }
+            if (!randomText.equals(textTables[5]) && !randomText.equals(textTables[9]))
+            {
+               editor.setFont(new Font("Monospaced", Font.PLAIN, 12));
+            }
             editor.setText(superEliteEncryption(randomText));
             editor.setForeground(new Color(142, 142, 142));
             editor.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
