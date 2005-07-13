@@ -17,7 +17,7 @@
            destdir="${project.build}"
            nowarn="yes"
            depend="yes"
-           debug="yes"
+           debug="no"
            optimize="yes"
     >
        <classpath path="./lib/sleep.jar" />

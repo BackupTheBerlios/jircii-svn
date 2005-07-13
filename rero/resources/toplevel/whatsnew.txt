@@ -1,3 +1,31 @@
+Beta 37 release 07.13.05
+====
+- fixed resource loading to ensure files in .jIRC have priority over 
+  internal resources
+- updated to Sleep 2.0-b11 (from b9)
+  be aware! the behavior of single quoted strings has changed slightly.
+  '\\' is now \; this breaks fserve.irc and I recommend if you are using 
+  it that you upgrade immediately
+- rename window now does nothing if the new window name already exists...  
+  thanks to serge for the bug report (now about that text selection...)
+- unbroke Alt+1 .. Alt+n for channel switching 
+- made a jIRCii launch service change, altnick is now based on the 
+  specified primary nick iff no altnick exists and a primary nick is 
+  speciifed.  If no primary nick is specified jircii will use the 
+  lamer_nnnn nickname.  
+- made auto reconnect on disconnect an option (under IRC Options dialog)
+- on disconnect initial IRC_RECONNECT message goes to all windows, 
+  subsequent ones only go to the status window
+- fixed a bug where dcc receive was not closing file handle when an error 
+  occured.
+- added ~ expansion for tab based file completion, /dcc send, /send, 
+  /theme, and /load ~ expands to your home directory if it is the first 
+  character...  :)
+- fixed occasional switchbar button disappearing bug as reported by simple
+- added the ability to position the switchbar on the left or right side 
+  of the jIRCii window
+- fixed a startup visual artifact on OS X with the metal L&F
+
 Beta   36 release 06.18.05
 ====
 - added localip() function for retrieving local ip address used for dccs

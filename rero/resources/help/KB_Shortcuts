@@ -19,6 +19,10 @@
 <br>
 <br>Another popular style of nick completion supported by jIRC is Tab key nick completion.  This is where you type part of a nick and then hit the Tab key.  The last word in the editbox will then be completed to a full nickname.  If the editbox is empty hitting tab will bring up /msg &lt;last person to msg you&gt; in the editbox.  
 <br>
+<br><b>Tab File Completion</b></font>
+<br>
+<br>If you are using /dcc send, /send, /load, etc. it is possible to tab complete the filename as well.  Just type the first few characters of the path, hit tab, and jIRCii will expand it for you.  Keep hitting tab to cycle through your options.
+<br>
 <br><b>Quickly Edit a Topic</b></font>
 <br>
 <br>To quickly edit a channel topic simply type /topic in the editbox and then hit the Tab key.  This will bring the channel topic up in the editbox ready for quick editing.
