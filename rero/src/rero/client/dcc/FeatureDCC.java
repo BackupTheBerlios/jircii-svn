@@ -173,7 +173,7 @@ public class FeatureDCC extends Feature implements ClientCommand, ChatListener, 
          }
          else
          {
-            sendme = new File(temps.getToken(2));;
+            sendme = ClientUtils.getFile(temps.getToken(2));
          }
 
          if (sendme != null && sendme.exists())

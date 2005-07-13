@@ -122,7 +122,8 @@ public class AboutWindow extends JDialog
             editor.setEditable(false);
             editor.setOpaque(false);
 
-            if (!randomText.equals(textTables[5]) && !randomText.equals(textTables[9]))
+            // 5 should be monospaced...
+            if (!randomText.equals(textTables[1]) && !randomText.equals(textTables[9]) && !randomText.equals(textTables[8]))
             {
                editor.setFont(new Font("Monospaced", Font.PLAIN, 12));
             }
@@ -212,7 +213,9 @@ public class AboutWindow extends JDialog
 
             if (buffer.toString().toLowerCase().equals(superEliteEncryption("zvep jneevbe")))
             {
-               randomText = textTables[Math.abs((int)System.currentTimeMillis() % textTables.length)];
+               int rand = Math.abs((int)System.currentTimeMillis() % textTables.length);
+
+               randomText = textTables[rand];
                activateEgg();
             }
             else if (buffer.toString().toLowerCase().equals(superEliteEncryption("jroon")))

@@ -538,6 +538,16 @@ public class ClientUtils
         return temp.toString();
     }
 
+    public static File getFile(String file)
+    {
+        if (file.charAt(0) == '~' && System.getProperty("user.home") != null)
+        {
+            return new File(System.getProperty("user.home").toString(), file.substring(1));
+        }
+
+        return new File(file);
+    }
+
     public static LinkedList fileCompleteAll(String pfile)
     {
         LinkedList rv = new LinkedList();
@@ -545,7 +555,7 @@ public class ClientUtils
         File   cwd;
         String cwf = null;
         
-        File temp = new File(pfile);
+        File temp = getFile(pfile);
         if (temp.isDirectory())
         {
            cwd = temp;

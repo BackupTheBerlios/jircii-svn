@@ -160,11 +160,23 @@ public class ServerHandler extends Feature implements FrameworkConstants, Socket
        }
        else
        {
+           boolean isDone = false;
+
            if (data.getMyUser().getChannels().size() > 0)
            {
-               restoreInformation = data.getMyUser();
-               restoreServer      = ev.data.hostname;
                getCapabilities().getOutputCapabilities().fireSetAll(ClientUtils.getEventHashMap(ev.data.hostname, ev.message), "IRC_DISCONNECT");
+
+               if (ClientState.getClientState().isOption("option.reconnect", ClientDefaults.option_reconnect))
+               {
+                  restoreInformation = data.getMyUser();
+                  restoreServer      = ev.data.hostname;
+ 
+                  getCapabilities().getOutputCapabilities().fireSetAll(ClientUtils.getEventHashMap(ev.data.hostname, ev.message), "IRC_RECONNECT");
+                  getCapabilities().getGlobalCapabilities().setTabTitle(getCapabilities(), "reconnecting");
+                  socket.connect(ev.data.hostname, ev.data.port, ClientState.getClientState().getInteger("reconnect.time", ClientDefaults.reconnect_time) * 1000, ev.data.password, ev.data.isSecure);
+
+                  isDone = true;
+               }
            }
            else
            {
@@ -174,7 +186,7 @@ public class ServerHandler extends Feature implements FrameworkConstants, Socket
            data.reset();
            notify.reset();
 
-           if (restoreInformation != null)
+           if (restoreInformation != null && !isDone)
            {
                getCapabilities().getOutputCapabilities().fireSetStatus(ClientUtils.getEventHashMap(ev.data.hostname, ev.message), "IRC_RECONNECT");
                getCapabilities().getGlobalCapabilities().setTabTitle(getCapabilities(), "reconnecting");
@@ -204,6 +216,13 @@ public class ServerHandler extends Feature implements FrameworkConstants, Socket
 
           if (event.equals("433"))
           {
+              if (rero.test.QuickConnect.IsQuickConnect() && rero.test.QuickConnect.GetInformation().getURL().getUserInfo() != null)
+              {
+                  // set a new alternate alt nick iff a user is quick connecting and a default nickname has been specified...
+                  // otherwise lamer will do just fine...
+
+                  altNick = ClientState.getClientState().getString("user.nick",  rero.test.QuickConnect.GetInformation().getNickname()) + System.currentTimeMillis();
+              }
               getCapabilities().sendln("NICK " + altNick);
           }
 

@@ -42,7 +42,8 @@ public class IRCOptions extends DMain
       addBlankSpace();
 
       addCheckboxInput("update.ial" , ClientDefaults.option_showmotd,  "Update IAL on channel join", 'I');
-      addCheckboxInput("option.showmotd" , ClientDefaults.option_showmotd,  "Show MOTD", 'l');
+      addCheckboxInput("option.showmotd" , ClientDefaults.option_showmotd,  "Show MOTD", 'M');
+      addCheckboxInput("option.reconnect" , ClientDefaults.option_reconnect,  "Auto-reconnect when disconnected", 'r');
       addCheckboxInput("option.timestamp", ClientDefaults.option_timestamp, "Timestamp Events.", 'a');
    }
 }

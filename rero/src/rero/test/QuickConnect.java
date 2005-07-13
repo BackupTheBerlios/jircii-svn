@@ -23,6 +23,11 @@ public class QuickConnect
       return qc;
    }
 
+   public URI getURL()
+   {
+      return info;
+   }
+
    public String getNickname()
    {
       if (info.getUserInfo() != null)

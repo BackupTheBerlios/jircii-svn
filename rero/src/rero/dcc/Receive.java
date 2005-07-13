@@ -142,6 +142,8 @@ public class Receive extends ProtocolDCC
        byte[] data      = new byte[PACKET_SIZE]; // read packets in 4k chunks
        byte[] ackPacket = new byte[4];
 
+       Exception transferError = null;
+
        try
        {
           boolean appendToFile = startSize != 0;
@@ -193,8 +195,7 @@ public class Receive extends ProtocolDCC
           if (receivedSize != finalSize)
           {
               ex.printStackTrace();
-              fireError(ex.getMessage());
-              return;
+              transferError = ex;
           }
        }
 
@@ -213,6 +214,10 @@ public class Receive extends ProtocolDCC
           // dispatch the send succeeded event
           //
           fireEvent("RECEIVE_COMPLETE", null);
+       }
+       else if (transferError != null)
+       {
+          fireError(transferError.getMessage());
        }
        else
        {

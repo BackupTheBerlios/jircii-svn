@@ -4,6 +4,8 @@ import rero.client.*;
 import rero.config.*;
 import rero.script.*;
 
+import rero.util.*;
+
 import sleep.error.*;
 import sleep.runtime.*;
 
@@ -78,6 +80,8 @@ public class ScriptManager extends Feature implements ClientStateListener, Runti
 
    public void loadTheme(String filename)
    {
+      filename = ClientUtils.getFile(filename).getAbsolutePath();
+
       if ((new File(filename)).exists())
       {
          internalScriptLoad(filename);
@@ -94,7 +98,7 @@ public class ScriptManager extends Feature implements ClientStateListener, Runti
       if ((new File(filename)).exists())
       {
          StringList temp = ClientState.getClientState().getStringList("script.files");
-         String     fn   = (new File(filename)).getAbsolutePath();
+         String     fn   = ClientUtils.getFile(filename).getAbsolutePath();
 
          if (!temp.getList().contains(fn))
          {

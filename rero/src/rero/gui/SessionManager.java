@@ -59,6 +59,7 @@ public class SessionManager extends JTabbedPane implements ClientWindowListener,
             }
 
             bridge.installMenubar(menu);
+            menu.repaint();
             frame.validate();
          }
       });

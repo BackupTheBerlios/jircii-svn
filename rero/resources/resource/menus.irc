@@ -491,17 +491,6 @@ bind Alt+2
 {
    local('@windows');
    @windows = getWindows();
-   if (size(@windows) > 0)
-   {
-      activateWindow(@windows[0]);
-      halt;
-   }
-}
-
-bind Alt+3
-{
-   local('@windows');
-   @windows = getWindows();
    if (size(@windows) > 1)
    {
       activateWindow(@windows[1]);
@@ -509,7 +498,7 @@ bind Alt+3
    }
 }
 
-bind Alt+4
+bind Alt+3
 {
    local('@windows');
    @windows = getWindows();
@@ -520,7 +509,7 @@ bind Alt+4
    }
 }
 
-bind Alt+5
+bind Alt+4
 {
    local('@windows');
    @windows = getWindows();
@@ -531,7 +520,7 @@ bind Alt+5
    }
 }
 
-bind Alt+6
+bind Alt+5
 {
    local('@windows');
    @windows = getWindows();
@@ -542,8 +531,7 @@ bind Alt+6
    }
 }
 
-
-bind Alt+7
+bind Alt+6
 {
    local('@windows');
    @windows = getWindows();
@@ -555,7 +543,7 @@ bind Alt+7
 }
 
 
-bind Alt+8
+bind Alt+7
 {
    local('@windows');
    @windows = getWindows();
@@ -567,13 +555,25 @@ bind Alt+8
 }
 
 
-bind Alt+9
+bind Alt+8
 {
    local('@windows');
    @windows = getWindows();
    if (size(@windows) > 7)
    {
       activateWindow(@windows[7]);
+      halt;
+   }
+}
+
+
+bind Alt+9
+{
+   local('@windows');
+   @windows = getWindows();
+   if (size(@windows) > 8)
+   {
+      activateWindow(@windows[8]);
       halt;
    }
 }

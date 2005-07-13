@@ -26,13 +26,15 @@ public class OrientedToolBar extends JToolBar implements ClientStateListener
 
    public void propertyChanged(String var, String var2)
    {
-/*      int orientation = ClientState.getClientState().getInteger("switchbar.position", 0);
+      int orientation = ClientState.getClientState().getInteger("switchbar.position", 0);
  
       if (orientation == 2 || orientation == 3)
       {
-         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+//         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+         setLayout(new GridLayout3());
+         validate();
       }
-      else */ if (ClientState.getClientState().isOption("switchbar.fixed", ClientDefaults.switchbar_fixed))
+      else if (ClientState.getClientState().isOption("switchbar.fixed", ClientDefaults.switchbar_fixed))
       {
          if (fixed == null || fill == null)
          {
@@ -41,10 +43,12 @@ public class OrientedToolBar extends JToolBar implements ClientStateListener
          }
 
          setLayout(fixed); // not perfect but whatever...
+         validate();
       }
       else
       {
          setLayout(new GridLayout());
+         validate();
       } 
    }
 
@@ -64,7 +68,8 @@ public class OrientedToolBar extends JToolBar implements ClientStateListener
 
       public void layoutContainer(Container c)
       {
-         if ((c.getComponentCount() * BUTTON_FIXED_WIDTH) < c.getWidth())
+      
+         if ((c.getComponentCount() * (BUTTON_FIXED_WIDTH + 2)) < c.getWidth())
          {
             super.layoutContainer(c);
          }
@@ -80,7 +85,7 @@ public class OrientedToolBar extends JToolBar implements ClientStateListener
    {
        public void layoutContainer(Container c)
        {
-         if ((c.getComponentCount() * BUTTON_FIXED_WIDTH) < c.getWidth())
+         if ((c.getComponentCount() * (BUTTON_FIXED_WIDTH + 2)) < c.getWidth())
          {
             c.setLayout(fixed);
             c.validate();
@@ -89,6 +94,33 @@ public class OrientedToolBar extends JToolBar implements ClientStateListener
          {
             super.layoutContainer(c);
          }
+      }
+   }
+
+
+   private class GridLayout3 extends GridLayout
+   {
+      public int getColumns() { return 1; }
+
+      public void layoutContainer(Container c)
+      {
+         if (c.getComponentCount() > 0)
+         {
+            int buttonheight = getComponent(0).getPreferredSize().height + getVgap();
+
+            if ((buttonheight * c.getComponentCount()) > c.getHeight())
+            {
+               setRows(c.getComponentCount());
+               setColumns(1);
+            }
+            else
+            {
+               setRows(c.getHeight() / buttonheight);
+               setColumns(1);
+            }
+         }
+
+         super.layoutContainer(c);
       }
    }
 }

@@ -29,6 +29,7 @@ public class ClientDefaults
    public static final boolean active_option = true; /** echo to active option */
 
    public static final boolean option_showmotd  = true;
+   public static final boolean option_reconnect = true;
    public static final boolean option_timestamp = false;
 
    public static       boolean ui_sdi        = true;

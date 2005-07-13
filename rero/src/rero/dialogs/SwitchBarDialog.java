@@ -33,8 +33,8 @@ public class SwitchBarDialog extends DMain
       {
           public void setupDialog()
           {
-//              addSelectInput("switchbar.position", 0, new String[] { "Top", "Bottom", "Left", "Right" }, "Position:  ", 'P', 25);
-              addSelectInput("switchbar.position", 0, new String[] { "Top", "Bottom" }, "Position:  ", 'P', 25);
+              addSelectInput("switchbar.position", 0, new String[] { "Top", "Bottom", "Left", "Right" }, "Position:  ", 'P', 25);
+//              addSelectInput("switchbar.position", 0, new String[] { "Top", "Bottom" }, "Position:  ", 'P', 25);
               addColorInput("switchbar.color", ClientDefaults.switchbar_color, "Activity Color", 'A');
               addCheckboxInput("switchbar.fixed", ClientDefaults.switchbar_fixed,  "Fixed width switchbar buttons", 'F', FlowLayout.LEFT);
               addCheckboxInput("switchbar.sort", ClientDefaults.switchbar_sort,  "Sort buttons alphabetically", 'F', FlowLayout.LEFT);

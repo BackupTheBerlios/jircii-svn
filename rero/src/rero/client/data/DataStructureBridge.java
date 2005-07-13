@@ -44,12 +44,12 @@ public class DataStructureBridge extends Feature implements Variable
    {
       if ("$me".equals(key)) { return SleepUtils.getScalar(data.getMyNick()); }
       if ("$time".equals(key)) { return SleepUtils.getScalar(ClientUtils.TimeStamp()); }
-      if ("$lag".equals(key)) { return SleepUtils.getScalar(((Lag)getCapabilities().getDataStructure("lag")).getLag()); }
+      if ("$lag".equals(key) && getCapabilities().getDataStructure("lag") != null) { return SleepUtils.getScalar(((Lag)getCapabilities().getDataStructure("lag")).getLag()); }
       if ("$active".equals(key)) { return SleepUtils.getScalar(getCapabilities().getUserInterface().getQuery()); }
 //      if ("$myserver".equals(key)) { return SleepUtils.getScalar(getCapabilities().getSocketConnection().getSocketInformation().hostname); }
 //      if ("$myserverport".equals(key)) { return SleepUtils.getScalar(getCapabilities().getSocketConnection().getSocketInformation().port); }
       if ("$mymode".equals(key)) { return SleepUtils.getScalar(data.getMyUserInformation().getMode().toString()); }
-      return null;
+      return SleepUtils.getEmptyScalar();
    }
 
    public void init()

@@ -24,17 +24,39 @@ public class ClientPanel extends WindowManager implements ActionListener, Client
 {
     protected StatusWindow active = null;
 
-    protected JPanel     desktop;
+    protected JPanel     desktop, top;
     protected JLabel     button;
+
+    public void propertyChanged(String key, String value)
+    {
+       if (key.equals("switchbar.position"))
+       {
+          int orientation = ClientState.getClientState().getInteger("switchbar.position", ClientDefaults.switchbar_position);
+
+          top.remove(button);
+          if (orientation == 2 || orientation == 3)
+          {
+             top.add(button, BorderLayout.SOUTH);
+          }
+          else
+          {
+             top.add(button, BorderLayout.EAST);
+          }
+       }
+       else
+       {
+          super.propertyChanged(key, value);
+       }
+    }
 
     public void init()
     {
        switchbar = new OrientedToolBar();  
 
-       JPanel top = new JPanel();
+       top = new JPanel();
        top.setLayout(new BorderLayout(5, 0));
        
-       button = new JLabel("<html><b>X</b></html>");
+       button = new JLabel("<html><b>X</b></html>", SwingConstants.CENTER);
        button.setToolTipText("Close active window");  
 
        button.addMouseListener(new MouseAdapter()
@@ -70,7 +92,9 @@ public class ClientPanel extends WindowManager implements ActionListener, Client
        });
 
        top.add(switchbar, BorderLayout.CENTER);
-       top.add(button, BorderLayout.EAST);
+
+       propertyChanged("switchbar.position", null);
+//       top.add(button, BorderLayout.SOUTH); // was EAST
 
        setLayout(new BorderLayout());
 
@@ -87,6 +111,8 @@ public class ClientPanel extends WindowManager implements ActionListener, Client
        add(desktop, BorderLayout.CENTER);
 
        new MantainActiveFocus(this);
+
+       ClientState.getClientState().addClientStateListener("switchbar.position", this);
     }
 
     public void addWindow(StatusWindow window, boolean selected)

@@ -155,9 +155,10 @@ public class IRCSession
 
    public void renameWindow(String name, String newname)
    {
-      StatusWindow temp = (StatusWindow)windows.get(name.toUpperCase());
+      StatusWindow temp  = (StatusWindow)windows.get(name.toUpperCase());
+      StatusWindow temp2 = (StatusWindow)windows.get(newname.toUpperCase());
 
-      if (temp != null)
+      if (temp != null && temp2 == null)
       {
          windows.remove(name.toUpperCase());
          windows.put(newname.toUpperCase(), temp);
