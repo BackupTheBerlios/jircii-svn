@@ -1,6 +1,7 @@
 package rero.gui;
 
 import rero.client.output.*;
+
 import java.util.*;
 
 import rero.ircfw.interfaces.ChatListener;
@@ -15,65 +16,45 @@ import text.event.*;
 
 public class ClickableURLHandler extends Feature implements ClickListener
 {
-   public void wordClicked(ClickEvent ev)
-   {
-      String item = ev.getClickedText().toLowerCase();
+    public void wordClicked(ClickEvent ev)
+    {
+        String item = ev.getClickedText().toLowerCase();
 
-      if (item.length() > 7 && item.substring(0, 7).equals("http://"))
-      {
-          ClientUtils.openURL(extractURL(ev.getClickedText()));
-          ev.consume();
-          ev.acknowledge();
-      }
-      else if (item.length() > 10 && item.substring(0, 8).equals("(http://") && item.charAt(item.length() -1) == ')')
-      {
-          ClientUtils.openURL(extractURL(ev.getClickedText()));
-          ev.consume();
-          ev.acknowledge();
-      }
-      else if (item.length() > 11 && item.substring(0, 9).equals("(https://") && item.charAt(item.length() -1) == ')')
-      {
-          ClientUtils.openURL(extractURL(ev.getClickedText()));
-          ev.consume();
-          ev.acknowledge();
-      }
-      else if (item.length() > 8 && item.substring(0, 8).equals("https://"))
-      {
-          ClientUtils.openURL(extractURL(ev.getClickedText()));
-          ev.consume();
-          ev.acknowledge();
-      }
-      else if (item.length() > 4 && item.substring(0, 4).equals("www."))
-      {
-          ClientUtils.openURL("http://" + extractURL(ev.getClickedText()));
-          ev.consume();
-          ev.acknowledge();
-      }
-      else if (item.length() > 2 && ClientUtils.isChannel(item) && getCapabilities().isConnected() && !ev.getClickedText().endsWith("."))
-      {
-          getCapabilities().sendln("JOIN " + ev.getClickedText());
-          ev.consume();
-          ev.acknowledge();
-      }
-      else if (item.length() > 2 && ClientUtils.isChannel(item.substring(1, item.length())) && getCapabilities().isConnected())
-      {
-          getCapabilities().sendln("JOIN " + ev.getClickedText().substring(1, item.length() - 1));
-          ev.consume();
-          ev.acknowledge();
-      }
-   }
+        if (item.matches("^\\(*(http|https|ftp)://.*"))
+        {
+            ClientUtils.openURL(extractURL(ev.getClickedText()));
+            ev.consume();
+            ev.acknowledge();
+        } else if (item.matches("^www\\..*"))
+        {
+            String location = extractURL(ev.getClickedText());
+            ClientUtils.openURL("http://" + location);
+            ev.consume();
+            ev.acknowledge();
+        } else if (item.length() > 2 && ClientUtils.isChannel(item) && getCapabilities().isConnected() && !ev.getClickedText().endsWith("."))
+        {
+            getCapabilities().sendln("JOIN " + ev.getClickedText());
+            ev.consume();
+            ev.acknowledge();
+        } else if (item.length() > 2 && ClientUtils.isChannel(item.substring(1, item.length())) && getCapabilities().isConnected())
+        {
+            getCapabilities().sendln("JOIN " + ev.getClickedText().substring(1, item.length() - 1));
+            ev.consume();
+            ev.acknowledge();
+        }
+    }
 
-   private static String extractURL(String url)
-   {
-      if (url.charAt(0) == '(')
-      {
-         url = url.substring(1, url.length() - 1);
-      }
+    private static String extractURL(String url)
+    {
+        if (url.charAt(0) == '(')
+        {
+            url = url.substring(1, url.length() - 1);
+        }
 
-      return url;
-   }
+        return url;
+    }
 
-   public void init()
-   {
-   }
+    public void init()
+    {
+    }
 }
