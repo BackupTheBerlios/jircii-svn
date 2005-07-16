@@ -259,7 +259,15 @@ public class StatusWindow extends BackgroundPanel implements IRCAwareComponent, 
          {
              public void mousePressed(MouseEvent ev)
              {
-                maybeShowPopup(ev, "switchbar");
+                 // Shift+Click closes windows
+                 int onmask = KeyEvent.SHIFT_DOWN_MASK | KeyEvent.BUTTON1_DOWN_MASK;
+                 if ((ev.getModifiersEx() & onmask) == onmask)
+                 {
+                     JToggleButton jb = (JToggleButton) ev.getSource();
+                     capabilities.getUserInterface().closeWindow(jb.getText());
+                 } else {
+                    maybeShowPopup(ev, "switchbar");
+                 }
              }
 
              public void mouseReleased(MouseEvent ev)
