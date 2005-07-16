@@ -24,11 +24,11 @@ public class InputField extends JTextField implements KeyListener, ActionListene
     // This is the command history for this InputField
     // WARNING: Do not, under any circumstance, modify this structure.
     //          This will lead to a ConcurrentModificationException!
-    private ArrayList<String> commandHistory;
+    private ArrayList commandHistory;
 
     // An iterator for the command history. This is what is actually
     // used for manipulating the command history.
-    private ListIterator<String> commandIterator;
+    private ListIterator commandIterator;
 
     // This is the maximum number of commands in the command history.
     // This should be configurable.
@@ -102,7 +102,7 @@ public class InputField extends JTextField implements KeyListener, ActionListene
        ClientState.getClientState().addClientStateListener("ui.font", this);
 
        // Instantiate the command history -oracel
-       this.commandHistory = new ArrayList<String>(maxCommands + 1);
+       this.commandHistory = new ArrayList(maxCommands + 1);
        this.commandIterator = commandHistory.listIterator();
 
     }
@@ -279,11 +279,11 @@ public class InputField extends JTextField implements KeyListener, ActionListene
             if (commandIterator.hasPrevious()) {
             
                 // Store it
-                String previous = commandIterator.previous();
+                String previous = String.valueOf(commandIterator.previous());
                 
                 // See if we should skip one forward
                 if (!previousKeyUpArrow && commandIterator.hasPrevious()) {
-                    setText(commandIterator.previous());
+                    setText(String.valueOf(commandIterator.previous()));
                 }
                 
                 // Set text from history
@@ -328,13 +328,13 @@ public class InputField extends JTextField implements KeyListener, ActionListene
                  else 
                  {
                      // Fetch next item in command history (downwards)
-                     next = commandIterator.next();
+                     next = String.valueOf(commandIterator.next());
                     
                      // Semi-special case, user pressed up then down so
                      // we need to skip an item
                      if (previousKeyUpArrow && commandIterator.hasNext()) 
                      {
-                         setText(commandIterator.next());
+                         setText(String.valueOf(commandIterator.next()));
                      }
                      
                      // Just set the text
