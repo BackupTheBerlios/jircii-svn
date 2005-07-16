@@ -7,8 +7,12 @@ import javax.swing.text.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.datatransfer.* ;
 
 import java.util.*;
+
+import java.io.IOException;
+
 
 import text.*;
 
@@ -31,7 +35,7 @@ public class InputField extends JTextField implements KeyListener, ActionListene
     private ListIterator commandIterator;
 
     // This is the maximum number of commands in the command history.
-    // This should be configurable.
+    // TODO: This should be configurable.
     private int maxCommands = 30;
 
     // True if the key pressed in the previous keyevent was the upkey
@@ -123,15 +127,63 @@ public class InputField extends JTextField implements KeyListener, ActionListene
 
        revalidate();
     }
+    
+    
+    // Override JTextfield.paste() to be able to capture pasted input
+    // for the command history
+    public void paste() {
+
+        // Get the clipboard
+        Clipboard cb = getToolkit().getSystemClipboard() ;
+
+        // Probably won't happen
+        if (cb == null)
+        {
+            return;
+        }
+        
+        // Get the contents
+        Transferable t =  cb.getContents(null);
+        if (t != null) 
+        {
+            try 
+            {
+                
+                // Get the data and check that it's a String
+                Object obj = t.getTransferData(DataFlavor.stringFlavor);
+                if (obj != null && obj instanceof String) 
+                {
+                    // Split the string into lines
+                    String lines[] = String.valueOf(obj).split("\\n");
+                    
+                    // Loop through the lines in the pasted text
+                    for (int i = 0; i < lines.length; i++) {
+                        
+                        // Add each line to the history
+                        this.addToHistory(lines[i].trim());
+                    }
+                }
+            } 
+            
+            catch (IOException ioe) 
+            {
+                return;
+            } 
+            
+            catch (UnsupportedFlavorException ufe)
+            {
+                return ;
+            }
+        }
+        
+        // Make sure the garble is pasted
+        super.paste();   
+    }
+
 
     public void actionPerformed(ActionEvent ev)
     {
        event.text = ev.getActionCommand();
-
-       /*
-       InputList temp = new InputList();
-       temp.text = event.text;
-       */
 
        if (event.text.length() <= 0)
        {
@@ -139,21 +191,8 @@ public class InputField extends JTextField implements KeyListener, ActionListene
           return;
        }
 
-       // Add the text to the command history and remove redundant items
-       this.commandExistsInHistory(event.text, true); // Remove if it already exists
-       this.resetIterator(false);   // Reset to end
-       this.commandIterator.add(event.text); // Append to end of list
-
-       // Check if the max size of the history has been reached
-       if (this.commandHistory.size() == (maxCommands + 1)
-                                                    && (maxCommands > 0)) 
-       {
-
-           this.resetIterator(); // Reset to beginning
-           this.commandIterator.remove(); // Remove first item in list
-           this.resetIterator(false);   // Reset to end
-       }
-
+       // Add text to history
+       this.addToHistory(event.text);
 
        fireInputEvent();
     }
@@ -396,6 +435,25 @@ public class InputField extends JTextField implements KeyListener, ActionListene
         }
         
         return;
+    }
+
+
+    private void addToHistory(String text) {
+       
+       // Add the text to the command history and remove redundant items
+       this.commandExistsInHistory(text, true); // Remove if it already exists
+       this.resetIterator(false);   // Reset to end
+       this.commandIterator.add(text); // Append to end of list
+
+       // Check if the max size of the history has been reached
+       if (this.commandHistory.size() == (maxCommands + 1)
+                                                    && (maxCommands > 0)) 
+       {
+
+           this.resetIterator(); // Reset to beginning
+           this.commandIterator.remove(); // Remove first item in list
+           this.resetIterator(false);   // Reset to end
+       }        
     }
 
 
