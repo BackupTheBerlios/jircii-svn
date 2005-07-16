@@ -30,20 +30,20 @@ public class StatusWindow extends BackgroundPanel implements IRCAwareComponent, 
    protected JToggleButton   button;    // for the switchbar homez.
    protected ImageIcon       icon;      // jEAH bABY
 
-   protected ClientWindow    frame; 
+   protected ClientWindow    frame;
    protected String          query = "";
 
    protected Capabilities    capabilities;
-  
+
    protected Color           defaultForegroundColor;
-  
+
    protected MenuBridge      menuManager;
 
    public void cleanup()
    {
       if (display != null)
         display.clear();
-   } 
+   }
 
    public void touch()
    {
@@ -56,7 +56,7 @@ public class StatusWindow extends BackgroundPanel implements IRCAwareComponent, 
       if (ev.isPopupTrigger())
       {
          JPopupMenu menu = getPopupMenu(desc, ClientUtils.getEventHashMap(getName(), getName()));
-  
+
          if (menu != null)
          {
             menu.show((JComponent)ev.getComponent(), ev.getX(), ev.getY());
@@ -71,7 +71,7 @@ public class StatusWindow extends BackgroundPanel implements IRCAwareComponent, 
       statusbar.installCapabilities(c);
 
       menuManager = (MenuBridge)c.getDataStructure("menuBridge");
- 
+
       input.addMouseListener(new MouseAdapter()
       {
           public void mousePressed(MouseEvent ev)
@@ -88,7 +88,7 @@ public class StatusWindow extends BackgroundPanel implements IRCAwareComponent, 
           {
              maybeShowPopup(ev, "input");
           }
-      });      
+      });
 
       MouseAdapter normal = new MouseAdapter()
       {
@@ -106,7 +106,7 @@ public class StatusWindow extends BackgroundPanel implements IRCAwareComponent, 
           {
              maybeShowPopup(ev, getWindowType());
           }
-      };      
+      };
 
       display.addMouseListener(normal);
    }
@@ -161,7 +161,7 @@ public class StatusWindow extends BackgroundPanel implements IRCAwareComponent, 
       statusbar = new WindowStatusBar(this);
 
       add(display, BorderLayout.CENTER);
-      
+
       JPanel space = new JPanel();
       space.setLayout(new BorderLayout());
 
@@ -170,7 +170,7 @@ public class StatusWindow extends BackgroundPanel implements IRCAwareComponent, 
 
       space.setOpaque(false);
 
-      add(space, BorderLayout.SOUTH);      
+      add(space, BorderLayout.SOUTH);
 
       frame.setContentPane(this);
 
@@ -199,7 +199,7 @@ public class StatusWindow extends BackgroundPanel implements IRCAwareComponent, 
       frame.setTitle(title);
    }
 
-   public ClientWindow getWindow() 
+   public ClientWindow getWindow()
    {
       return frame;
    }
@@ -263,17 +263,18 @@ public class StatusWindow extends BackgroundPanel implements IRCAwareComponent, 
                  int onmask = KeyEvent.SHIFT_DOWN_MASK | KeyEvent.BUTTON1_DOWN_MASK;
                  if ((ev.getModifiersEx() & onmask) == onmask)
                  {
-                     JToggleButton jb = (JToggleButton) ev.getSource();
-                     capabilities.getUserInterface().closeWindow(jb.getText());
+                     String text = ((JToggleButton) ev.getSource()).getText();
+                     IRCSession session = capabilities.getGlobalCapabilities().getSessionManager().getActiveSession();
+                     session.getWindow(text).getWindow().closeWindow();
                  } else {
-                    maybeShowPopup(ev, "switchbar");
+                     maybeShowPopup(ev, "switchbar");
                  }
              }
 
              public void mouseReleased(MouseEvent ev)
              {
                 maybeShowPopup(ev, "switchbar");
-             } 
+             }
 
              public void mouseClicked(MouseEvent ev)
              {
@@ -282,20 +283,20 @@ public class StatusWindow extends BackgroundPanel implements IRCAwareComponent, 
          });
       }
 
-      return button;      
+      return button;
    }
 
    protected class ClientWindowStuff implements ClientWindowListener
    {
-      public void onActive(ClientWindowEvent ev) 
-      { 
+      public void onActive(ClientWindowEvent ev)
+      {
          unflag();
       }
       public void onOpen(ClientWindowEvent ev) { }
       public void onInactive(ClientWindowEvent ev) { }
       public void onMinimize(ClientWindowEvent ev) { }
-      public void onClose(ClientWindowEvent ev) 
-      { 
+      public void onClose(ClientWindowEvent ev)
+      {
          cleanup();
       }
    }
@@ -313,7 +314,7 @@ public class StatusWindow extends BackgroundPanel implements IRCAwareComponent, 
       {
          return this.getName().toUpperCase().compareTo(((StatusWindow)o).getName().toUpperCase());
       }
-      
+
       return compareWindowType() - temp.compareWindowType();
    }
 
