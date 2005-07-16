@@ -16,10 +16,27 @@ import rero.config.*;
 
 public class InputField extends JTextField implements KeyListener, ActionListener, MouseListener, ClientStateListener
 {
-    protected InputList  list = null;
+    //protected InputList  list = null;
     protected Border     defaultBorder;
-    protected LinkedList listeners;   
+    protected LinkedList listeners;
     protected UserInputEvent event;
+
+    // This is the command history for this InputField
+    // WARNING: Do not, under any circumstance, modify this structure.
+    //          This will lead to a ConcurrentModificationException!
+    private ArrayList<String> commandHistory;
+
+    // An iterator for the command history. This is what is actually
+    // used for manipulating the command history.
+    private ListIterator<String> commandIterator;
+
+    // This is the maximum number of commands in the command history.
+    // This should be configurable.
+    private int maxCommands = 30;
+
+    // True if the key pressed in the previous keyevent was the upkey
+    // This flag is modified in a variety of places in the code.
+    private boolean previousKeyUpArrow = true;
 
     protected InputBorder indent;
 
@@ -63,8 +80,8 @@ public class InputField extends JTextField implements KeyListener, ActionListene
        defaultBorder = BorderFactory.createEmptyBorder(1, TextSource.UNIVERSAL_TWEAK, 1, 1); // a 1 pixel empty border all around;
        setBorder(defaultBorder);
 /*
-       setBackground(null); // suggested by Sun as a fix to a background being painted problem 
-                            // in the GTK+ look and feel, unfortunately it doesn't work... maybe it will when 1.5 comes out      
+       setBackground(null); // suggested by Sun as a fix to a background being painted problem
+                            // in the GTK+ look and feel, unfortunately it doesn't work... maybe it will when 1.5 comes out
 */
 
        addActionListener(this);
@@ -83,6 +100,11 @@ public class InputField extends JTextField implements KeyListener, ActionListene
 
        ClientState.getClientState().addClientStateListener("ui.editcolor", this);
        ClientState.getClientState().addClientStateListener("ui.font", this);
+
+       // Instantiate the command history -oracel
+       this.commandHistory = new ArrayList<String>(maxCommands + 1);
+       this.commandIterator = commandHistory.listIterator();
+
     }
 
     public void propertyChanged(String name, String parms)
@@ -95,7 +117,7 @@ public class InputField extends JTextField implements KeyListener, ActionListene
        Color temp = ClientState.getClientState().getColor("ui.editcolor", ClientDefaults.ui_editcolor);
 
        setForeground(temp);
-       setCaretColor(temp.brighter()); 
+       setCaretColor(temp.brighter());
 
        setFont(ClientState.getClientState().getFont("ui.font", ClientDefaults.ui_font));
 
@@ -106,8 +128,10 @@ public class InputField extends JTextField implements KeyListener, ActionListene
     {
        event.text = ev.getActionCommand();
 
+       /*
        InputList temp = new InputList();
        temp.text = event.text;
+       */
 
        if (event.text.length() <= 0)
        {
@@ -115,24 +139,25 @@ public class InputField extends JTextField implements KeyListener, ActionListene
           return;
        }
 
-       if (list != null)
+       // Add the text to the command history and remove redundant items
+       this.commandExistsInHistory(event.text, true); // Remove if it already exists
+       this.resetIterator(false);   // Reset to end
+       this.commandIterator.add(event.text); // Append to end of list
+
+       // Check if the max size of the history has been reached
+       if (this.commandHistory.size() == (maxCommands + 1)
+                                                    && (maxCommands > 0)) 
        {
-          temp.prev = list;
-          temp.next = list.next;
 
-          if (list.next != null)
-          {
-             list.next.prev = temp;
-          }
-
-          list.next = temp;
+           this.resetIterator(); // Reset to beginning
+           this.commandIterator.remove(); // Remove first item in list
+           this.resetIterator(false);   // Reset to end
        }
 
-       list = temp;
 
        fireInputEvent();
     }
- 
+
     public void addInputListener(InputListener l)
     {
        // we use addFirst for the following reasons...  generally input fields will have two listeners
@@ -163,7 +188,7 @@ public class InputField extends JTextField implements KeyListener, ActionListene
     {
        if (indent != null)
        {
-          return indent.getText(); 
+          return indent.getText();
        }
 
        return "";
@@ -236,49 +261,178 @@ public class InputField extends JTextField implements KeyListener, ActionListene
 
        if (e.getKeyCode() == KeyEvent.VK_ENTER && e.getModifiers() != 0)
        {
+          this.resetIterator();
           event.text = getText();
           fireInputEvent();
           e.consume();
           return;
        }
 
+
        //
        // deal with arrow up
        //
        if (e.getKeyCode() == KeyEvent.VK_UP)
        {
-          if (list != null)
-          {
-             setText(list.text);
-
-             if (list.prev != null)
-             {
-                list = list.prev;
-             }
-          }          
-          e.consume();
+        
+            // See if there is an available command in list
+            if (commandIterator.hasPrevious()) {
+            
+                // Store it
+                String previous = commandIterator.previous();
+                
+                // See if we should skip one forward
+                if (!previousKeyUpArrow && commandIterator.hasPrevious()) {
+                    setText(commandIterator.previous());
+                }
+                
+                // Set text from history
+                else {
+                    setText(previous);
+                }
+            
+            }
+            else {
+                e.consume();
+            }
+            
+            // Set flag       
+            this.previousKeyUpArrow = true;
        }
-   
+                       
+
        // deal with arrow down
        if (e.getKeyCode() == KeyEvent.VK_DOWN)
        {
-          if (list != null && list.next != null)
-          {
-             list = list.next;
-             setText(list.text);
-          }          
-          else
-          {
-             setText("");
-          }
-          e.consume();
+            
+            // This will hold the next item in the list
+            String next;
+
+            // Check
+            if (commandIterator.hasNext())
+            {
+
+                 // Special case check, user pressed up and down from empty
+                 // command line
+                 if (commandIterator.hasNext() && 
+                        commandIterator.nextIndex() + 1 == commandHistory.size() &&
+                            this.previousKeyUpArrow) 
+                 {
+                    // Clear the command textfield and reset iterator
+                    resetIterator(false);
+                    this.previousKeyUpArrow = true;                    
+                    setText("");
+                 }
+                 
+                 // Not a special case
+                 else 
+                 {
+                     // Fetch next item in command history (downwards)
+                     next = commandIterator.next();
+                    
+                     // Semi-special case, user pressed up then down so
+                     // we need to skip an item
+                     if (previousKeyUpArrow && commandIterator.hasNext()) 
+                     {
+                         setText(commandIterator.next());
+                     }
+                     
+                     // Just set the text
+                     else 
+                     {
+                         setText(next);
+                     }
+                     
+                     // Set flag (user pressed arrow down)
+                     this.previousKeyUpArrow = false;
+                 }
+            }
+            
+            // No more items in history, clear the textfield and set flag
+            else 
+            {
+                 setText("");
+                 next = null;
+                 this.previousKeyUpArrow = true;
+            
+            }
+            
+            // I'm not really sure what this is
+            e.consume();
        }
+
 
        // deal with ^K and other built in shortcuts
     }
 
-    public void keyReleased(KeyEvent e) 
-    { 
+    // Resets to the beginning of the command iterator
+    private void resetIterator() 
+    {
+        this.resetIterator(true);
+    }
+
+    // Reset the iterator to beginning (true) or end (false)
+    private void resetIterator(boolean resetToBeginning) 
+    {
+        if (resetToBeginning)
+        {
+            
+            // Reset to beginning
+            while (this.commandIterator.hasPrevious()) 
+            {
+               this.commandIterator.previous();
+            }
+
+        }
+        
+        else {
+            
+            // Reset to end
+            while (this.commandIterator.hasNext()) 
+            {
+               this.commandIterator.next();
+            }
+
+        }
+        
+        return;
+    }
+
+
+    // Returns true if the command is found in the history. If the
+    // parameter <i>delete</i> is true, the command is deleted if found.
+    // This method offers O(n) performance.
+    private boolean commandExistsInHistory(String cmd, boolean delete) 
+    {
+
+        // Reset iterator to beginning
+        this.resetIterator();
+
+        // Iterate through the history from beginning to end
+        while(this.commandIterator.hasNext()) 
+        {
+            if (this.commandIterator.next().equals(cmd)) 
+            {
+
+                // Command was found
+                if (delete) 
+                {
+
+                    // Remove it
+                    this.commandIterator.remove();
+                }
+
+                // Return
+                return true;
+            }
+        }
+
+        // Not found
+        return false;
+    }
+
+    public void keyReleased(KeyEvent e)
+    {
     }
 
     public void paint(Graphics g)
