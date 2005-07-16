@@ -47,6 +47,7 @@ public class GeneralListDialog extends EmptyWindow
       table.setDefaultRenderer((new Object()).getClass(), new MyRenderer());
       table.setShowGrid(false);
       table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+      table.setRowHeight(TextSource.fontMetrics.getHeight());
 
       JScrollPane scroller = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
       scroller.setOpaque(false);
@@ -154,7 +155,7 @@ public class GeneralListDialog extends EmptyWindow
       private JLabel          select = new JLabel();
       private AttributedLabel labeln = new AttributedLabel();
       private AttributedLabel labels = new AttributedLabel();
-       
+
       public MyRenderer()
       {
          select.setOpaque(true);
