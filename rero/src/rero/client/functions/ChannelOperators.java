@@ -66,6 +66,9 @@ public class ChannelOperators extends Feature implements Predicate, Function, Lo
           String  _channel = BridgeUtilities.getString(locals, "");
           Channel channel  = data.getChannel(_channel);
  
+          if (data.getUser(_nick) == null)
+              return SleepUtils.getEmptyScalar();
+
           return SleepUtils.getScalar(data.getPrefixInfo().toString(data.getUser(_nick).getModeFor(channel)));
       }
 

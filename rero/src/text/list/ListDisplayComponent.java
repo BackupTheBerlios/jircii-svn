@@ -67,7 +67,9 @@ public class ListDisplayComponent extends JComponent implements ChangeListener, 
 
       int baseline = TextSource.fontMetrics.getHeight() - 2; // starting at the top for this one...
 
-      synchronized (data.getSynchronizationKey())
+      synchronized (data.getSynchronizationKeyOuter())
+      {
+      synchronized (data.getSynchronizationKeyInner())
       {
       ListElement head = data.head(); // iteration is built into the ListData class, not my favorite pattern 
 
@@ -88,7 +90,9 @@ public class ListDisplayComponent extends JComponent implements ChangeListener, 
          baseline += (TextSource.fontMetrics.getHeight() + 2);
 
          head = data.next();
-      }
-      }
+      } // end while loop... I do need to reformat this...
+
+      } // end key inner
+      } // end key outer
    }
 }

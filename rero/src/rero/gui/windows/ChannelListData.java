@@ -90,7 +90,8 @@ public class ChannelListData extends ListData
       return null;
    }
 
-   public Object getSynchronizationKey()
+   // in the listbox painting code we ensure we have the script variable lock first before doing any painting...
+   public Object getSynchronizationKeyOuter()
    {
       if (capabilities != null)
       {
@@ -99,11 +100,13 @@ public class ChannelListData extends ListData
       }
       else
       {
-         // we'll use this given no choice, however permanently locking based on this
-         // value is the road to deadlock since so much is synchronized on the script
-         // variables already...
-         return getChannel().getAllUsers();
+         return null;
       }
+   }
+
+   public Object getSynchronizationKeyInner()
+   {
+      return getChannel().getAllUsers();
    }
 
    protected ListElement getElementForUser(User u)

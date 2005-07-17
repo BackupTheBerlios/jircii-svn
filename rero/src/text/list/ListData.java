@@ -42,7 +42,12 @@ public abstract class ListData implements BoundedRangeModel
     public abstract ListElement getElementAt(int number);
     public abstract Iterator    dataIterator();
 
-    public Object getSynchronizationKey()
+    public Object getSynchronizationKeyOuter()
+    {
+        return null;
+    }
+
+    public Object getSynchronizationKeyInner()
     {
         return null;
     }
