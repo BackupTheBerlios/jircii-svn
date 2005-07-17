@@ -92,7 +92,18 @@ public class ChannelListData extends ListData
 
    public Object getSynchronizationKey()
    {
-      return getChannel().getAllUsers();
+      if (capabilities != null)
+      {
+         // lock this tree by the script variables so no other thread can touch it...
+         return capabilities.getDataStructure(DataStructures.ScriptVariables);
+      }
+      else
+      {
+         // we'll use this given no choice, however permanently locking based on this
+         // value is the road to deadlock since so much is synchronized on the script
+         // variables already...
+         return getChannel().getAllUsers();
+      }
    }
 
    protected ListElement getElementForUser(User u)

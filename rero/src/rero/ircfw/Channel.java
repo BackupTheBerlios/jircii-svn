@@ -8,7 +8,7 @@ import rero.ircfw.data.*;
 public class Channel implements FrameworkConstants, Comparator
 {
     protected String topic = ""; /* channel topic */
-    
+
     public void setTopic(String t) { topic = t; }
     public String getTopic() { return topic; }
 
