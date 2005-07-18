@@ -3,7 +3,7 @@ Beta 39
 - The find feature is now case insensitive (oracel)
 - Fixed bug in command history, the history was not reset when pasting
   multiple lines of text (oracel)
-
+- Fixed flipped Ctrl+Click and Shift+Click behavior in the nicklist (Serge)
 
 Beta 38 
 ====
