@@ -64,7 +64,7 @@ public class ListSelectionSpace extends MouseInputAdapter
     {
         if (ev.getButton() == MouseEvent.BUTTON1 && !(ev.isShiftDown() && ev.isControlDown()) )
         {
-           if ((ev.getModifiers() & MouseEvent.SHIFT_MASK) == MouseEvent.SHIFT_MASK)
+           if ((ev.getModifiers() & MouseEvent.CTRL_MASK) == MouseEvent.CTRL_MASK)
            {
               ListElement temp = data.getElementAtLocation(ev.getY());
 
@@ -78,7 +78,7 @@ public class ListSelectionSpace extends MouseInputAdapter
                  display.repaint();
               }
            }
-           else if ((ev.getModifiers() & MouseEvent.CTRL_MASK) == MouseEvent.CTRL_MASK)
+           else if ((ev.getModifiers() & MouseEvent.SHIFT_MASK) == MouseEvent.SHIFT_MASK)
            {
               selectRange(ev);
            }
