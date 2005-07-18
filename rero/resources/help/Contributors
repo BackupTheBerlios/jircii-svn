@@ -2,10 +2,9 @@
 <br>
 <br>jIRCii has been a work in progress for a long time now.  I originally started it as a project to learn java while in high school.  I tinkered with it as a hobby throughout college.  I didn't make that final push to create a release quality product until now though.  Anyways with such a long history as a project there are to many people to thank so I'm going to keep this list short.
 <br>
-<br><p>Development Team</p>
-<br>Serge Baranov
-<br>Raphael Mudge
-<br>Andreas Ravnestad
+<br><b>Development Team</b>
+<br>Serge Baranov (<i>Serge</i>)
+<br>Andreas Ravnestad (<i>oracel</i>)
 <br>
 <br><b>Patch Contributors</b>
 <br>Mouton - found and fixed a Ctrl+K parsing bug

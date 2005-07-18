@@ -95,6 +95,8 @@ public class ScriptManager extends Feature implements ClientStateListener, Runti
 
    public void addScript(String filename)
    {
+      filename = ClientUtils.getFile(filename).getAbsolutePath();
+
       if ((new File(filename)).exists())
       {
          StringList temp = ClientState.getClientState().getStringList("script.files");

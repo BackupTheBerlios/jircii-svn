@@ -1,4 +1,4 @@
-jircii faq - distributed with jircii 07.13.05:
+jircii faq - distributed with jircii 07.18.05:
 
                .sS$$Ss.                           .sS$$Ss. .sS$$Ss.
                $$$$$$$$                           $$$$$$$$ $$$$$$$$
@@ -9,7 +9,7 @@ jircii faq - distributed with jircii 07.13.05:
          $$$$$$ $$$$$$ $$$$$$ $$$$$$ $$$$$$ $$$$$$ $$$$$$   $$$$$$
          $$$$$$ $$$$$$ $$$$$$ $$$$$$ $$$$$$        $$$$$$   $$$$$$
   """""" $$$$$$ $$$$$$ $$$$$$        $$$$$$ $$$$$$ $$$$$$   $$$$$$
-  $$$$$$ $$$$$$ $$$$$$ $$$$$$ 071305 $$$$$$ $$$$$$ $$$$$$   $$$$$$
+  $$$$$$ $$$$$$ $$$$$$ $$$$$$ 071805 $$$$$$ $$$$$$ $$$$$$   $$$$$$
   $$$$$$ $$$$$$ $$$$$$ $$$$$$        `?$$$$s$$$$P' $$$$$$   $$$$$$
   `?$$$$s$$$$P'                                        
 
@@ -30,50 +30,51 @@ Questions:
  9. What do the faded nicknames in the channel listbox mean?
 10. What is a jIRCii theme?
 11. How do I copy and paste in jIRCii?
-12. Where does jIRCii store its settings?
-13. How do I edit the jIRCii color scheme?
-14. How can I change ________ in the default jIRCii script?
-15. Is it possible to assign keyboard shortcuts in jIRCii?
-16. How do I get 24-hour format time stamps?
+12. I can't cut text with Ctrl+X, what's wrong?
+13. Where does jIRCii store its settings?
+14. How do I edit the jIRCii color scheme?
+15. How can I change ________ in the default jIRCii script?
+16. Is it possible to assign keyboard shortcuts in jIRCii?
+17. How do I get 24-hour format time stamps?
 
-17. What is the difference between a .THM and a .IRC file?
-18. How do I reload jIRCii scripts?
+18. What is the difference between a .THM and a .IRC file?
+19. How do I reload jIRCii scripts?
 
-19. What options need to be filled in to connect to an irc server?
-20. How do I connect to multiple servers?  What command do I use?
-21. How do I close the current IRC session?
-22. How do I connect to an SSL server?
+20. What options need to be filled in to connect to an irc server?
+21. How do I connect to multiple servers?  What command do I use?
+22. How do I close the current IRC session?
+23. How do I connect to an SSL server?
 
-23. How do I create a list of channels to automatically join?
-24. How do I set jIRCii to automatically connect to a server on startup?
-25. How can I make the server tabs get my attention when something happens?
+24. How do I create a list of channels to automatically join?
+25. How do I set jIRCii to automatically connect to a server on startup?
+26. How can I make the server tabs get my attention when something happens?
 
-26. How do I specify my own local IP address information for DCCs?
-27. What is Ident?  Do I have to use it?
+27. How do I specify my own local IP address information for DCCs?
+28. What is Ident?  Do I have to use it?
 
-28. How do I use a different Java look and feel with jIRCii?
-29. How do I make my statusbar transparent?
-30. How do I change the statusbar color?
-31. How can I set a background image in jIRCii?
-32. Can I make jIRCii windows transparent?
+29. How do I use a different Java look and feel with jIRCii?
+30. How do I make my statusbar transparent?
+31. How do I change the statusbar color?
+32. How can I set a background image in jIRCii?
+33. Can I make jIRCii windows transparent?
 
-33. Why don't you allow plugins written in Java, C, Python, Visual Basic etc.?
+34. Why don't you allow plugins written in Java, C, Python, Visual Basic etc.?
 
-34. Will you ever charge money for jIRCii?
-35. Can I get the jIRCii source code?
-36. Can I use portions of jIRCii's source code in my GPL project?
-37. What do the release designations (stable, beta) mean?
-38. How do I embed jIRCii into my website?
+35. Will you ever charge money for jIRCii?
+36. Can I get the jIRCii source code?
+37. Can I use portions of jIRCii's source code in my GPL project?
+38. What do the release designations (stable, beta) mean?
+39. How do I embed jIRCii into my website?
 
-39. What development environment do you use?
-40. Why write another Java IRC Client?
-41. What clients did you rip^H^H^H receive inspiration from?
-42. How long has jIRCii been in development?
-43. Why don't you wait until you have more changes to do a release?
+40. What development environment do you use?
+41. Why write another Java IRC Client?
+42. What clients did you rip^H^H^H receive inspiration from?
+43. How long has jIRCii been in development?
+44. Why don't you wait until you have more changes to do a release?
 
-44. I disabled my jircii menubar, how do I get it back?
-45. How do I reset the jIRCii settings?
-46. My jIRCii window flashes or acts crazy occasionally, what's wrong?
+45. I disabled my jircii menubar, how do I get it back?
+46. How do I reset the jIRCii settings?
+47. My jIRCii window flashes or acts crazy occasionally, what's wrong?
 
 If a question you would like answered is not here then post your question to 
 the jIRCii Message Board at http://jircii.hick.org/jirc/wwwboard.prl
@@ -224,7 +225,22 @@ Begin jIRCii FAQ:
     paste.  Or you can use the cut, copy, paste keyboard shortcuts specific
     to your operating system.
 
-12. Where does jIRCii store its settings?
+12. I can't cut text with Ctrl+X, what's wrong?
+
+    Beleive it or not this actually isn't a bug.  jIRCii binds Ctrl+X by
+    default to switch the current active query in case you are IRC'ing out
+    of your status window (i.e. all auto /window options turned off).  
+
+    This is consistent with the Ctrl+X binding used by BitchX.  If you would
+    like Ctrl+X to provide the normal service of cutting text, paste the
+    following into notepad, save it, and load it into jIRCii:
+
+    bind Ctrl+X
+    {
+       cutSelectedText();
+    }
+
+13. Where does jIRCii store its settings?
 
     jIRCii creates a folder called ".jIRC" in your home directory.  On UNIX
     systems your home directory should be kind of obvious.  On Windows your
@@ -233,7 +249,7 @@ Begin jIRCii FAQ:
 
     All of your settings are saved to this directory.  
 
-13. How do I edit the jIRCii color scheme?
+14. How do I edit the jIRCii color scheme?
 
     First off you don't have to script a single line of code to do this.  
     Most of jIRCii colors can be edited by holding down shift and clicking 
@@ -260,7 +276,7 @@ Begin jIRCii FAQ:
     using the theme manager so you can share your color settings with 
     others.
       
-14. How can I change ________ in the default jIRCii script?
+15. How can I change ________ in the default jIRCii script?
 
     jIRCii internally has two scripts loaded.  default.irc contains all of
     the default sets and a few commands.  menus.irc contains the popup and
@@ -280,7 +296,7 @@ Begin jIRCii FAQ:
     For more information on this feature see the file scriptjirc.pdf 
     located in the docs/ directory of the jIRCii archive.
     
-15. Is it possible to assign keyboard shortcuts in jIRCii?
+16. Is it possible to assign keyboard shortcuts in jIRCii?
 
     It is possible to do this.  However you must use jIRCii's scripting
     interface.  Just about any key combination can be turned into a keyboard
@@ -298,7 +314,7 @@ Begin jIRCii FAQ:
     myscript.irc.  You can then load this file using the jIRCii script
     manager.
 
-16. How do I get 24-hour format time stamps?
+17. How do I get 24-hour format time stamps?
 
     To change the timestamp format you will have to do a little bit of 
     scripting.  Open up your favorite text editor and enter in the following:
@@ -319,7 +335,7 @@ Begin jIRCii FAQ:
     Appendix D of the Sleep Language Fundamentals:
     http://jirc.hick.org/jirc/tutorial.prl?sleeplang#15
 
-17. What is the difference between a .THM and a .IRC file?
+18. What is the difference between a .THM and a .IRC file?
 
     A .THM file is a jIRCii theme script.  These are created with the jIRCii
     theme manager under View->Options->Theme Manager.  A .thm file is the 
@@ -330,7 +346,7 @@ Begin jIRCii FAQ:
     to jIRCii.  These are created by users.  A jIRCii script is loaded with
     the /load command or via the Script Manager.
 
-18. How do I reload jIRCii scripts?
+19. How do I reload jIRCii scripts?
 
     To reload a jIRCii script use the /reload command i.e.:
     /reload myscript.irc
@@ -339,7 +355,7 @@ Begin jIRCii FAQ:
     Once a script is loaded jIRCii knows where the script is located and will
     manage that detail for you.
 
-19. What options need to be filled in to connect to an irc server?
+20. What options need to be filled in to connect to an irc server?
 
     When you first launch jIRCii the options dialog will be open.  To 
     connect to an IRC server you merely need to fill in the User 
@@ -357,23 +373,23 @@ Begin jIRCii FAQ:
     With this information filled in you should be ready to connect to an
     irc server.
  
-20. How do I connect to multiple servers?  What command do I use?
+21. How do I connect to multiple servers?  What command do I use?
 
     jIRCii is a multiserver IRC client.  To create a new server connection
     you can use the /newserver command.
 
-21. How do I close the current IRC session?
+22. How do I close the current IRC session?
 
     To close the current IRC session simply close the "Status" window. 
 
-22. How do I connect to an SSL server?
+23. How do I connect to an SSL server?
 
     To connect to an SSL (Secure Socket Layer) with jIRCii simply
     use:
 
     /server -ssl server.hostname portnumber
 
-23. How do I create a list of channels to automatically join?
+24. How do I create a list of channels to automatically join?
 
     It is possible to set jIRCii to execute commands upon connecting to
     a server using the Perform on Connect feature.  You can define
@@ -396,7 +412,7 @@ Begin jIRCii FAQ:
     The perform on connect feature can be used to execute any commands you
     want when connecting to a server.
 
-24. How do I set jIRCii to automatically connect to a server on startup?
+25. How do I set jIRCii to automatically connect to a server on startup?
 
     a. Go to View -> Options -> jIRCii Setup.
     b. Select the server you want to automatically connect to on startup.
@@ -409,7 +425,7 @@ Begin jIRCii FAQ:
     server list.  Any servers configured to be connected to on startup
     will be blue.
 
-25. How can I make the server tabs get my attention when something happens?
+26. How can I make the server tabs get my attention when something happens?
 
    The normal answer I give to a feature request like this is to script
    it.  Fortunately it has already been scripted.  You can download 
@@ -417,7 +433,7 @@ Begin jIRCii FAQ:
 
    http://jircii.hick.org/cgi-bin/jirc.cgi?ACTION=VIEW&PAGE=contrib    
 
-26. How do I specify my own local IP address information for DCCs?
+27. How do I specify my own local IP address information for DCCs?
 
     If you would like to set a specific IP address that others use to 
     connect to you to receive files via DCC then:
@@ -440,7 +456,7 @@ Begin jIRCii FAQ:
     If you have any doubts on what to use then set jIRCii to use the
     Server method.
  
-27. What is Ident?  Do I have to use it?
+28. What is Ident?  Do I have to use it?
 
     Ident is an outdated protocol that many IRC servers expect your computer
     to respond to.  Essentially it is an Identification server.
@@ -471,7 +487,7 @@ Begin jIRCii FAQ:
     If your using MacOS X, Linux, or any other *NIX variant then you don't
     need to enable ident.  In fact don't enable it.
  
-28. How do I use a different Java look and feel with jIRCii?
+29. How do I use a different Java look and feel with jIRCii?
 
     For those that don't know look and feels are a skinnining mechanism 
     for Java.  An update to date selection of look and feels can be found
@@ -498,7 +514,7 @@ Begin jIRCii FAQ:
                      rero.test.WindowTest 
                      -lnf com.birosoft.liquid.LiquidLookAndFeel
 
-29. How do I make my statusbar transparent?
+30. How do I make my statusbar transparent?
 
     a. Go to View -> Options -> Backgrounds.
     b. Click on the statusbar in the preview thing in the top half of the 
@@ -507,7 +523,7 @@ Begin jIRCii FAQ:
     d. Select the Setup tab to change the tint color of the transparency
     e. Select the Tint tab to adjust the level of transparency
 
-30. How do I change the statusbar color?
+31. How do I change the statusbar color?
 
     a. Go to View -> Options -> Backgrounds.
     b. Click on the statusbar in the preview thing in the top half of the 
@@ -518,7 +534,7 @@ Begin jIRCii FAQ:
     Feel free to experiment with different combinations of background 
     options.  
   
-31. How can I set a background image in jIRCii?
+32. How can I set a background image in jIRCii?
 
     a. Go to View -> Options -> Backgrounds
     b. Click on the window in the preview thing.  The window is the inner 
@@ -531,7 +547,7 @@ Begin jIRCii FAQ:
     preview thing.  The label in the middle of the dialog will reflect
     which element of the display your editing background properties for.
 
-32. Can I make jIRCii windows transparent?
+33. Can I make jIRCii windows transparent?
 
     You can't make jIRCii windows themselves transparent.  However you
     can setup an effect known as pseudotransprency. 
@@ -565,7 +581,7 @@ Begin jIRCii FAQ:
     configurations for your window backgrounds.  This is the only eye candy
     you'll get so enjoy it.
 
-33. Why don't you allow plugins written in Java, C, Python, Visual Basic etc.?
+34. Why don't you allow plugins written in Java, C, Python, Visual Basic etc.?
 
     Some people have asked me why I use sleep and not some masterpeice of 
     a language like Python.  Short answer is this:
@@ -590,12 +606,12 @@ Begin jIRCii FAQ:
 
     As for plugins and such.  Why not just modify the source code?
 
-34. Will you ever charge money for jIRCii?
+35. Will you ever charge money for jIRCii?
 
     No.  jIRCii is my gift to the IRC community.  Therefor I can't charge
     money for the client.  However I may charge for shipping and handling.
 
-35. Can I get the jIRCii source code?
+36. Can I get the jIRCii source code?
 
     Yes!  jIRCii is an open source client.  jIRCii source code and 
     binaries are released under the artistic license.  
@@ -619,7 +635,7 @@ Begin jIRCii FAQ:
     source project so long as I receive some form of credit for the code
     I wrote.  If you modify it please note that too.
 
-36. Can I use portions of jIRCii's source code in my GPL project?
+37. Can I use portions of jIRCii's source code in my GPL project?
 
     Short answer, yes.  I grant you permission to use any jIRCii code "I
     wrote" licensed under the artistic license in your GPL project and to
@@ -629,7 +645,7 @@ Begin jIRCii FAQ:
     of the license feels like a bit of a lock-in to me.  However feel 
     free to do what you need to do.  :)
 
-37. What do the release designations (stable, beta) mean?
+38. What do the release designations (stable, beta) mean?
 
     No one has asked me this yet. However I'm going to answer because I'm 
     sure someone is curious. 
@@ -641,7 +657,7 @@ Begin jIRCii FAQ:
     recently released beta. As such stable releases are considered stable 
     since they've been tested by people other than me. 
 
-38. How do I embed jIRCii into my website?
+39. How do I embed jIRCii into my website?
 
     You can do this by using the jIRCii launch service.  jIRCii launch
     service provides a way of specifying an irc server and a channel when
@@ -655,7 +671,7 @@ Begin jIRCii FAQ:
     More info about jIRCii launch service can be found at:
     http://jircii.hick.org/jirc/link.prl
 
-39. What development environment do you use?
+40. What development environment do you use?
 
     Don't laugh, I use pico as my text editor.  I should be shot.  Or
     maybe given an award for writing over 40,000 lines of code in pico.
@@ -679,11 +695,11 @@ Begin jIRCii FAQ:
     10.3.4.  jIRCii development in the past has been done on Linux using
     the same type of environment and on Windows using editplus.  
 
-40. Why write another Java IRC Client?
+41. Why write another Java IRC Client?
 
     I don't own a TV or a playstation and I needed something to do.
 
-41. What clients did you rip^H^H^H receive inspiration from?
+42. What clients did you rip^H^H^H receive inspiration from?
 
     Years ago back when I was an IRC scripter.  I wrote an addon called
     mIRCii.  mIRCii was essentially a multi-server addon for mIRC.  You
@@ -713,7 +729,7 @@ Begin jIRCii FAQ:
     mIRC gets points for heavy influence by default.  Since mIRC is the 
     client most people use.
 
-42. How long has jIRCii been in development?
+43. How long has jIRCii been in development?
 
     I started writing jIRCii when I was in high school.  This was mostly
     an effort to learn Java.  jIRC was my senior project for my high school
@@ -768,7 +784,7 @@ Begin jIRCii FAQ:
     Short answer:  I've been working on this client for a looong freaking
     time.  
 
-43. Why don't you wait until you have more changes to do a release?
+44. Why don't you wait until you have more changes to do a release?
 
     Good question.  You may notice the main package jIRCii classes are 
     stored in is named "rero".  I named the jIRCii package this because
@@ -792,7 +808,7 @@ Begin jIRCii FAQ:
     then I recommend downloading a released labeled stable and just
     waiting until the next stable release ignoring betas in between.  
 
-44. I disabled my jircii menubar, how do I get it back?
+45. I disabled my jircii menubar, how do I get it back?
 
     Open up the options dialog using Alt+O.  From there navigate to 
     "GUI Setup" near the bottom.  Make sure the box "Show menubar" is
@@ -802,7 +818,7 @@ Begin jIRCii FAQ:
     This could be due to a rogue script that got loaded.  The best thing 
     to do in this case is to reset your jIRCii settings.
 
-45. How do I reset the jIRCii settings?
+46. How do I reset the jIRCii settings?
 
     You should only need to do this if your jIRCii settings become really 
     messed up.  Symptoms of messed up settings include nothing happening
@@ -824,7 +840,7 @@ Begin jIRCii FAQ:
  
     Do a file search for .jIRC and delete it.   
 
-46. My jIRCii window flashes or acts crazy occasionally, what's wrong?
+47. My jIRCii window flashes or acts crazy occasionally, what's wrong?
 
     Java uses a lot of video card hardware tricks to enhance performance.
     Unfortunately buggy video card drivers can cause problems with the
