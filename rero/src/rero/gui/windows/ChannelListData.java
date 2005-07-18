@@ -100,7 +100,7 @@ public class ChannelListData extends ListData
       }
       else
       {
-         return null;
+         return getChannel().getAllUsers(); // prevent a null pointer exception when capabilities haven't been installed yet
       }
    }
 

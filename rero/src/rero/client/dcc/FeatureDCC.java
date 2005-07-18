@@ -330,12 +330,19 @@ public class FeatureDCC extends Feature implements ClientCommand, ChatListener, 
 
                   getCapabilities().sendln(outputz);
                   getCapabilities().getOutputCapabilities().fireSetStatus(description, "SEND_RESUME_REQUEST");
-                  break;
                }
-
+               else
+               {
+                  protocol.fireError("file already completed, no need to resume");
+               }
+               break;
              case DCCUtilities.RENAME_OPTION_SELECTED:
-               SendRequest.showDialog(getCapabilities().getGlobalCapabilities().getFrame(), connect);
-               handleReceive(protocol, connect, description, temp);
+               boolean option = SendRequest.showDialog(getCapabilities().getGlobalCapabilities().getFrame(), connect);
+
+               if (option)
+               {
+                  handleReceive(protocol, connect, description, temp);
+               }
                break;
 
              case DCCUtilities.OVERWRITE_OPTION_SELECTED:

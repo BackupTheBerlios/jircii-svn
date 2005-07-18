@@ -278,7 +278,7 @@ public class InternalDataList
 
     public boolean isOn(User user, Channel channel)
     {
-        return (user.getChannels().contains(channel));
+        return user != null && user.getChannels().contains(channel);
     }
 
     public void AddUser(String nickname, Channel channel)

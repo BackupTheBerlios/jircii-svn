@@ -10,7 +10,6 @@ ctcp::/ctcp `butane VERSION::sends a specified ctcp request to a user::nick - us
 cping::/cping tanto::sends a ctcp ping request to the specified nick/channel.::+target - nick/channel to send ping to
 creply::/creply Tobias VERSION x-chat: paid Windows version::sends a ctcp reply to the target::target - who to send reply to::type - type of ctcp reply to send::+parms - parameters to send
 cycle::/cycle::leaves and joins the current/specified channel::+#channel - channel to cycle
-d::/d blue-elf JakieChan::figures out the mode for the specified users (op,voice,halfop) and removes the mode.  You can specify up to 4 nicknames (uses nick completion).::nick - user to take mode from::+nick... - other users to take mode from.
 dcc::/dcc send JakieChan ~/jerksrc.tar<br>/dcc chat tanto<br>/dcc accept blue-elf<br>/dcc close JakieChan::DCC stands for Direct Client Connection.  It is a way of sending and receiving files from other users on IRC.  It also provides facilities for chatting with another user outside of the IRC environment.::+stats - show dcc statistics in a window::send|chat|close|accept - type of dcc command to send.::nick - user to send dcc request to.::+file - filename to send
 deop::/deop tijiez::takes away half operator privileges for user on active channel. You can specify up to 4 nicknames (uses nick completion).::nick - user to deop::+nick... - other users to deop.
 describe::/describe #jIRC slaps tanto.::sends an action to the specified channel::#channel - channel to send action to.::text - action to perform.

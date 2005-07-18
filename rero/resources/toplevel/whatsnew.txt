@@ -1,3 +1,24 @@
+Beta 38 
+====
+- jIRCii command history behavior has been completely overhauled to feel
+  more like mIRC and other clients (- Oracel -)
+- a bug has been fixed where jIRCii list dialogs (/list etc.) did not
+  have the appropriate row height set (- Serge -)
+- windows can now be closed by shift+clicking the switchbar button (- Serge -)
+- added better URL matching for clicked links (- Serge -)
+- added a check to getModeFor() to prevent a null pointer exception
+- fixed a potential deadlock issue from the listbox painting code
+- upgraded scripting library to Sleep 2.0-stable
+- fixed repainting issues with the channel listbox and statusbar under XP
+  (Serge/Raffi)
+- fixed bug with auto resume option, if a file is complete, auto resume
+  will no longer pop up a dialog asking you to rename the saved file.
+  (the idea behind the auto options is to be hands off...); a message is
+  fired to indicate this case as well.
+- moved the Update IAL on Join and Auto Reconnect options to a new dialog
+  panel called Client Options
+- added an option to strip out all formatting codes from IRC messages
+
 Beta 37 release 07.13.05
 ====
 - fixed resource loading to ensure files in .jIRC have priority over 

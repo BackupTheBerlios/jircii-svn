@@ -97,6 +97,7 @@ public class OptionWindow extends JDialog implements DCapabilities, TreeSelectio
 
        category = new DefaultMutableTreeNode("Client Options"); items.add(category);
           option = new DefaultMutableTreeNode(addDialog(new IRCOptions()));   category.add(option);
+          option = new DefaultMutableTreeNode(addDialog(new ClientOptions()));   category.add(option);
           option = new DefaultMutableTreeNode(addDialog(new DCCOptions()));   category.add(option);
           option = new DefaultMutableTreeNode(addDialog(new LoggingDialog()));   category.add(option);
           option = new DefaultMutableTreeNode(addDialog(new AutoWindowDialog()));   category.add(option);

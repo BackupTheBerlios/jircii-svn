@@ -57,8 +57,8 @@ public class ListDisplayComponent extends JComponent implements ChangeListener, 
 
       data.setExtent(getHeight() / (TextSource.fontMetrics.getHeight() + 2));
 
-      int checkY = (g.getClipBounds()).y;             // reverse these if
-      int checkH = checkY+(g.getClipBounds()).height; // painting fucks up
+      int checkY = (g.getClipBounds()).y - 10;             // reverse these if
+      int checkH = checkY+(g.getClipBounds()).height + 20; // painting fucks up
 
       int width = super.getWidth();
       int height = super.getHeight();

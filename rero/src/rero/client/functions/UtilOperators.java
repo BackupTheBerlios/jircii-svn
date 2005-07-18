@@ -144,7 +144,7 @@ public class UtilOperators extends Feature implements Loadable
    {
       public Scalar evaluate(String f, ScriptInstance si, Stack locals)
       {
-         return SleepUtils.getScalar(AttributedString.CreateAttributedString(locals.pop().toString()).getText());
+         return SleepUtils.getScalar(ClientUtils.strip(BridgeUtilities.getString(locals, "")));
       }
    }
 

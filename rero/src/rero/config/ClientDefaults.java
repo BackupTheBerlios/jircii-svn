@@ -60,6 +60,8 @@ public class ClientDefaults
    public static final boolean switchbar_sort     = false; // sort switchbar buttons alphabetically...
    public static final boolean switchbar_hilight  = true; // determine if switchbar hilighting is on/off
 
+   public static final boolean client_stripcodes  = false; // strip colors from server?
+
    public static final boolean log_enabled   = false;
    public static final String  log_saveto    = new File(System.getProperty("user.home"), "irc_logs").getAbsolutePath();
    public static final boolean log_strip     = true;

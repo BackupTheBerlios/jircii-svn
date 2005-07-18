@@ -59,8 +59,8 @@ public class LabelDisplay extends JComponent implements MouseListener
    {
       TextSource.initGraphics(g);
 
-      int checkY = (g.getClipBounds()).y;             // reverse these if
-      int checkH = checkY+(g.getClipBounds()).height; // painting fucks up
+      int checkY = (g.getClipBounds()).y - 10;             // reverse these if
+      int checkH = checkY+(g.getClipBounds()).height + 20; // painting fucks up
 
       int width = super.getWidth();
       int height = super.getHeight();

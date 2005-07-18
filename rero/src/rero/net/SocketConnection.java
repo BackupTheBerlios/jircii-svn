@@ -246,7 +246,23 @@ public class SocketConnection implements Runnable, ClientStateListener
       event.data   = connectionInformation;
 
       ClientState.getClientState().addClientStateListener("client.encoding", this);
+
+      if (listener2 == null)
+      {
+         listener2 = new ClientStateListener() {
+             public void propertyChanged(String key, String value)
+             {
+                stripcodes = ClientState.getClientState().isOption("client.stripcodes", ClientDefaults.client_stripcodes);
+             }
+         };
+
+         listener2.propertyChanged(null, null);
+         ClientState.getClientState().addClientStateListener("client.stripcodes", listener2);
+      }
    }
+
+   private static boolean stripcodes;
+   private static ClientStateListener listener2 = null;
 
    LinkedList connectDisconnectListeners = new LinkedList();
    LinkedList messageReadListeners       = new LinkedList();
@@ -290,6 +306,11 @@ public class SocketConnection implements Runnable, ClientStateListener
 
    public void fireReadEvent(String message)
    {
+      if (stripcodes)
+      {
+         message = ClientUtils.strip(message);
+      }
+
       event.message = message;
       event.valid   = true;
 

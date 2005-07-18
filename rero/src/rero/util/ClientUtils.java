@@ -44,6 +44,11 @@ public class ClientUtils
         return null;
     }
 
+    public static String strip(String text)
+    {
+        return AttributedString.CreateAttributedString(text).getText();
+    }
+
     public static String ShowVersion()
     {
         String tagline = ClientUtils.tagline();
