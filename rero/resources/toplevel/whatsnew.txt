@@ -1,3 +1,10 @@
+Beta 39 
+====
+- The find feature is now case insensitive (oracel)
+- Fixed bug in command history, the history was not reset when pasting
+  multiple lines of text (oracel)
+
+
 Beta 38 
 ====
 - jIRCii command history behavior has been completely overhauled to feel

@@ -162,6 +162,10 @@ public class InputField extends JTextField implements KeyListener, ActionListene
                         // Add each line to the history
                         this.addToHistory(lines[i].trim());
                     }
+                    
+                    // Reset iterator to end in case the user had been 
+                    // browsing the command history.
+                    this.resetIterator(false);
                 }
             } 
             
