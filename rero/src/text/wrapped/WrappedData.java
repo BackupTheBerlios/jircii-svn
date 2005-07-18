@@ -49,7 +49,7 @@ public class WrappedData implements BoundedRangeModel
         WrappedContainer temp = last;
         while (temp != null)
         {
-           if (temp.getText().indexOf(text) > -1)
+           if (temp.getText().toUpperCase().indexOf(text.toUpperCase()) > -1)
            {
                values.add(new Integer(x));
            }
