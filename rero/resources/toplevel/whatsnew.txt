@@ -4,6 +4,14 @@ Beta 39
 - Fixed bug in command history, the history was not reset when pasting
   multiple lines of text (oracel)
 - Fixed flipped Ctrl+Click and Shift+Click behavior in the nicklist (Serge)
+- Modified the built-in /topic command to display the current topic
+  instead of unsetting it if no topic message was specified. (oracel)
+- Added the built-in command /ut to unset the topic in a given channel.
+  (oracel)
+- Both /topic and /ut now uses the currently active channel name if no
+  channel name is excplicitly given as a parameter to the respective
+  commands (oracel)
+
 
 Beta 38 
 ====
