@@ -611,7 +611,7 @@ public class BuiltInCommands extends Feature implements ClientCommand
                target = tokens.getToken(0);
             }
  
-            // Send the command
+            // Send the command to unset the topic
             getCapabilities().sendln("TOPIC " + target + " :");
             break;
 
