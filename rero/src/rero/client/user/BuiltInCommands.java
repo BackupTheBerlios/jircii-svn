@@ -100,6 +100,7 @@ public class BuiltInCommands extends Feature implements ClientCommand
    public static final int SEND       = 2541448;         // implemented within DCC framework
    public static final int SERVER     = -1852497085;     // implemented
    public static final int ST         = 2657;            // implemented
+   public static final int UT         = 2719;            // implemented
    public static final int SM         = 2650;            // implemeneted
    public static final int SV         = 2659;            // implemented
    public static final int THEME      = 79789481;        // implemented
@@ -556,6 +557,9 @@ public class BuiltInCommands extends Feature implements ClientCommand
          case SERVER:
             connectToServer(parms);
             break;
+            
+         // TODO: this command is redundant and should be removed unless
+         // backwards compatability is an issue
          case ST:
             target = gui.getQuery();
             if (parms.length() > 0)
@@ -572,8 +576,45 @@ public class BuiltInCommands extends Feature implements ClientCommand
             ((ScriptManager)getCapabilities().getDataStructure(DataStructures.ScriptManager)).loadTheme(parms);
             break;
          case TOPIC:
-            getCapabilities().sendln("TOPIC " + tokens.getToken(0) + " :" + tokens.getTokenFrom(1));
+
+            // Fetch possible target from currently active window
+            target = gui.getQuery();
+            
+            // Check if there is a specified target parameter
+            if (parms.length() > 0)
+            {
+               target = tokens.getToken(0);
+            }
+         
+            // Check how many tokens there are
+            if (tokens.getTotalTokens() > 1) {
+
+                // Setting current topic
+                getCapabilities().sendln("TOPIC " + target + " :" + tokens.getTokenFrom(1));
+            }
+            else {
+
+                // Trying to fetch current topic
+                getCapabilities().sendln("TOPIC " + target);                
+            }
             break;
+
+         // Unsets topic in the given channel
+         case UT:
+         
+            // Fetch possible target from currently active window
+            target = gui.getQuery();
+            
+            // Check if there is a specified target parameter
+            if (parms.length() > 0)
+            {
+               target = tokens.getToken(0);
+            }
+ 
+            // Send the command
+            getCapabilities().sendln("TOPIC " + target + " :");
+            break;
+
          case UNBAN:
             if (parms.indexOf('!') > -1)
             {
