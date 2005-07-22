@@ -13,7 +13,7 @@ Beta 39
   commands (oracel)
 - Nicknames in private messages now uses standard diamond brackets instead 
   of asterixes unless user is using the SDI interface option. (oracel)
-
+- Channel part messages are now shown (oracel)
 
 Beta 38 
 ====

@@ -173,7 +173,11 @@ set USER_QUIT
 
 set CHANNEL_PART 
 { 
-   return "\C18*\B*\B* $nick has left: $target"; 
+   # Check if there's a part message we should display
+   if ($1-) {
+       $msg = "( $+ $1- $+ )";
+   }
+   return "\C18*\B*\B* $nick has left: $target $msg"; 
 }
 
 set CHANNEL_TEXT 
