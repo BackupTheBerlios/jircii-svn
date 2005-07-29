@@ -68,6 +68,7 @@ topic::/topic #jIRC no the beta is not done yet.::sets the topic for the specifi
 unban::/unban `butane::unsets bans against the specified nick.::nick|banmask - nickname to unset all matching bans for or banmask to unset.
 unignore::/unignore *!*@*.aol.com::removes the specified mask from the ignore list.::nick!user@host - mask to remove from ignore list.
 unload::/unload xdcc.irc::unloads specified script.::file.irc - script to unload.
+ut::/ut #jIRC::unsets the topic for the specified channel.::+#channel - channel to unset the topic for.
 v::/v tijiez::gives voice (+v) privileges to specified users.  You may specify up to 4 nicks (uses nick completion)::nick - user to give voice to.::+nick... - other users to give voice to.
 ver::/ver tanto::requests version information from specified nick/channel.::+target - nick/channel to request version info from.
 voice::/voice tijiez::gives voice (+v) privileges to specified users.  You may specify up to 4 nicks (uses nick completion)::nick - user to give voice to.::+nick... - other users to give voice to.

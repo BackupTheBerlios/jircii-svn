@@ -173,11 +173,7 @@ set USER_QUIT
 
 set CHANNEL_PART 
 { 
-   # Check if there's a part message we should display
-   if ($1-) {
-       $msg = "( $+ $1- $+ )";
-   }
-   return "\C18*\B*\B* $nick has left: $target $msg"; 
+   return "\C18*\B*\B* $nick has left: $target"; 
 }
 
 set CHANNEL_TEXT 
@@ -346,23 +342,12 @@ set PRIVMSG
 }
 set SEND_MSG 
 {
-
-   # Check if it's SDI before using * as nick bracets
-   if (getProperty("ui.sdi") eq "true") {
-      $lb = "*"; $rb = "*";
-   }
-   else {
-      $lb = "<"; $rb = ">";
-   }
-   
    if (-iswindow $target)
    {
-       return "\C34 $+ $lb $+ \B $+ $me $+ \B $+ $rb $+ \C17 $parms ";
+       return "\C34*\B $+ $me $+ \B*\C17 $parms";
    }
    else
    {
-   
-       # Use * as brackets here since it looks best
        return "\C34 $+ \R->\R *\B $+ $target $+ \B*\C17 $parms";
    }
 }
