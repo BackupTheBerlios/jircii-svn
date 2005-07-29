@@ -64,7 +64,7 @@ sm::/sm::shows the mode on the current channel.
 st::/st::shows the topic on the current channel.
 sv::/sv::show version - sends a message showing your jIRC pride to the current nick/channel.
 theme::/theme /Users/raffi/mIRC-theme.thm::loads a jIRCii theme file::file.thm - the theme file to load
-topic::/topic #jIRC no the beta is not done yet.::sets the topic for the specified channel.::+#channel - channel to set topic for.
+topic::/topic #jIRC no the beta is not done yet.::sets or displays the topic for the specified channel.::+#channel - channel to set topic for.::+new topic - The new topic to set for the given channel. If no new topic is specified, the current topic for the specified channel will be displayed.
 unban::/unban `butane::unsets bans against the specified nick.::nick|banmask - nickname to unset all matching bans for or banmask to unset.
 unignore::/unignore *!*@*.aol.com::removes the specified mask from the ignore list.::nick!user@host - mask to remove from ignore list.
 unload::/unload xdcc.irc::unloads specified script.::file.irc - script to unload.
