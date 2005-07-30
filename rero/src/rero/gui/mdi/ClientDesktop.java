@@ -18,7 +18,7 @@ import rero.config.*;
 import rero.gui.toolkit.OrientedToolBar;
 
 /** responsible for mantaining the state of the desktop GUI and switchbar */
-public class ClientDesktop extends WindowManager implements ClientWindowListener, ChangeListener, ClientStateListener
+public class ClientDesktop extends WindowManager implements ClientWindowListener, ClientStateListener
 {
     protected JDesktopPane desktop;
 
@@ -57,11 +57,8 @@ public class ClientDesktop extends WindowManager implements ClientWindowListener
        windowMap.put(window.getWindow(), window);
        windowMap.put(window.getButton(), window);
 
-       if (selected)
-       {
-          window.getWindow().addWindowListener(this);
-          window.getButton().addChangeListener(this);
-       }
+       window.getWindow().addWindowListener(this);
+       window.getButton().addActionListener(this);
 
        // add to the switchbar
        addToSwitchbar(window);
@@ -72,8 +69,6 @@ public class ClientDesktop extends WindowManager implements ClientWindowListener
        if (!selected)
        {
           temp.setVisible(false);
-          window.getWindow().addWindowListener(this);
-          window.getButton().addChangeListener(this);
        }
        else
        {
@@ -90,39 +85,20 @@ public class ClientDesktop extends WindowManager implements ClientWindowListener
               {
                  try
                  {
-//                    Thread.sleep(2 * 1000); // sleep for 2 seconds - originally used when we had problems requesting focus
                     refreshFocus(desktop.getSelectedFrame()); 
                     desktop.getSelectedFrame().setSelected(true);
                  }
                  catch (java.beans.PropertyVetoException ex) { }
-//                 catch (InterruptedException ex2) { }
-
                  desktop.repaint();
               }
           }
        });
     }
 
-    public void stateChanged(ChangeEvent e)
-    {
-       JToggleButton source = (JToggleButton)e.getSource();
-       if (source.isSelected())
-       {
-          doActivate(getWindowFor(e.getSource()));
-       }
-       else
-       {
-          doDeactivate(getWindowFor(e.getSource()));
-       }
-    }
-
     public void onActive(ClientWindowEvent ev) 
     { 
        StatusWindow temp = getWindowFor(ev.getSource());
        doActivate(temp);
-
-//       if (temp.isLegalWindow())
-//          temp.getInput().requestFocus();
     }
 
     public void onInactive(ClientWindowEvent ev) 
@@ -133,15 +109,13 @@ public class ClientDesktop extends WindowManager implements ClientWindowListener
     public void onMinimize(ClientWindowEvent ev) 
     { 
        doDeactivate(getWindowFor(ev.getSource()));
+       newActive(windows.indexOf(getWindowFor(ev.getSource())) - 1);
     }
 
     public void onOpen(ClientWindowEvent ev) 
     { 
        StatusWindow temp = getWindowFor(ev.getSource());
        doActivate(temp);
-
-//       if (temp.isLegalWindow())
-//          temp.getInput().requestFocus();
     }
 
     public void onClose(ClientWindowEvent ev) 

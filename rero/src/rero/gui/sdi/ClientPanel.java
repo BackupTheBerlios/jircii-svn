@@ -156,21 +156,6 @@ public class ClientPanel extends WindowManager implements ActionListener, Client
        refreshFocus(); 
     }
 
-    public void actionPerformed(ActionEvent e)
-    {
-       JToggleButton source = (JToggleButton)e.getSource();
-
-       if (source.isSelected())
-       {
-          doActivate(getWindowFor(e.getSource()));
-       }
-       else
-       {
-          doDeactivate(getWindowFor(e.getSource()));
-          newActive(windows.indexOf(getWindowFor(e.getSource())) - 1);
-       }
-    }
-
     public void killWindow(ClientWindow cwindow)
     {
        StatusWindow window = getWindowFor(cwindow);
@@ -210,30 +195,9 @@ public class ClientPanel extends WindowManager implements ActionListener, Client
        }       
     }
 
-    public void newActive(int index)
-    {
-       StatusWindow temp;
-
-       if (index >= windows.size() || index < 0)
-       {
-          temp = (StatusWindow)windows.getFirst();
-       }
-       else
-       {
-          temp = (StatusWindow)windows.get(index);
-       }
-
-       doActivate(temp);
-    }
-
     public StatusWindow getActiveWindow()
     {
        return active;
-    }
-
-    protected StatusWindow getWindowFor(Object o)
-    {
-       return (StatusWindow)windowMap.get(o);
     }
 
     protected void doActivate(StatusWindow window)

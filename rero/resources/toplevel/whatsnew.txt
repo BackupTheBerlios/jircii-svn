@@ -1,4 +1,4 @@
-Beta 39 
+Beta    39 release 07.30.05
 ====
 - The find feature is now case insensitive (oracel)
 - Fixed bug in command history, the history was not reset when pasting
@@ -17,8 +17,11 @@ Beta 39
   : is present.
 - &use (in jIRCii) now cache's the shared script instance causing any
   loaded modules to be instantiated only once for all jIRCii sessions
+- fixed several bugs in the MDI window management routines
+- Added a workaround to keep Ctrl+Tab from freezing jIRCii on Windows.
+  Ctrl+Tab can still be binded by scripts though.
 
-Beta 38 
+Beta    38 released 07.18.05
 ====
 - jIRCii command history behavior has been completely overhauled to feel
   more like mIRC and other clients (oracel)
@@ -41,7 +44,7 @@ Beta 38
 - added an option to strip out all formatting codes from IRC messages
 - fixed /load ~/file not resolving ~
 
-Beta 37 release 07.13.05
+Beta    37 release 07.13.05
 ====
 - fixed resource loading to ensure files in .jIRC have priority over 
   internal resources

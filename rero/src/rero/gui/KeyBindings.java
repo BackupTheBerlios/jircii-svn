@@ -65,6 +65,12 @@ public class KeyBindings implements KeyEventDispatcher
           return true;
        }
 
+       if (ev.isControlDown() && ev.getKeyCode() == 9) 
+       {
+          ev.consume();
+          return true;
+       }       
+
        return false;
    }
 

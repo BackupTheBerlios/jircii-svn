@@ -81,8 +81,6 @@ public class UtilOperators extends Feature implements Loadable
     {
        public Scalar evaluate(String n, ScriptInstance si, Stack l)
        {
-          System.out.println("The new use has been called");
-
           File   parent;
           String className;
 

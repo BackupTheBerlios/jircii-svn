@@ -3,8 +3,10 @@ package rero.gui.windows;
 import javax.swing.*;
 import java.util.*;
 import rero.config.*;
+import java.awt.*;
+import java.awt.event.*;
 
-public abstract class WindowManager extends JPanel implements ClientStateListener
+public abstract class WindowManager extends JPanel implements ClientStateListener, ActionListener
 {
     protected SwitchBarOptions switchOptions; // we have to keep a reference to it or it will go bye bye
     protected JToolBar         switchbar;
@@ -12,6 +14,11 @@ public abstract class WindowManager extends JPanel implements ClientStateListene
     protected HashMap          windowMap; /** key=<JInternalFrame> value=<StatusWindow> or some child thereof */
 
     protected boolean          isRelative; // is the bg being drawn relative to the main window, makes a difference in repainting..
+
+    public StatusWindow getWindowFor(Object o)
+    {
+       return (StatusWindow)windowMap.get(o);
+    }
 
     public void addToSwitchbar(StatusWindow window)
     {
@@ -38,6 +45,38 @@ public abstract class WindowManager extends JPanel implements ClientStateListene
        switchbar.add(window.getButton());
        switchbar.revalidate();
     }
+
+    public void actionPerformed(ActionEvent e)
+    {
+       JToggleButton source = (JToggleButton)e.getSource();
+
+       if (source.isSelected())
+       {
+          doActivate(getWindowFor(e.getSource()));
+       }
+       else
+       {
+          doDeactivate(getWindowFor(e.getSource()));
+          newActive(windows.indexOf(getWindowFor(e.getSource())) - 1);
+       }
+    }
+
+    public void newActive(int index)
+    {
+       StatusWindow temp;
+
+       if (index >= windows.size() || index < 0)
+       {
+          temp = (StatusWindow)windows.getFirst();
+       }
+       else
+       {
+          temp = (StatusWindow)windows.get(index);
+       }
+
+       doActivate(temp);
+    }
+
 
     public void propertyChanged(String key, String value)
     {
@@ -76,4 +115,6 @@ public abstract class WindowManager extends JPanel implements ClientStateListene
     public abstract void init();
     public abstract void addWindow(StatusWindow window, boolean selected);
     public abstract StatusWindow getActiveWindow();
+    protected abstract void doActivate(StatusWindow window);
+    protected abstract void doDeactivate(StatusWindow window);
 }  
