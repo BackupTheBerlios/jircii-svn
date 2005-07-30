@@ -122,7 +122,7 @@ public class UtilOperators extends Feature implements Loadable
              else
              {
                 temp = (Loadable)bridges.get(bridge.toString());
-             }
+              }
 
              temp.scriptLoaded(si);
           }
