@@ -147,11 +147,6 @@ public class ClientDesktop extends WindowManager implements ClientWindowListener
        return getWindowFor(f);
     }
 
-    protected StatusWindow getWindowFor(Object o)
-    {
-       return (StatusWindow)windowMap.get(o);
-    }
-
     protected void doActivate(StatusWindow window)
     {
        try 
