@@ -81,6 +81,8 @@ public class UtilOperators extends Feature implements Loadable
     {
        public Scalar evaluate(String n, ScriptInstance si, Stack l)
        {
+          System.out.println("The new use has been called");
+
           File   parent;
           String className;
 
@@ -112,14 +114,14 @@ public class UtilOperators extends Feature implements Loadable
 
              Loadable temp;
 
-             if (bridges.get(bridge) == null)
+             if (bridges.get(bridge.toString()) == null)
              {
                 temp = (Loadable)bridge.newInstance();
-                bridges.put(bridge, temp);
+                bridges.put(bridge.toString(), temp);
              }
              else
              {
-                temp = (Loadable)bridges.get(bridge);
+                temp = (Loadable)bridges.get(bridge.toString());
              }
 
              temp.scriptLoaded(si);
