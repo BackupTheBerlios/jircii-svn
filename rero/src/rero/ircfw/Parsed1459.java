@@ -73,6 +73,17 @@ public class Parsed1459 implements FrameworkConstants
 
    protected HashMap eventInformation;
 
+   public static void main(String args[])
+   {
+      HashMap temp = new Parsed1459().parseString(":nick!user@host TOPIC #jircii :");
+      java.util.Iterator i = temp.keySet().iterator();
+      while (i.hasNext())
+      {
+         Object n = i.next();
+         System.out.println(n + " = " + temp.get(n));
+      } 
+   }
+
    public HashMap parseString (String data)
    {
       eventInformation = new HashMap();
@@ -187,7 +198,7 @@ public class Parsed1459 implements FrameworkConstants
        {
            parmsString.append(parser.getParsedString(0));
        }
-       else
+       else if (!data.equals(":"))
        {
            parmsString.append(data);
        }
@@ -197,6 +208,10 @@ public class Parsed1459 implements FrameworkConstants
        if (targetLength < parmsString.toString().length())
        {
           eventInformation.put($PARMS$, parmsString.toString().substring(targetLength, parmsString.toString().length()  ));
+       }
+       else
+       {
+          eventInformation.put($PARMS$, "");
        }  
 
        return eventInformation;

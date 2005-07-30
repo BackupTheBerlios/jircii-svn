@@ -288,13 +288,16 @@ public class InternalDataList
         while (umode.isPrefixChar(nickname.charAt(0)))
         {
            modes    = umode.setMode(modes, umode.getModeForDisplay(nickname.charAt(0)));
-           nickname = nickname.substring(1, nickname.length());           
+           nickname = nickname.substring(1, nickname.length());
         }
 
         User user = getUser(nickname);
-        user.getChannelData().put(channel, new Integer(modes));
 
-        channel.getAllUsers().add(user);
+        if (! user.getChannelData().containsKey(channel))
+        {
+           user.getChannelData().put(channel, new Integer(modes));
+           channel.getAllUsers().add(user);
+        }
     }
 
     public Channel getChannel(String channel)

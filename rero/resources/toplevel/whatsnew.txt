@@ -11,6 +11,12 @@ Beta 39
 - Both /topic and /ut now uses the currently active channel name if no
   channel name is excplicitly given as a parameter to the respective
   commands (oracel)
+- Fixed bug with quit message showing twice in the status (turned out to
+  be a problem with the printAll function which has been fixed).
+- Fixd bug with IRC parser not creating $PARMS$ correctly when only a
+  : is present.
+- &use (in jIRCii) now cache's the shared script instance causing any
+  loaded modules to be instantiated only once for all jIRCii sessions
 
 Beta 38 
 ====

@@ -80,7 +80,7 @@ public class UICapabilities
          }
       }
 
-      printStatus(text);
+//      printStatus(text);
    }
 
    /** prints text directly to the status window. */

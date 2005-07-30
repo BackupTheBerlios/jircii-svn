@@ -17,7 +17,8 @@ import java.awt.*; // for colormap and font apis
 
 import text.TextSource; // for colormap manipulation stuff
 
-import java.io.File;
+import java.io.*;
+import java.net.*;
 
 import javax.swing.*;
 
@@ -62,6 +63,7 @@ public class UtilOperators extends Feature implements Loadable
       script.getScriptEnvironment().getEnvironment().put("&versionString",       new versionString());
 
       script.getScriptEnvironment().getEnvironment().put("&exit", new exit());
+      script.getScriptEnvironment().getEnvironment().put("&use", new f_use());
 
       script.getScriptEnvironment().getEnvironment().put("-ischannel", new isChannel());
 
@@ -72,6 +74,64 @@ public class UtilOperators extends Feature implements Loadable
 
       return true;
    }
+
+    private static class f_use implements Function
+    {
+       private static HashMap bridges = new HashMap();
+
+       public Scalar evaluate(String n, ScriptInstance si, Stack l)
+       {
+          File   parent;
+          String className;
+
+          if (l.size() == 2)
+          {
+             parent    = BridgeUtilities.getFile(l);
+             className = BridgeUtilities.getString(l, "");
+          }
+          else
+          {
+             File a    = BridgeUtilities.getFile(l);
+             parent    = a.getParentFile();
+             className = a.getName();
+          }
+
+          Class bridge;
+
+          try
+          {
+             if (parent != null)
+             {
+                URLClassLoader loader = new URLClassLoader(new URL[] { parent.toURL() });
+                bridge = Class.forName(className, true, loader);
+             }
+             else
+             {
+                bridge = Class.forName(className);
+             }
+
+             Loadable temp;
+
+             if (bridges.get(bridge) == null)
+             {
+                temp = (Loadable)bridge.newInstance();
+                bridges.put(bridge, temp);
+             }
+             else
+             {
+                temp = (Loadable)bridges.get(bridge);
+             }
+
+             temp.scriptLoaded(si);
+          }
+          catch (Exception ex)  
+          {   
+             si.getScriptEnvironment().flagError(ex.toString());
+          }
+              
+          return SleepUtils.getEmptyScalar();
+       }
+    }
 
    public boolean scriptUnloaded(ScriptInstance script)
    {
