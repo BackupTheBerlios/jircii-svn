@@ -13,6 +13,7 @@ import java.beans.*;
 import rero.gui.windows.*;
 import rero.gui.background.*;
 
+import rero.util.ClientUtils;
 import rero.config.*;
 
 import rero.gui.toolkit.OrientedToolBar;
@@ -77,7 +78,8 @@ public class ClientDesktop extends WindowManager implements ClientWindowListener
 
        // one of my hacks...  make sure the selected window knows it is the selected window.
        // for some reason when I first launch the program this concept doesn't take so well.
-       SwingUtilities.invokeLater(new Runnable()
+ 
+       ClientUtils.invokeLater(new Runnable()
        {
           public void run()
           {
@@ -115,6 +117,7 @@ public class ClientDesktop extends WindowManager implements ClientWindowListener
        {
           int index = windows.indexOf(getWindowFor(ev.getSource()));
           newActive(index, false);
+          refreshFocus(desktop.getSelectedFrame()); 
        }
     }
 
@@ -144,13 +147,10 @@ public class ClientDesktop extends WindowManager implements ClientWindowListener
        switchbar.validate();
        switchbar.repaint();
 
-/*       if (getActiveWindow() != null)
+       if (desktop.getSelectedFrame() == null)
        {
-          doActivate(getActiveWindow());
-       } */
-       if (wasSelected)
-       {
-          newActive(index - 1, true);
+          newActive(index, true);
+          refreshFocus(desktop.getSelectedFrame()); 
        }
     }
 
@@ -215,7 +215,7 @@ public class ClientDesktop extends WindowManager implements ClientWindowListener
 
     public void refreshFocus(JInternalFrame f)
     {
-       if (isShowing() && getWindowFor(f).isLegalWindow() && !rero.gui.KeyBindings.is_dialog_active)
+       if (f != null && isShowing() && getWindowFor(f).isLegalWindow() && !rero.gui.KeyBindings.is_dialog_active)
           getWindowFor(f).getInput().requestFocus();
     }
 
@@ -320,43 +320,7 @@ public class ClientDesktop extends WindowManager implements ClientWindowListener
 
     protected class MyModifiedDesktopManager extends DefaultDesktopManager
     {
-        protected void SunSucksAndShouldMakeActivateNextFrameAtLeastProtectedThisIsAPainInMyAss(Container c)
-        {
-           // taken from the DefaultDesktopManager source code.  This does not fall under whatever license
-           // I decided this client falls under.  It falls under Suns Communist Source License.  Not that
-           // it is anything stellar or innovative.  They should have made this method "protected" so I could
-           // call it from my subclass.  But no.... they're to busy designing "mAD hATTER ThE JaVA DEsKTOp
-           // eNViROnMEnt".   The ultra elite desktop that features mozilla with an uglier Sun icon, an ugly
-           // scheme, and a bunch of general lameness.   
-
-           int i;
-           JInternalFrame nextFrame = null;
-
-           if (c == null)
-           {
-              return;
-           }
-
-           for (i = 0; i < c.getComponentCount(); i++)
-           {
-              if (c.getComponent(i) instanceof JInternalFrame) 
-              {
-                 nextFrame = (JInternalFrame)c.getComponent(i);
-                 break;
-              }
-           }
-
-           if (nextFrame != null)
-           {
-              try 
-              {
-                 nextFrame.setSelected(true);
-              }
-              catch(PropertyVetoException ex) { }
-
-              nextFrame.moveToFront();
-           }
-        }
+        public void closeFrame(JInternalFrame f) { }
 
         public void iconifyFrame(JInternalFrame f)
         { 
@@ -364,11 +328,6 @@ public class ClientDesktop extends WindowManager implements ClientWindowListener
 
            f.setVisible(false);
            f.getParent().repaint(f.getX(), f.getY(), f.getWidth(), f.getHeight());
-
-           if (findNew)
-           {
-              SunSucksAndShouldMakeActivateNextFrameAtLeastProtectedThisIsAPainInMyAss(f.getParent());
-           }
         }
 
         public void deiconifyFrame(JInternalFrame f)

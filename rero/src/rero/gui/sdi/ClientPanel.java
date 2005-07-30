@@ -180,7 +180,8 @@ public class ClientPanel extends WindowManager implements ActionListener, Client
        }
        else if (window == active)
        {
-          newActive(idx - 1, true); // if this window was the active one, make another one active instead...
+          newActive(idx, true); // if this window was the active one, make another one active instead...
+          refreshFocus();
        }
 
        switchbar.validate();

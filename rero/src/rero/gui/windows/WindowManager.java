@@ -66,12 +66,7 @@ public abstract class WindowManager extends JPanel implements ClientStateListene
     // find next non-minimized window to the left of the specified index without making the specified index active again
     public void newActive(int index, boolean includeCurrent)
     {
-       if (index > windows.size())
-       {
-          index = windows.size() - (includeCurrent ? 1 : 0);
-       }
-
-       for (int x = index - (includeCurrent ? 0 : 1); x >= 0; x--)
+       for (int x = index - 1; x >= 0; x--)
        {
           StatusWindow temp   = (StatusWindow)windows.get(x);
 
@@ -81,6 +76,8 @@ public abstract class WindowManager extends JPanel implements ClientStateListene
              return;
           }
        }
+ 
+       if (includeCurrent) { index = -1; }
 
        for (int x = windows.size() - 1; x > index; x--)
        {
