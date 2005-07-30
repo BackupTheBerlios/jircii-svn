@@ -63,7 +63,7 @@ public class UtilOperators extends Feature implements Loadable
       script.getScriptEnvironment().getEnvironment().put("&versionString",       new versionString());
 
       script.getScriptEnvironment().getEnvironment().put("&exit", new exit());
-      script.getScriptEnvironment().getEnvironment().put("&use", new f_use());
+      script.getScriptEnvironment().getEnvironment().put("&use", new f2_use());
 
       script.getScriptEnvironment().getEnvironment().put("-ischannel", new isChannel());
 
@@ -75,10 +75,10 @@ public class UtilOperators extends Feature implements Loadable
       return true;
    }
 
-    private static class f_use implements Function
-    {
-       private static HashMap bridges = new HashMap();
+    private static HashMap bridges = new HashMap();
 
+    private static class f2_use implements Function
+    {
        public Scalar evaluate(String n, ScriptInstance si, Stack l)
        {
           File   parent;
