@@ -57,26 +57,42 @@ public abstract class WindowManager extends JPanel implements ClientStateListene
        else
        {
           doDeactivate(getWindowFor(e.getSource()));
-          newActive(windows.indexOf(getWindowFor(e.getSource())) - 1);
+
+          int index = windows.indexOf(getWindowFor(e.getSource()));
+          newActive(index, false);
        }
     }
 
-    public void newActive(int index)
+    // find next non-minimized window to the left of the specified index without making the specified index active again
+    public void newActive(int index, boolean includeCurrent)
     {
-       StatusWindow temp;
-
-       if (index >= windows.size() || index < 0)
+       if (index > windows.size())
        {
-          temp = (StatusWindow)windows.getFirst();
-       }
-       else
-       {
-          temp = (StatusWindow)windows.get(index);
+          index = windows.size() - (includeCurrent ? 1 : 0);
        }
 
-       doActivate(temp);
+       for (int x = index - (includeCurrent ? 0 : 1); x >= 0; x--)
+       {
+          StatusWindow temp   = (StatusWindow)windows.get(x);
+
+          if (temp != null && !temp.getWindow().isIcon())
+          {
+             doActivate(temp);
+             return;
+          }
+       }
+
+       for (int x = windows.size() - 1; x > index; x--)
+       {
+          StatusWindow temp   = (StatusWindow)windows.get(x);
+
+          if (temp != null && !temp.getWindow().isIcon())
+          {
+             doActivate(temp);
+             return;
+          }
+       }
     }
-
 
     public void propertyChanged(String key, String value)
     {

@@ -108,8 +108,14 @@ public class ClientDesktop extends WindowManager implements ClientWindowListener
 
     public void onMinimize(ClientWindowEvent ev) 
     { 
+       boolean wasSelected = ev.getSource().isSelected();
        doDeactivate(getWindowFor(ev.getSource()));
-       newActive(windows.indexOf(getWindowFor(ev.getSource())) - 1);
+
+       if (wasSelected)
+       {
+          int index = windows.indexOf(getWindowFor(ev.getSource()));
+          newActive(index, false);
+       }
     }
 
     public void onOpen(ClientWindowEvent ev) 
@@ -120,6 +126,9 @@ public class ClientDesktop extends WindowManager implements ClientWindowListener
 
     public void onClose(ClientWindowEvent ev) 
     { 
+       int index = windows.indexOf(getWindowFor(ev.getSource()));
+       boolean wasSelected = ev.getSource().isSelected();
+
        ClientWindow window = ev.getSource();
        StatusWindow temp = (StatusWindow)windowMap.get(window);
 
@@ -135,9 +144,13 @@ public class ClientDesktop extends WindowManager implements ClientWindowListener
        switchbar.validate();
        switchbar.repaint();
 
-       if (getActiveWindow() != null)
+/*       if (getActiveWindow() != null)
        {
-           doActivate(getActiveWindow());
+          doActivate(getActiveWindow());
+       } */
+       if (wasSelected)
+       {
+          newActive(index - 1, true);
        }
     }
 

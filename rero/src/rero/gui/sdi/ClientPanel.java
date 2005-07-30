@@ -174,13 +174,13 @@ public class ClientPanel extends WindowManager implements ActionListener, Client
 
        desktop.remove(window);          
 
-       if (window == active && !active.getName().equals(StatusWindow.STATUS_NAME))
+       if (window == active && active.getName().equals(StatusWindow.STATUS_NAME))
        {
-           newActive(idx - 1);
+          active = null; // if we close the status window, that's it... make sure we get rid fo the reference
        }
-       else
+       else if (window == active)
        {
-          active = null;
+          newActive(idx - 1, true); // if this window was the active one, make another one active instead...
        }
 
        switchbar.validate();
