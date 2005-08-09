@@ -1,3 +1,8 @@
+Beta    40 release <unknown>
+====
+- Improved find dialog slightly, if there's any previous search text in
+  the textfield, that text is now selected when the find dialog is opened.
+
 Beta    39 release 07.30.05
 ====
 - The find feature is now case insensitive (oracel)

@@ -9,12 +9,12 @@ import java.awt.event.*;
 import java.util.*;
 
 public class FindDialog extends JDialog implements ActionListener, KeyListener
-{ 
+{
    protected JButton next, prev;
    protected WrappedDisplay display;
    protected JTextField     search;
    protected ListIterator   results = null;
- 
+
    public void showDialog()
    {
       rero.gui.KeyBindings.is_dialog_active = true;
@@ -24,6 +24,7 @@ public class FindDialog extends JDialog implements ActionListener, KeyListener
       pack();
       setLocationRelativeTo(display);
       setVisible(true);
+      this.search.selectAll();
       search.requestFocus();
    }
 
@@ -40,7 +41,7 @@ public class FindDialog extends JDialog implements ActionListener, KeyListener
        search.addActionListener(this);
 
        JPanel panel = new JPanel();
-       panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));       
+       panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
        panel.setLayout(new FlowLayout());
        panel.add(new JLabel("Find: "));
        panel.add(search);
@@ -49,7 +50,7 @@ public class FindDialog extends JDialog implements ActionListener, KeyListener
 
        JPanel buttons = new JPanel();
        buttons.setLayout(new FlowLayout(FlowLayout.RIGHT));
-  
+
        next = new JButton("Next");
        next.setMnemonic('N');
        next.setEnabled(false);
@@ -60,7 +61,7 @@ public class FindDialog extends JDialog implements ActionListener, KeyListener
        prev.setEnabled(text.length() > 0);
        prev.addActionListener(this);
 
-  
+
        buttons.add(prev);
        buttons.add(next);
 
@@ -82,13 +83,13 @@ public class FindDialog extends JDialog implements ActionListener, KeyListener
        temp.showDialog();
    }
 
-   public void keyTyped(KeyEvent ev) 
-   { 
+   public void keyTyped(KeyEvent ev)
+   {
    }
 
    public void keyPressed(KeyEvent ev) { }
-   public void keyReleased(KeyEvent ev) 
-   { 
+   public void keyReleased(KeyEvent ev)
+   {
        if (ev.getKeyCode() == KeyEvent.VK_ESCAPE)
        {
           rero.gui.KeyBindings.is_dialog_active = false;
@@ -109,7 +110,7 @@ public class FindDialog extends JDialog implements ActionListener, KeyListener
    {
        if (results == null)
        {
-          results = display.find(search.getText());        
+          results = display.find(search.getText());
           lastSource = null;
        }
 
