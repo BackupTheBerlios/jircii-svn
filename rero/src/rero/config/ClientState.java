@@ -182,6 +182,24 @@ public class ClientState
    {
       try
       {
+        
+         // Patch to remove empty key/value pairs
+         Iterator i = state.keySet().iterator();
+         Object tmp;
+         while (i.hasNext()) {
+            tmp = state.get(i.next());
+            
+            // This is not likely, but I added it to avoid weird crashes
+            if (tmp == null) {
+                i.remove();
+            }
+            
+            // Most common case
+            else if (tmp.equals("")) {
+                i.remove();
+            }
+         }
+        
          FileOutputStream ostream = new FileOutputStream(new File(getBaseDirectory(), "jirc.prop"));
          state.save(ostream, "Java IRC Configuration");
          ostream.close();

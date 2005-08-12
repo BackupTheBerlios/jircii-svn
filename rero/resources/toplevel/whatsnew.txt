@@ -1,7 +1,10 @@
 Beta    40 release <unknown>
 ====
 - Improved find dialog slightly, if there's any previous search text in
-  the textfield, that text is now selected when the find dialog is opened.
+  the textfield, that text is now selected when the find dialog is opened
+  (oracel)
+- Empty properties are no longer saved (oracel)
+
 
 Beta    39 release 07.30.05
 ====
