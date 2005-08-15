@@ -13,8 +13,8 @@ import java.lang.ref.*;
 
 public class ClientState
 {
-   protected static HashMap listeners = new HashMap(); 
-   // ^-- container for the listeners for property changes.  This way 
+   protected static HashMap listeners = new HashMap();
+   // ^-- container for the listeners for property changes.  This way
    // components won't be checking themselves all the time, they
    // can be notified when something happens.
    // listeners{"property.name"} = LinkedList ( WeakReference(listener1),
@@ -22,7 +22,7 @@ public class ClientState
    //                                           WeakReference(listener2))
    // The weak references are for a server connection that gets closed,
    // this way those can be garbage collected.  Trying to make jIRC more
-   // memory friendly.   
+   // memory friendly.
 
    // related to backup and restore procedures
    protected Set        changes; // keeps track of changes made to this version of the "state"
@@ -37,7 +37,7 @@ public class ClientState
    {
       baseDirectory = new File(directory);
    }
-  
+
    public void fireChange(String property)
    {
       fireChange(property, null);
@@ -77,7 +77,7 @@ public class ClientState
          }
       }
    }
- 
+
    public static InputStreamReader getProperInputStream(InputStream stream)
    {
       if (ClientState.getClientState().getString("client.encoding", rero.dck.items.CharsetInput.DEFAULT_CHARSET).equals(rero.dck.items.CharsetInput.DEFAULT_CHARSET))
@@ -86,7 +86,7 @@ public class ClientState
       }
       else
       {
-         try 
+         try
          {
             return new InputStreamReader(stream, ClientState.getClientState().getString("client.encoding", rero.dck.items.CharsetInput.DEFAULT_CHARSET));
          }
@@ -106,7 +106,7 @@ public class ClientState
       }
       else
       {
-         try 
+         try
          {
             return new PrintStream(stream, true, ClientState.getClientState().getString("client.encoding", rero.dck.items.CharsetInput.DEFAULT_CHARSET));
          }
@@ -131,7 +131,7 @@ public class ClientState
 
    protected static ClientState clientState = null;
 
-   public static ClientState getClientState()  
+   public static ClientState getClientState()
    {
       if (clientState == null)
       {
@@ -174,7 +174,7 @@ public class ClientState
       {
          String temp = (String)i.next();
          fireChange(temp);
-      } 
+      }
    }
 
    /** sync the file system config file with the current client state */
@@ -182,24 +182,7 @@ public class ClientState
    {
       try
       {
-        
-         // Patch to remove empty key/value pairs
-         Iterator i = state.keySet().iterator();
-         Object tmp;
-         while (i.hasNext()) {
-            tmp = state.get(i.next());
-            
-            // This is not likely, but I added it to avoid weird crashes
-            if (tmp == null) {
-                i.remove();
-            }
-            
-            // Most common case
-            else if (tmp.equals("")) {
-                i.remove();
-            }
-         }
-        
+
          FileOutputStream ostream = new FileOutputStream(new File(getBaseDirectory(), "jirc.prop"));
          state.save(ostream, "Java IRC Configuration");
          ostream.close();
@@ -214,9 +197,9 @@ public class ClientState
 
    public void setString(String key, String value)
    {
-      state.setProperty(key, value);      
+      state.setProperty(key, value);
       fireChange(key);
-   }   
+   }
 
    public String getString(String key, String defaultValue)
    {
@@ -244,7 +227,7 @@ public class ClientState
             x = 0;
             y = 0;
          }
- 
+
          return new Rectangle(x, y, (int)mySize.getWidth(), (int)mySize.getHeight());
       }
 
@@ -313,7 +296,7 @@ public class ClientState
       if (temp.equals("true"))
       {
          return true;
-      }   
+      }
 
       return false;
    }
@@ -380,10 +363,10 @@ public class ClientState
          {
             temp.append(text);
             temp.append("\n");
-         } 
+         }
 
          return temp.toString();
-      } 
+      }
       catch (Exception ex)
       {
          ex.printStackTrace();
@@ -442,14 +425,14 @@ public class ClientState
          return temp.openStream();
       }
       catch (Exception ex) { ex.printStackTrace(); }
-   
+
       return null;
    }
 
    public Font getFont(String key, Font defaultValue)
    {
       String fname = getString(key, null);
-      
+
       if (fname == null)
       {
          return defaultValue;
