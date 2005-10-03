@@ -453,7 +453,7 @@ public class ProcessEvents extends Feature implements FrameworkConstants, ChatLi
 
    private static boolean isWhoisNumeric(int x)
    {
-      return ((x >= 311 && x < 321) || x == 338 || x == 369 || x == 301 || x == 302 || x == 307 || x == 308 || x == 330 || x == 401 || x == 406);
+      return ((x >= 311 && x < 321) || x == 338 || x == 369 || x == 301 || x == 302 || x == 307 || x == 308 || x == 330 || x == 401 || x == 406 || x == 378 || x == 379);
    }
 
    private static class AllowAwayReply implements ChatListener

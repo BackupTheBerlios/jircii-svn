@@ -393,6 +393,8 @@ set REPL_319!
 }
 set REPL_320! { return formatWhois("Secure", "\c35\b $+ $1 $+ \b\c33 $2-"); }
 set REPL_338! { return formatWhois("Host", "$2"); }
+set REPL_379! { return formatWhois("Modes", "$5-"); }
+set REPL_378! { return formatWhois("Mask/IP", "$5-"); }
 
 sub formatWhois
 {
