@@ -47,7 +47,7 @@ public class GeneralListDialog extends EmptyWindow
       table.setDefaultRenderer((new Object()).getClass(), new MyRenderer());
       table.setShowGrid(false);
       table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-      table.setRowHeight(TextSource.fontMetrics.getHeight());
+      table.setRowHeight(TextSource.fontMetrics.getHeight() + 2);
 
       JScrollPane scroller = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
       scroller.setOpaque(false);
