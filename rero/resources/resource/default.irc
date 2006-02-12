@@ -94,13 +94,13 @@ sub formatNick
    {
       return "\C26@\C29 $+ $3";
    }
-   else if ($1 isvoice $2) 
-   {
-      return "\C27+\C29 $+ $3";
-   }
    else if ($1 ishalfop $2)
    {
       return "\C28%\C29 $+ $3";
+   }
+   else if ($1 isvoice $2)
+   {
+      return "\C27+\C29 $+ $3";
    }
    else if ($1 hasmode $2)
    {
@@ -503,13 +503,13 @@ set SBAR_LEFT
   {
      $ime = "\B@\B $+ $me";
   }
-  else if ($me ishalfop $query) 
-  {
-     $ime = "\B%\B $+ $me";
-  }
   else if ($me isvoice $query) 
   {
      $ime = "\B+\B $+ $me";
+  }
+  else if ($me ishalfop $query)
+  {
+     $ime = "\B%\B $+ $me";
   }
   else
   {

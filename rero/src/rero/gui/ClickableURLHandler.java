@@ -1,56 +1,46 @@
 package rero.gui;
 
-import rero.client.output.*;
+import rero.client.Feature;
+import rero.util.ClientUtils;
+import text.event.ClickEvent;
+import text.event.ClickListener;
 
-import java.util.*;
-
-import rero.ircfw.interfaces.ChatListener;
-import rero.client.*;
-import rero.gui.*;
-
-import rero.util.*;
-
-import rero.bridges.event.*;
-
-import text.event.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ClickableURLHandler extends Feature implements ClickListener
 {
+    private static final Pattern CHAN_PATTERN = Pattern.compile("[@+%]*(#.*)");
+
     public void wordClicked(ClickEvent ev)
     {
         String item = ev.getClickedText().toLowerCase();
 
-        if (item.matches("^\\(*(http|https|ftp)://.*"))
-        {
+        if (item.matches("^\\(*(http|https|ftp)://.*")) {
             ClientUtils.openURL(extractURL(ev.getClickedText()));
             ev.consume();
             ev.acknowledge();
-        } else if (item.matches("^www\\..*"))
-        {
+        } else if (item.matches("^www\\..*")) {
             String location = extractURL(ev.getClickedText());
             ClientUtils.openURL("http://" + location);
             ev.consume();
             ev.acknowledge();
-        } else if (item.length() > 2 && ClientUtils.isChannel(item) && getCapabilities().isConnected() && !ev.getClickedText().endsWith("."))
-        {
-            getCapabilities().sendln("JOIN " + ev.getClickedText());
-            ev.consume();
-            ev.acknowledge();
-        } else if (item.length() > 2 && ClientUtils.isChannel(item.substring(1, item.length())) && getCapabilities().isConnected())
-        {
-            getCapabilities().sendln("JOIN " + ev.getClickedText().substring(1, item.length() - 1));
-            ev.consume();
-            ev.acknowledge();
+        } else {
+            Matcher m = CHAN_PATTERN.matcher(ev.getClickedText());
+            if (m.matches()) {
+                String chan = m.group(1).trim();
+                getCapabilities().sendln("JOIN " + chan);
+                ev.consume();
+                ev.acknowledge();
+            }
         }
     }
 
     private static String extractURL(String url)
     {
-        if (url.charAt(0) == '(')
-        {
+        if (url.charAt(0) == '(') {
             url = url.substring(1, url.length() - 1);
         }
-
         return url;
     }
 
