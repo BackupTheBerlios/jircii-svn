@@ -5,12 +5,18 @@ Beta    40 release <unknown>
   (oracel)
 - Support for Unreal IRCD extended whois ('connecting from' & 'using modes')
   (Serge)
+- Fix for http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?8300256 (Serge)
 - Fix for http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?7013225 (Serge)
 - Fix for http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?7056241 (Serge)
 - Fix for http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?9936279 (Serge)
 - Fix for http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?3984134 (Serge)
 - Fix for http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?4487090 (Serge)
 - Fix for http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?1912086 (Serge)
+- Fix for http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?8618918
+  If script file name is name.charset.irc or just name.charset, it will be
+  loaded in the specified charset.
+  List of valid charsets: http://www.iana.org/assignments/character-sets
+  (Serge)
 
 Beta    39 release 07.30.05
 ====
