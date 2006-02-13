@@ -309,6 +309,7 @@ public class ScriptManager extends Feature implements ClientStateListener, Runti
 
     private static final Pattern ENCODING_IN_FILE = Pattern.compile(".*\\.(.*?)\\..*$");
     private static final Pattern ENCODING_IN_EXTENSION = Pattern.compile(".*\\.(.*)$");
+    private static SortedMap charsets = null;
 
     /**
      * Script file name may contain charset, like file.charset.irc, or just file.charset
@@ -324,19 +325,19 @@ public class ScriptManager extends Feature implements ClientStateListener, Runti
         Matcher mname = ENCODING_IN_FILE.matcher(name);
         Matcher mext = ENCODING_IN_EXTENSION.matcher(name);
 
-        if (mname.matches() || mext.matches()) {
-            SortedMap charsets = Charset.availableCharsets();
-
-            if (mname.matches()) {
-                String charset = mname.group(1);
-                if (charsets.containsKey(charset))
-                    return charset;
-            } else {
-                String charset = mext.group(1);
-                if (charsets.containsKey(charset))
-                    return charset;
-            }
+        // lazy init
+        if (charsets == null) charsets = Charset.availableCharsets();
+        if (mname.matches()) {
+            String charset = mname.group(1);
+            if (charsets.containsKey(charset))
+                return charset;
         }
+        if (mext.matches()) {
+            String charset = mext.group(1);
+            if (charsets.containsKey(charset))
+                return charset;
+        }
+
         return null;
     }
 
