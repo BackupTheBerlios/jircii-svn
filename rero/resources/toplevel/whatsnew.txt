@@ -8,6 +8,7 @@ Beta    40 release <unknown>
 - Fix for http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?7013225 (Serge)
 - Fix for http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?7056241 (Serge)
 - Fix for http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?9936279 (Serge)
+- Fix for http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?3984134 (Serge)
 
 Beta    39 release 07.30.05
 ====

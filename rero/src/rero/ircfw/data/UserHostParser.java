@@ -12,7 +12,7 @@ import java.util.regex.*;
 
 public class UserHostParser extends DataEventAction implements FrameworkConstants
 {
-    protected static Pattern userHostPattern = Pattern.compile("(.*)=(.*)");
+    protected static Pattern userHostPattern = Pattern.compile("(.*?)=(.*)");
 
     public boolean isEvent(HashMap data)
     {
