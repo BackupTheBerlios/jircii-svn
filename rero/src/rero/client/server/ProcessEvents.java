@@ -44,6 +44,7 @@ public class ProcessEvents extends Feature implements FrameworkConstants, ChatLi
              } */
 
              output.fireSetTarget(eventDescription, channel, output.chooseSet(channel, "CHANNEL_TEXT", "CHANNEL_TEXT_INACTIVE"));
+             touchUser(nick, target);
          }
          else
          {
@@ -91,6 +92,7 @@ public class ProcessEvents extends Feature implements FrameworkConstants, ChatLi
          if (ClientUtils.isChannel(target))
          {
              output.fireSetTarget(eventDescription, channel, output.chooseSet(channel, "ACTION", "ACTION_INACTIVE"));
+             touchUser(nick, target);
          }
          else
          {
@@ -180,6 +182,7 @@ public class ProcessEvents extends Feature implements FrameworkConstants, ChatLi
       {
          output.fireSetTarget(eventDescription, channel, "CHANNEL_TOPIC_CHANGED");
          getCapabilities().getUserInterface().notifyWindow(channel);
+         touchUser(nick, target);
       }
       else if (event.equals("SIGNON"))
       {
@@ -479,4 +482,19 @@ public class ProcessEvents extends Feature implements FrameworkConstants, ChatLi
          return ChatListener.EVENT_DONE;
       }
    }
+
+    private void touchUser(String nick, String channel)
+    {
+        User user = ircData.getUser(nick);
+
+        boolean wasIdle = user.isIdle();
+
+        user.touch();
+
+        if (wasIdle && ircData.getChannel(channel) != null) {
+            ChannelDataWatch temp = ircData.getChannelDataWatch(ircData.getChannel(channel));
+            if (temp != null)
+                temp.userChanged();
+        }
+    }
 }

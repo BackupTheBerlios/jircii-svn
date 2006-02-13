@@ -64,18 +64,9 @@ public class ChannelUserWatch extends DataEventAction implements FrameworkConsta
         }     
         else if (event.equals("PRIVMSG"))
         {
-            User user = dataList.getUser(nick);
-
-            boolean wasIdle = user.isIdle();
-
-            user.touch();
-
-            if (wasIdle && dataList.getChannel(channel) != null)
-            {
-                ChannelDataWatch temp = dataList.getChannelDataWatch(dataList.getChannel(channel));
-                if (temp != null)
-                   temp.userChanged();
-            }
+            // @Serge: code moved to ProcessEvents.java, where we can touch user not only on
+            // PRIVMSG, but also on ACTION and other events.
+            // Fix for: http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?1912086
         }
     }
 }
