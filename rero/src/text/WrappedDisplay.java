@@ -11,6 +11,9 @@ import java.awt.font.*;
 import java.awt.datatransfer.*;
 
 import rero.config.*;
+import rero.gui.script.WindowAreaClickListener;
+import rero.gui.windows.ChannelWindow;
+import rero.gui.SessionManager;
 
 import text.event.*;
 
@@ -191,6 +194,9 @@ public class WrappedDisplay extends JComponent implements MouseWheelListener, Mo
                }
             }).start();
          }
+      } else {
+        String wname = SessionManager.getGlobalCapabilities().getActiveSession().getActiveWindow().getName();
+        fireClickEvent(null, wname, ev);
       }
    }   
 
@@ -236,7 +242,9 @@ public class WrappedDisplay extends JComponent implements MouseWheelListener, Mo
       while (i.hasNext() && !event.isConsumed())
       {
          ClickListener l = (ClickListener)i.next();
-         l.wordClicked(event);
+        // pass events with null text only to area click listener
+        if(text == null && !(l instanceof WindowAreaClickListener)) continue;
+        l.wordClicked(event);
       }
 
       return event;

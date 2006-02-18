@@ -19,6 +19,9 @@ Beta    40 release <unknown>
   (Serge)
 - Fix for http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?4225366
   Double click is now the default to open links and channels (Serge)
+- cclick event, fired when user clicks on empty channel window area.
+  $item is set to window name, $clicks is set to number of clicks (Serge)
+- $clicks variable added for all click events (Serge)
 
 Beta    39 release 07.30.05
 ====

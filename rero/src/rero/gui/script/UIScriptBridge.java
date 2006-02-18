@@ -1,91 +1,90 @@
 package rero.gui.script;
 
-import rero.gui.*;
-import rero.gui.windows.*;
+import rero.bridges.event.EventBridge;
+import rero.gui.IRCSession;
+import rero.gui.windows.ChannelWindow;
+import rero.gui.windows.ClientWindowEvent;
+import rero.gui.windows.EmptyWindow;
+import rero.gui.windows.StatusWindow;
 
-import rero.client.*;
-import rero.bridges.event.*;
+public class UIScriptBridge {
+  protected IRCSession session;
 
-import javax.swing.*;
+  protected WindowStateListener windowState;       // dispatches window state related events (on close,open,minimize etc.)
+  protected WindowDataListener windowData;        // dispatches the "on window" event for text being echo'd to a window
+  protected WindowClickListener windowClick;       // handles the "on click" event for text being clicked on in a window...
+  protected WindowClickListener windowDoubleClick; // handles the "on dclick" event for text being (double) clicked on in a listbox...
+  protected WindowClickListener windowSpecialClick; // handles the "on sclick" event for text being (double) clicked on in a special window
+  protected WindowInputListener windowInput;       // handles the "on input" event
 
-import text.*;
-import text.list.*;
+  protected WindowAreaClickListener areaClickListener;       // handles double clicks for empty channel areas
 
-public class UIScriptBridge
-{
-   protected IRCSession          session;
+  protected SessionOperators sessionOps;
 
-   protected WindowStateListener windowState;       // dispatches window state related events (on close,open,minimize etc.)
-   protected WindowDataListener  windowData;        // dispatches the "on window" event for text being echo'd to a window 
-   protected WindowClickListener windowClick;       // handles the "on click" event for text being clicked on in a window...
-   protected WindowClickListener windowDoubleClick; // handles the "on dclick" event for text being (double) clicked on in a listbox...
-   protected WindowClickListener windowSpecialClick; // handles the "on sclick" event for text being (double) clicked on in a special window
-   protected WindowInputListener windowInput;       // handles the "on input" event
+  protected WindowOperators windowOps;         // functions related to windows specifically
+  protected WindowManagementOperators windowMgmt;        // functions related to windows specifically
 
-   protected SessionOperators    sessionOps;
+  protected UIOperators interfaceOps;
 
-   protected WindowOperators     windowOps;         // functions related to windows specifically
-   protected WindowManagementOperators     windowMgmt;        // functions related to windows specifically
+  public UIScriptBridge(IRCSession _session) {
+    session = _session;
 
-   protected UIOperators         interfaceOps;
+    EventBridge bridge = (EventBridge) session.getCapabilities().getDataStructure("eventBridge");
 
-   public UIScriptBridge(IRCSession _session)
-   {
-       session = _session;
+    windowState = new WindowStateListener(session);
+    windowState.registerListener(bridge);
 
-       EventBridge bridge = (EventBridge)session.getCapabilities().getDataStructure("eventBridge");
+    windowData = new WindowDataListener(session.getCapabilities().getUserInterface());
+    bridge.registerEvent("window", windowData);
 
-       windowState = new WindowStateListener(session);
-       windowState.registerListener(bridge);
+    windowClick = new WindowClickListener();
+    bridge.registerEvent("click", windowClick);
 
-       windowData  = new WindowDataListener(session.getCapabilities().getUserInterface());
-       bridge.registerEvent("window", windowData);       
+    windowDoubleClick = new WindowClickListener();
+    bridge.registerEvent("dclick", windowDoubleClick);
 
-       windowClick = new WindowClickListener();
-       bridge.registerEvent("click", windowClick);
+    areaClickListener = new WindowAreaClickListener();
+    bridge.registerEvent("cclick", areaClickListener);
 
-       windowDoubleClick = new WindowClickListener();
-       bridge.registerEvent("dclick", windowDoubleClick);
+    windowSpecialClick = new WindowClickListener();
+    bridge.registerEvent("sclick", windowSpecialClick);
 
-       windowSpecialClick = new WindowClickListener();
-       bridge.registerEvent("sclick", windowSpecialClick);
+    windowInput = new WindowInputListener();
+    bridge.registerEvent("input", windowInput);
 
-       windowInput = new WindowInputListener();
-       bridge.registerEvent("input", windowInput);
+    windowOps = new WindowOperators(session);
+    session.getCapabilities().getScriptCore().addBridge(windowOps);
 
-       windowOps = new WindowOperators(session);
-       session.getCapabilities().getScriptCore().addBridge(windowOps);
+    windowMgmt = new WindowManagementOperators(session);
+    session.getCapabilities().getScriptCore().addBridge(windowMgmt);
 
-       windowMgmt = new WindowManagementOperators(session);
-       session.getCapabilities().getScriptCore().addBridge(windowMgmt);
+    sessionOps = new SessionOperators(session);
+    session.getCapabilities().getScriptCore().addBridge(sessionOps);
 
-       sessionOps = new SessionOperators(session);
-       session.getCapabilities().getScriptCore().addBridge(sessionOps);
+    interfaceOps = new UIOperators(session);
+    session.getCapabilities().getScriptCore().addBridge(interfaceOps);
+  }
 
-       interfaceOps = new UIOperators(session);
-       session.getCapabilities().getScriptCore().addBridge(interfaceOps);
-   }
+  /**
+   * called to notify the scripting bridge that a window has been created, this is for listeners and such to get
+   * registered
+   */
+  public void windowCreated(final StatusWindow window) {
+    window.getWindow().addWindowListener(windowState);
 
-   /** called to notify the scripting bridge that a window has been created, this is for listeners and such to get registered */
-   public void windowCreated(final StatusWindow window)
-   {
-       window.getWindow().addWindowListener(windowState);
+    if (window.isLegalWindow()) {
+      window.getDisplay().addClickListener(windowClick);
+      window.getDisplay().addClickListener(areaClickListener);
+      window.getInput().addInputListener(windowInput);
 
-       if (window.isLegalWindow())
-       {
-          window.getDisplay().addClickListener(windowClick);
-          window.getInput().addInputListener(windowInput);
+      if (window instanceof ChannelWindow) {
+        ((ChannelWindow) window).addClickListener(windowDoubleClick);
+      }
+    } else {
+      ((EmptyWindow) window).addClickListener(windowSpecialClick);
+    }
 
-          if (window instanceof ChannelWindow)
-          {
-             ((ChannelWindow)window).addClickListener(windowDoubleClick);
-          }
-       }
-       else
-       {
-          ((EmptyWindow)window).addClickListener(windowSpecialClick);
-       }
-   
-       windowState.onOpen(new ClientWindowEvent(window.getWindow())); // fake out the scripting saying "the window has opened"
-   }
+    windowState
+      .onOpen(new ClientWindowEvent(window.getWindow())); // fake out the scripting saying "the window has opened"
+  }
 }
