@@ -14,24 +14,27 @@ public class ClickableURLHandler extends Feature implements ClickListener
 
     public void wordClicked(ClickEvent ev)
     {
-        String item = ev.getClickedText().toLowerCase();
+        int clickCount = ev.getEvent().getClickCount();
+        if (clickCount == 2) {
+            String item = ev.getClickedText().toLowerCase();
 
-        if (item.matches("^\\(*(http|https|ftp)://.*")) {
-            ClientUtils.openURL(extractURL(ev.getClickedText()));
-            ev.consume();
-            ev.acknowledge();
-        } else if (item.matches("^www\\..*")) {
-            String location = extractURL(ev.getClickedText());
-            ClientUtils.openURL("http://" + location);
-            ev.consume();
-            ev.acknowledge();
-        } else {
-            Matcher m = CHAN_PATTERN.matcher(ev.getClickedText());
-            if (m.matches()) {
-                String chan = m.group(1).trim();
-                getCapabilities().sendln("JOIN " + chan);
+            if (item.matches("^\\(*(http|https|ftp)://.*")) {
+                ClientUtils.openURL(extractURL(ev.getClickedText()));
                 ev.consume();
                 ev.acknowledge();
+            } else if (item.matches("^www\\..*")) {
+                String location = extractURL(ev.getClickedText());
+                ClientUtils.openURL("http://" + location);
+                ev.consume();
+                ev.acknowledge();
+            } else {
+                Matcher m = CHAN_PATTERN.matcher(ev.getClickedText());
+                if (m.matches()) {
+                    String chan = m.group(1).trim();
+                    getCapabilities().sendln("JOIN " + chan);
+                    ev.consume();
+                    ev.acknowledge();
+                }
             }
         }
     }

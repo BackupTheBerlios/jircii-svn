@@ -17,6 +17,7 @@ Beta    40 release <unknown>
   loaded in the specified charset.
   List of valid charsets: http://www.iana.org/assignments/character-sets
   (Serge)
+- Fix for http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?4225366 (Serge)
 
 Beta    39 release 07.30.05
 ====
