@@ -18,7 +18,8 @@ Beta    40 release <unknown>
   List of valid charsets: http://www.iana.org/assignments/character-sets
   (Serge)
 - Fix for http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?4225366
-  Double click is now the default to open links and channels (Serge)
+  Double click is now the default to open links and channels.
+  dclick.links config option controls this behavior (Serge)
 - cclick event, fired when user clicks on empty channel window area.
   $item is set to window name, $clicks is set to number of clicks (Serge)
 - $clicks variable added for all click events (Serge)

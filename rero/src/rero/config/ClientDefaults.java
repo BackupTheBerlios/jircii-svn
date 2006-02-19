@@ -31,6 +31,7 @@ public class ClientDefaults
    public static final boolean option_showmotd  = true;
    public static final boolean option_reconnect = true;
    public static final boolean option_timestamp = false;
+   public static final boolean dclick_links     = true; // open links with double click
 
    public static       boolean ui_sdi        = true;
    public static final boolean ui_native     = true; 
