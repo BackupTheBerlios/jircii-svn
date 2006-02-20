@@ -17,9 +17,14 @@ bind Meta+F
    showSearchDialog(getActiveWindow());
 }
 
-bind Ctrl+X
+bind Ctrl+S
 {
    cycleQuery();
+}
+
+bind Ctrl+X
+{
+   cutSelectedText();
 }
 
 bind Ctrl+W
