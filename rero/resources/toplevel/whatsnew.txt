@@ -27,6 +27,10 @@ Beta    40 release <unknown>
   It's a fix for http://jircii.hick.org/cgi-bin/bitch.cgi/view.html?8150450
   (Serge)
 - Fixed pasting of multiple lines deleting current input field text (Serge)
+- Implemented automatic word wrapping of long messages if packet doesn't
+  fit 512 bytes RFC length. For details check this link:
+  http://www.resultspk.net/hackirc/irchks-chp-13-sect-3.html (Serge)
+
 
 Beta    39 release 07.30.05
 ====
