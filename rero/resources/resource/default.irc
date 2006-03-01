@@ -88,25 +88,26 @@ set NICKLIST_FORMAT
    return formatNick($nick, $channel, $nick);
 }
 
-sub formatNick
-{
-   if ($1 isop $2) 
-   {
-      return "\C26@\C29 $+ $3";
-   }
-   else if ($1 ishalfop $2)
-   {
-      return "\C28%\C29 $+ $3";
-   }
-   else if ($1 isvoice $2)
-   {
-      return "\C27+\C29 $+ $3";
-   }
-   else if ($1 hasmode $2)
-   {
-      return "\C26\B" . getModeFor($1, $2) . "\B\C29 $+ $3";
-   }
-   return "\C29 $+ $3";
+sub formatNick {
+  if (($1 !hasmode $2)) {
+    return "\C29 $+ $3";
+  }
+
+  $uchar = getModeFor($1, $2);
+
+  if($uchar eq '@') {
+    return "\C26@\C29 $+ $3";
+  }
+
+  if($uchar eq '%') {
+    return "\C28%\C29 $+ $3";
+  }
+
+  if($uchar eq '+') {
+    return "\C27+\C29 $+ $3";
+  }
+
+  return "\C26\B $+ $uchar $+ \B\C29 $+ $3";
 }
 
 set CHANNEL_CREATED!
@@ -499,21 +500,10 @@ set CTCP_REQUEST
 
 set SBAR_LEFT 
 {
-  if ($me isop $query) 
-  {
-     $ime = "\B@\B $+ $me";
-  }
-  else if ($me isvoice $query) 
-  {
-     $ime = "\B+\B $+ $me";
-  }
-  else if ($me ishalfop $query)
-  {
-     $ime = "\B%\B $+ $me";
-  }
-  else
-  {
-     $ime = "$me";
+  if (($me hasmode $query)) {
+    $ime = "\B" . getModeFor($me, $query) . "\B $+ $me";
+  } else {
+    $ime = "$me";
   }
 
   if ($me ison $query)

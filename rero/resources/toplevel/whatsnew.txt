@@ -30,7 +30,13 @@ Beta    40 release <unknown>
 - Implemented automatic word wrapping of long messages if packet doesn't
   fit 512 bytes RFC length. For details check this link:
   http://www.resultspk.net/hackirc/irchks-chp-13-sect-3.html (Serge)
-
+- Fixed modes in nicklist and status bar (all possible channel modes
+  should be correctly supported now, including &, ~, .) (Serge)
+- Fixed &getModeFor returning 2 characters in some cases. According
+  to docs it should always return the highest channel mode user has
+  as a single character (Serge)
+- Added @ &getModeChars function, returns channel mode chars supported
+  by the server (@,%,+,&,~,.) (Serge)
 
 Beta    39 release 07.30.05
 ====
