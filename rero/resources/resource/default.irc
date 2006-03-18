@@ -393,9 +393,12 @@ set REPL_319!
    return formatWhois("Channels", "\c36 $+ $chtemp"); 
 }
 set REPL_320! { return formatWhois("Secure", "\c35\b $+ $1 $+ \b\c33 $2-"); }
+set REPL_671! { return formatWhois("Secure", "\c35\b $+ $1 $+ \b\c33 $2-"); }
 set REPL_338! { return formatWhois("Host", "$2"); }
 set REPL_379! { return formatWhois("Modes", "$5-"); }
 set REPL_378! { return formatWhois("Mask/IP", "$5-"); }
+set REPL_310! { return formatWhois("Help", "\c35\b $+ $1 \b\c33 $+ $2-"); }
+set REPL_703! { return formatWhois("Codepage", "\c35\b $+ $2 \b\c33 $+ $3-"); }
 
 sub formatWhois
 {

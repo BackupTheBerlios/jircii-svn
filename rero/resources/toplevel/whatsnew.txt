@@ -37,6 +37,12 @@ Beta    40 release <unknown>
   as a single character (Serge)
 - Added @ &getModeChars function, returns channel mode chars supported
   by the server (@,%,+,&,~,.) (Serge)
+- Fixed modes parsing for modes not currently handled by jIRCii internal
+  data structures (this caused problems like incorrect modes for users
+  in the nicklist) (Serge)
+- Whois codes support (671 - Unreal secure connection, 310 - Unreal
+  available for help, 703 - ircd-RU translation scheme) (Serge)
+
 
 Beta    39 release 07.30.05
 ====
