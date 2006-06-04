@@ -325,15 +325,19 @@ public class ScriptManager extends Feature implements ClientStateListener, Runti
         Matcher mname = ENCODING_IN_FILE.matcher(name);
         Matcher mext = ENCODING_IN_EXTENSION.matcher(name);
 
-        // lazy init
-        if (charsets == null) charsets = Charset.availableCharsets();
         if (mname.matches()) {
+            // lazy init
+            if (charsets == null) charsets = Charset.availableCharsets();
             String charset = mname.group(1);
             if (charsets.containsKey(charset))
                 return charset;
         }
         if (mext.matches()) {
             String charset = mext.group(1);
+            // skip for .irc files
+            if(charset.equalsIgnoreCase("irc")) return null;
+            // lazy init
+            if (charsets == null) charsets = Charset.availableCharsets();
             if (charsets.containsKey(charset))
                 return charset;
         }
