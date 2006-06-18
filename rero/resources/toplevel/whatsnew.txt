@@ -42,7 +42,11 @@ Beta    40 release <unknown>
   in the nicklist) (Serge)
 - Whois codes support (671 - Unreal secure connection, 310 - Unreal
   available for help, 703 - ircd-RU translation scheme) (Serge)
-
+- formatTime3 function, takes time in seconds, returns something like:
+  "13 days, 23 hours, 8 minutes, 54 seconds". Default script is changed
+  to use this function for idle times (Serge)
+- Default "/whois $1" in menus is changed to "/whois $1 $1" to show idle
+  time for all users (not only users that are on the same server) (Serge)
 
 Beta    39 release 07.30.05
 ====

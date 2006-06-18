@@ -383,7 +383,7 @@ menu channel
 
 menu query
 {
-   &addItem("&Whois", "/whois $1");
+   &addItem("&Whois", "/whois $1 $1");
    ctcpDccMenu();
 }
 
@@ -397,7 +397,7 @@ menu chat
 
 menu nicklist
 {
-   &addItem("&Whois", "/whois $1");
+   &addItem("&Whois", "/whois $1 $1");
    &addItem("&Query", "/window $1");
 
    &addSeparator();

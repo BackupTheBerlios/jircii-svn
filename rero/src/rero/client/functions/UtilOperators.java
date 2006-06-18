@@ -36,10 +36,11 @@ public class UtilOperators extends Feature implements Loadable
       script.getScriptEnvironment().getEnvironment().put("&duration",     new duration());
       script.getScriptEnvironment().getEnvironment().put("&formatTime",     new formatTime());
       script.getScriptEnvironment().getEnvironment().put("&formatTime2",     new formatTime2());
+      script.getScriptEnvironment().getEnvironment().put("&formatTime3",    new formatTime3());
       script.getScriptEnvironment().getEnvironment().put("&formatDecimal",  new formatDecimal());
       script.getScriptEnvironment().getEnvironment().put("&longip",         new longip());
 
-      // time date functions 
+      // time date functions
       script.getScriptEnvironment().getEnvironment().put("&ctime",          new ctime());
       script.getScriptEnvironment().getEnvironment().put("&timeDateStamp",  new timeDateStamp());
       script.getScriptEnvironment().getEnvironment().put("&timeStamp",      new timeStamp());
@@ -124,11 +125,11 @@ public class UtilOperators extends Feature implements Loadable
 
              temp.scriptLoaded(si);
           }
-          catch (Exception ex)  
-          {   
+          catch (Exception ex)
+          {
              si.getScriptEnvironment().flagError(ex.toString());
           }
-              
+
           return SleepUtils.getEmptyScalar();
        }
     }
@@ -212,10 +213,10 @@ public class UtilOperators extends Feature implements Loadable
    {
       public Scalar evaluate(String f, ScriptInstance si, Stack locals)
       {
-         if (locals.size() >= 1) 
+         if (locals.size() >= 1)
          {
             ClientUtils.generateThemeScript(locals.pop().toString());
-         } 
+         }
          else
          {
             ClientUtils.generateThemeScript(null);
@@ -277,6 +278,15 @@ public class UtilOperators extends Feature implements Loadable
       }
    }
 
+    private static class formatTime3 implements Function
+    {
+        public Scalar evaluate(String f, ScriptInstance si, Stack locals)
+        {
+            long a = BridgeUtilities.getLong(locals);
+            return SleepUtils.getScalar(ClientUtils.formatTime3(a));
+        }
+    }
+
    private static class timeDateStamp implements Function
    {
       public Scalar evaluate(String f, ScriptInstance si, Stack locals)
@@ -308,20 +318,20 @@ public class UtilOperators extends Feature implements Loadable
    {
       public Scalar evaluate(String f, ScriptInstance si, Stack locals)
       {
-         String message   = "Your answer?"; 
+         String message   = "Your answer?";
 
-         if (!locals.isEmpty()) 
+         if (!locals.isEmpty())
             message = locals.pop().toString();
 
          String title   = "Input Requested";
 
-         if (!locals.isEmpty()) 
+         if (!locals.isEmpty())
              title = locals.pop().toString();
 
          String a = JOptionPane.showInputDialog(getCapabilities().getGlobalCapabilities().getFrame(), message, title, JOptionPane.QUESTION_MESSAGE);
 
          if (a == null)
-             return SleepUtils.getEmptyScalar(); 
+             return SleepUtils.getEmptyScalar();
 
          return SleepUtils.getScalar(a);
       }
@@ -341,23 +351,23 @@ public class UtilOperators extends Feature implements Loadable
 
          chooser.setFileSelectionMode(dirChooser);
 
-         String title = "Select File"; 
+         String title = "Select File";
 
-         if (!locals.isEmpty()) 
+         if (!locals.isEmpty())
             title = locals.pop().toString();
 
          chooser.setDialogTitle(title);
 
-         if (!locals.isEmpty()) 
+         if (!locals.isEmpty())
             chooser.setCurrentDirectory(new File(locals.pop().toString()));
 
-         if (!locals.isEmpty()) 
+         if (!locals.isEmpty())
             chooser.setApproveButtonText(locals.pop().toString());
 
          int returnVal = chooser.showOpenDialog(getCapabilities().getGlobalCapabilities().getFrame());
 
          if (returnVal == JFileChooser.APPROVE_OPTION)
-             return SleepUtils.getScalar(chooser.getSelectedFile().getAbsolutePath()); 
+             return SleepUtils.getScalar(chooser.getSelectedFile().getAbsolutePath());
 
          return SleepUtils.getEmptyScalar();
       }
@@ -397,7 +407,7 @@ public class UtilOperators extends Feature implements Loadable
 
          if (a < TextSource.colorTable.length && a >= 0)
             TextSource.colorTable[a] = Color.decode(b);
-         
+
          return SleepUtils.getEmptyScalar();
       }
    }
@@ -410,7 +420,7 @@ public class UtilOperators extends Feature implements Loadable
 
          if (a < TextSource.colorTable.length && a > 0)
             return SleepUtils.getScalar(TextSource.colorTable[a].getRGB());
-         
+
          return SleepUtils.getEmptyScalar();
       }
    }
