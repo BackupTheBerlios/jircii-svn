@@ -332,18 +332,18 @@ public class WindowOperators implements Predicate, Function, Loadable
             session.getWindow(window).getInput().setIndent(text);
          }
       }
-      else if (function.equals("&setInputText"))
-      {
-         if (session.getWindow(window) != null)
-         {
-            session.getWindow(window).getInput().setText(text);
-         }
-      }
       else if (function.equals("&refreshWindow"))
       {
          if (session.getWindow(text) != null)
          {
             session.getWindow(text).touch();
+         }
+      }
+      else if (function.equals("&setInputText"))
+      {
+         if (session.getWindow(window) != null)
+         {
+            session.getWindow(window).getInput().setText(text);
          }
       }
    }

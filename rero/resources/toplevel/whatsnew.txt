@@ -60,6 +60,9 @@ Beta    40 release 12 Oct 06
   /debug xdcc.irc +trace or /debug xdcc.irc -trace  (Raffi)
   scripts can programatically set debug flags, see the sleep docs for more
   info
+- fixed a bug with on input event breaking setInputText, text is immediately
+  cleared from edit box prior to fireing events.  Typed text is available as
+  $1- within on input though
 
 Beta    39 release 07.30.05
 ====

@@ -158,12 +158,13 @@ public class InputField extends JTextField implements KeyListener, ActionListene
     // Add text to history
     this.addToHistory(event.text);
 
+    setText(""); // clear the textbox first, on input will receive the event information 
+
     while (i.hasNext()) {
       InputListener temp = (InputListener) i.next();
       temp.onInput(event);
     }
 
-    setText("");
     this.resetIterator(false);
 
     event.reset();

@@ -19,7 +19,7 @@
            depend="yes"
            source="1.4"
            target="1.4"
-           debug="no"
+           debug="yes"
            optimize="yes"
     >
        <classpath path="./lib/sleep.jar" />
