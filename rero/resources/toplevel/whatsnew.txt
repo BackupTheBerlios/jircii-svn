@@ -1,29 +1,37 @@
-Beta    40 release <unknown>
+Beta    40 release 12 Oct 06
 ====
 - Improved find dialog slightly, if there's any previous search text in
   the textfield, that text is now selected when the find dialog is opened
   (oracel)
 - Support for Unreal IRCD extended whois ('connecting from' & 'using modes')
   (Serge)
-- Fix for http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?8300256 (Serge)
-- Fix for http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?7013225 (Serge)
-- Fix for http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?7056241 (Serge)
-- Fix for http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?9936279 (Serge)
-- Fix for http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?3984134 (Serge)
-- Fix for http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?4487090 (Serge)
-- Fix for http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?1912086 (Serge)
-- Fix for http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?8618918
-  If script file name is name.charset.irc or just name.charset, it will be
-  loaded in the specified charset.
+- Fixed a bug with the channel list window (Serge)
+  http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?8300256
+- Fixed a bug joining an empty channel not reflecting personal +o status (Serge)
+  http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?7013225
+- Fixed a bug with +/% modes getting confused precedence on UnReal IRCDs
+  http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?7056241 (Serge)
+- Clicking on a channel with an @/+ prefix now properly opens the channel
+  http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?9936279 (Serge)
+- Fixed USERHOST parsing bug on Freenode, thanks to borked IRCD on their part
+  http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?3984134 (Serge)
+- On perform commands are now always evaluated as if they were typed from the
+  status window. (Serge) 
+  http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?4487090 (Serge)
+- Fixed: Nicknames do not show non-idle status after an action
+  http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?1912086 (Serge)
+- Added a naming conventions for scripts to allow a charset to be specified
+  when loading the script.  The convention is: 
+  <script_name>.<charset>.irc 
+
   List of valid charsets: http://www.iana.org/assignments/character-sets
-  (Serge)
 - Fix for http://jirc.hick.org/cgi-bin/bitch.cgi/view.html?4225366
   Double click is now the default to open links and channels.
   dclick.links config option controls this behavior (Serge)
 - cclick event, fired when user clicks on empty channel window area.
   $item is set to window name, $clicks is set to number of clicks (Serge)
 - $clicks variable added for all click events (Serge)
-- Ctrl+X now cuts text instead of cycleQuery() which is now Ctrl+S.
+- Ctrl+X now cuts text instead of cycleQuery() which is now Ctrl+Z.
   It's a fix for http://jircii.hick.org/cgi-bin/bitch.cgi/view.html?8150450
   (Serge)
 - Fixed pasting of multiple lines deleting current input field text (Serge)
@@ -47,6 +55,11 @@ Beta    40 release <unknown>
   to use this function for idle times (Serge)
 - Default "/whois $1" in menus is changed to "/whois $1 $1" to show idle
   time for all users (not only users that are on the same server) (Serge)
+- Upgraded scripting engine to Sleep 2.1-b6 lots and lots of changes (Raffi)
+- Added a /debug command for setting the trace, warn flags for a script i.e.:
+  /debug xdcc.irc +trace or /debug xdcc.irc -trace  (Raffi)
+  scripts can programatically set debug flags, see the sleep docs for more
+  info
 
 Beta    39 release 07.30.05
 ====

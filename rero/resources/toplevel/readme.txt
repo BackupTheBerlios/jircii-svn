@@ -1,5 +1,5 @@
  ------- -------------------- ---------   ---------------  ------- ---------
-jIRCii - Beta (39) 07.30.05 - README
+jIRCii - Beta (40) 10.12.06 - README
 -  ------------- -------- -   ---------------- --       -    -     -     - - -
 
 The official jIRCii homepage is at: http://jircii.hick.org
@@ -39,7 +39,7 @@ Running and Installation
    You do not need to download the software development kit, just the runtime 
    environment.
 
-   Note: jIRCii also works with Java 1.5. 
+   Note: jIRCii also works with Java 1.5+
    
 3. - - Running jIRCii    --
 

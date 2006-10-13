@@ -50,6 +50,7 @@ public class BuiltInCommands extends Feature implements ClientCommand
    public static final int DEOP       = 2094626;        // implemented
    public static final int DESCRIBE   = 1800840907;     // implemented
    public static final int DEVOICE    = -2016999119;    // implemented
+   public static final int DEBUG      = 64921139;       // implemented
    public static final int DH         = 2180;           // implemented
    public static final int DNS        = 67849;          // implemented
    public static final int DO         = 2187;           // implemented
@@ -184,6 +185,9 @@ public class BuiltInCommands extends Feature implements ClientCommand
             }
 
             getCapabilities().getChatCapabilities().sendRequest(tokens.getToken(0), tokens.getToken(1), tokens.getTokenFrom(2));
+            break;
+         case DEBUG:
+            ((ScriptManager)getCapabilities().getDataStructure(DataStructures.ScriptManager)).setDebug(tokens.getToken(0), tokens.getTokenFrom(1));
             break;
          case DO:
          case DOP:

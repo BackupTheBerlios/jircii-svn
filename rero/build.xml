@@ -17,6 +17,8 @@
            destdir="${project.build}"
            nowarn="yes"
            depend="yes"
+           source="1.4"
+           target="1.4"
            debug="no"
            optimize="yes"
     >
@@ -28,6 +30,8 @@
     <javac srcdir="src-apple/" 
            destdir="${project.build}"
            nowarn="yes"
+           source="1.4"
+           target="1.4"
            depend="yes"
            debug="no" 
            optimize="yes"

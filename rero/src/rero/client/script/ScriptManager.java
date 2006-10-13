@@ -125,6 +125,62 @@ public class ScriptManager extends Feature implements ClientStateListener, Runti
         }
     }
 
+    public void setDebug(String filename, String debuglevel)
+    {
+        Iterator i = findScripts(filename, ClientState.getClientState().getStringList("script.files").getList()).iterator();
+        while (i.hasNext()) {
+            String scriptf = (String) i.next();
+            setDebugReal(scriptf, debuglevel);
+        }
+    }
+
+    private void setDebugReal(String filename, String debuglevel)
+    {
+        ScriptInstance script = (ScriptInstance)loader.getScriptsByKey().get(filename);
+
+        if (script == null)
+        {
+           getCapabilities().getUserInterface().printStatus("Could not find script " + filename + " to set debug level");
+           return;
+        }
+
+        int debug = script.getDebugFlags();
+
+        if (debuglevel.indexOf("+trace") > -1)
+        {
+           debug = debug | ScriptInstance.DEBUG_TRACE_CALLS; 
+        }
+     
+        if (debuglevel.indexOf("-trace") > -1)
+        {
+           debug = debug & ~ScriptInstance.DEBUG_TRACE_CALLS; 
+        }
+
+        if (debuglevel.indexOf("-warn") > -1)
+        {
+           debug = debug & ~ScriptInstance.DEBUG_SHOW_WARNINGS; 
+        }
+
+        if (debuglevel.indexOf("+warn") > -1)
+        {
+           debug = debug | ScriptInstance.DEBUG_SHOW_WARNINGS; 
+        }
+
+        if (debuglevel.indexOf("+all") > -1)
+        {
+           debug = debug | ScriptInstance.DEBUG_SHOW_WARNINGS | ScriptInstance.DEBUG_TRACE_CALLS;
+        }
+
+        if (debuglevel.indexOf("-all") > -1)
+        {
+           debug = debug & ~ScriptInstance.DEBUG_SHOW_WARNINGS & ~ScriptInstance.DEBUG_TRACE_CALLS;
+        }
+
+        script.setDebugFlags(debug);
+
+        getCapabilities().getUserInterface().printStatus("*** Updated debug flags for " + filename);
+    }
+
     public String evalString(String code)
     {
         try {
@@ -350,9 +406,17 @@ public class ScriptManager extends Feature implements ClientStateListener, Runti
         if (! ClientState.getClientState().isOption("script.ignoreWarnings", ClientDefaults.script_ignoreWarnings)) {
             String[] temp = warn.getMessage().split("\n");
 
+
             String fname = warn.getNameShort();
 
-            getCapabilities().getUserInterface().printStatus("*** Script Warning: " + temp[0] + " at " + fname + ":" + warn.getLineNumber());
+            if (warn.isDebugTrace())
+            {
+               getCapabilities().getUserInterface().printStatus(fname + ":" + warn.getLineNumber() + " " + temp[0]);
+            }
+            else
+            {
+               getCapabilities().getUserInterface().printStatus("*** Script Warning: " + temp[0] + " at " + fname + ":" + warn.getLineNumber());
+            }
 
             for (int x = 1; x < temp.length; x++) {
                 getCapabilities().getUserInterface().printStatus("     " + temp[x]);

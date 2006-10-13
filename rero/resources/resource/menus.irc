@@ -17,7 +17,7 @@ bind Meta+F
    showSearchDialog(getActiveWindow());
 }
 
-bind Ctrl+S
+bind Ctrl+Z
 {
    cycleQuery();
 }
