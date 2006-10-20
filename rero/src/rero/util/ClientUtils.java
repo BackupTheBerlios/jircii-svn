@@ -63,6 +63,7 @@ public class ClientUtils
             "Fat butane, grubbin' on French fries",
             "<JakieChan> butan: java sucks",
             "Clean. Christian. Comprehensive.",
+            "If idiots could fly, IRC would be an airport"
         };
         int r = ctime() % taglines.length;
         return taglines[r];
