@@ -1,3 +1,14 @@
+Beta    41 release 23 Mar 07
+====
+- Updated to Sleep 2.1-b14 (is it even released yet?).  Lots of changes.
+  Scripters (and indirectly users) shall be pleased.  
+  See the full changelog at: http://sleep.hick.org/changelog.html
+- Fixed a bug where a popup trigger on MacOS X could also trigger a
+  mouse clicked event (causing inadvertant creation of query windows
+  even when you don't want them).
+- Fixed a bug that caused psuedo transparency image to be recalculated 
+  with every window resize.  Made psuedo transparency mode incredibly slow.
+
 Beta    40 release 12 Oct 06
 ====
 - Improved find dialog slightly, if there's any previous search text in

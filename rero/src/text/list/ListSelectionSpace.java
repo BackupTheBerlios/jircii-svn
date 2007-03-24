@@ -62,9 +62,10 @@ public class ListSelectionSpace extends MouseInputAdapter
 
     public void mousePressed(MouseEvent ev)
     {
-        if (ev.getButton() == MouseEvent.BUTTON1 && !(ev.isShiftDown() && ev.isControlDown()) )
+        if (ev.getButton() == MouseEvent.BUTTON1 && !ev.isPopupTrigger() && !(ev.isShiftDown() && ev.isControlDown()) )
         {
-           if ((ev.getModifiers() & MouseEvent.CTRL_MASK) == MouseEvent.CTRL_MASK)
+           if ((ev.getModifiers() & MouseEvent.CTRL_MASK) == MouseEvent.CTRL_MASK ||
+               (ev.getModifiers() & MouseEvent.ALT_MASK) == MouseEvent.ALT_MASK)
            {
               ListElement temp = data.getElementAtLocation(ev.getY());
 

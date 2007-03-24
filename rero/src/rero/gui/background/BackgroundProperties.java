@@ -15,6 +15,8 @@ public class BackgroundProperties implements ClientStateListener
    protected Image image;
    protected Image transform;
 
+   protected String name;
+
    protected Color bgColor; 
    protected float bgTint;
 
@@ -70,14 +72,30 @@ public class BackgroundProperties implements ClientStateListener
 
    public void init(Color defaultColor, int defaultType, int defaultStyle, float defaultTint)
    {
-      image          = null;
-      transform      = null;
-      bgType         = ClientState.getClientState().getInteger(type + ".bgtype"  , defaultType);
-      bgColor        = ClientState.getClientState().getColor(  type + ".color"   , defaultColor);
-      bgTint         = ClientState.getClientState().getFloat(  type + ".tint"    , defaultTint);
-      bgStyle        = ClientState.getClientState().getInteger(type + ".bgstyle" , defaultStyle);
+      int _bgType, _bgStyle;
+      Color _bgColor;
+      float _bgTint;
+      boolean _isRelative;
+      String _name;
 
-      isRelative     = ClientState.getClientState().isOption(  type + ".relative", false);
+      _name           = ClientState.getClientState().getString(type + ".image", "background.jpg");
+      _bgType         = ClientState.getClientState().getInteger(type + ".bgtype"  , defaultType);
+      _bgColor        = ClientState.getClientState().getColor(  type + ".color"   , defaultColor);
+      _bgTint         = ClientState.getClientState().getFloat(  type + ".tint"    , defaultTint);
+      _bgStyle        = ClientState.getClientState().getInteger(type + ".bgstyle" , defaultStyle);
+      _isRelative     = ClientState.getClientState().isOption(  type + ".relative", false);
+
+      if (!_name.equals(name) || bgColor == null || bgType != _bgType || !bgColor.equals(_bgColor) || bgTint != _bgTint || bgStyle != _bgStyle || isRelative != _isRelative)
+      {
+         name           = _name;
+         bgType         = _bgType;
+         bgColor        = _bgColor;
+         bgTint         = _bgTint;
+         bgStyle        = _bgStyle;
+         isRelative     = _isRelative;
+         image          = null;
+         transform      = null;
+      }
    }
 
    public Image getImage(Component c)

@@ -69,7 +69,7 @@ public class ChannelWindow extends StatusWindow implements ChannelDataWatch
 
           public void mouseClicked(MouseEvent ev)
           {
-             if (ev.getClickCount() >= 2)
+             if (ev.getClickCount() >= 2 && !ev.isPopupTrigger() && (ev.getButton() & MouseEvent.BUTTON3) != MouseEvent.BUTTON3)
              {
                 fireClickEvent(ev);
              }

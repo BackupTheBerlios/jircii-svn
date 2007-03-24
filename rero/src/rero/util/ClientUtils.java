@@ -61,9 +61,9 @@ public class ClientUtils
         String taglines[] = {
             "highly caffeinated",
             "Fat butane, grubbin' on French fries",
-            "<JakieChan> butan: java sucks",
             "Clean. Christian. Comprehensive.",
-            "If idiots could fly, IRC would be an airport"
+            "If idiots could fly, IRC would be an airport",
+            "I'm a *p0rn* star"
         };
         int r = ctime() % taglines.length;
         return taglines[r];
