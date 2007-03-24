@@ -1,13 +1,28 @@
-Beta    41 release 23 Mar 07
+Beta    41 release 24 Mar 07
 ====
 - Updated to Sleep 2.1-b14 (is it even released yet?).  Lots of changes.
-  Scripters (and indirectly users) shall be pleased.  
   See the full changelog at: http://sleep.hick.org/changelog.html
+
+  Highlights include:
+  -- Addition of try/catch blocks and a throw command
+  -- Watch variables to assist with debugging 
+  -- an include function for including external files into a script
+  -- a profiler for seeing where your scripts spend all their time
+  -- assignment ops i.e. +=, *=, /= etc.  
+  -- performance enhancements and several bug fixes!!
+
 - Fixed a bug where a popup trigger on MacOS X could also trigger a
   mouse clicked event (causing inadvertant creation of query windows
   even when you don't want them).
 - Fixed a bug that caused psuedo transparency image to be recalculated 
-  with every window resize.  Made psuedo transparency mode incredibly slow.
+  with every window resize.  Resizing with psuedo transparency should feel
+  a little faster now.
+- Disabled apple.awt.showGrowBox property in Info.plist, this stops the 
+  drawing of the OS X grow box in the lower right corner (functionallity it
+  is still there, this just prevents the box itself from obscuring the client)
+- jIRCii Weblaunch/command line options to specify irc URL now allows
+  ircs:// URLs for connecting to an SSL server.  Port information is allowed
+  as well.
 
 Beta    40 release 12 Oct 06
 ====

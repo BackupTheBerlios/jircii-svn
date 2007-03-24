@@ -138,7 +138,7 @@ public class WindowTest
       //
       // check for an irc:// specified on the command line...
       //
-      if (ARGNO < args.length && args[ARGNO].indexOf("irc://") > -1)
+      if (ARGNO < args.length && (args[ARGNO].indexOf("irc://") > -1 || args[ARGNO].indexOf("ircs://") > -1))
       {
          try
          {

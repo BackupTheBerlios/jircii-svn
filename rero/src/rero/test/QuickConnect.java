@@ -18,6 +18,23 @@ public class QuickConnect
       info  = _info;
    }
 
+   public String getConnectCommand()
+   {
+      StringBuffer doit = new StringBuffer();
+      doit.append("/server ");
+
+      if (isSSL())
+      {
+         doit.append("-ssl ");
+      }
+
+      doit.append(getServer());
+      doit.append(" ");
+      doit.append(getPort());
+
+      return doit.toString();
+   } 
+
    public static QuickConnect GetInformation() 
    {
       return qc;
@@ -34,6 +51,12 @@ public class QuickConnect
          return info.getUserInfo();
 
       return "Guest_" + (System.currentTimeMillis() % 100);
+   }
+
+   public boolean isSSL()
+   {
+       System.out.println(info.getScheme());
+       return "ircs".equals(info.getScheme());
    }
 
    public String getPort()

@@ -115,20 +115,8 @@ public class SessionManager extends JTabbedPane implements ClientWindowListener,
 
             if (QuickConnect.IsQuickConnect())
             {
-               String ircServer = QuickConnect.GetInformation().getServer();
-
                addSession();
-               ServerData sdata = ServerData.getServerData();
-               Server stemp = sdata.getServerByName(ircServer);
-  
-               if (stemp != null)
-               {
-                  getSession(getComponentAt(0)).executeCommand(stemp.getCommand());
-               }
-               else
-               {
-                  getSession(getComponentAt(0)).executeCommand("/server " + ircServer + " " + QuickConnect.GetInformation().getPort());
-               }
+               getSession(getComponentAt(0)).executeCommand(QuickConnect.GetInformation().getConnectCommand());
             }
             else if (temp.getList().size() == 0)
             {

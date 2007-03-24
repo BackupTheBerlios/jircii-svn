@@ -1,4 +1,4 @@
-jircii faq - distributed with jircii 07.18.05:
+jircii faq - distributed with jircii 03.24.07:
 
                .sS$$Ss.                           .sS$$Ss. .sS$$Ss.
                $$$$$$$$                           $$$$$$$$ $$$$$$$$
@@ -9,7 +9,7 @@ jircii faq - distributed with jircii 07.18.05:
          $$$$$$ $$$$$$ $$$$$$ $$$$$$ $$$$$$ $$$$$$ $$$$$$   $$$$$$
          $$$$$$ $$$$$$ $$$$$$ $$$$$$ $$$$$$        $$$$$$   $$$$$$
   """""" $$$$$$ $$$$$$ $$$$$$        $$$$$$ $$$$$$ $$$$$$   $$$$$$
-  $$$$$$ $$$$$$ $$$$$$ $$$$$$ 071805 $$$$$$ $$$$$$ $$$$$$   $$$$$$
+  $$$$$$ $$$$$$ $$$$$$ $$$$$$ 032407 $$$$$$ $$$$$$ $$$$$$   $$$$$$
   $$$$$$ $$$$$$ $$$$$$ $$$$$$        `?$$$$s$$$$P' $$$$$$   $$$$$$
   `?$$$$s$$$$P'                                        
 
@@ -30,7 +30,7 @@ Questions:
  9. What do the faded nicknames in the channel listbox mean?
 10. What is a jIRCii theme?
 11. How do I copy and paste in jIRCii?
-12. I can't cut text with Ctrl+X, what's wrong?
+12. How do I cycle channels in the status window?
 13. Where does jIRCii store its settings?
 14. How do I edit the jIRCii color scheme?
 15. How can I change ________ in the default jIRCii script?
@@ -57,24 +57,25 @@ Questions:
 31. How do I change the statusbar color?
 32. How can I set a background image in jIRCii?
 33. Can I make jIRCii windows transparent?
+34. How do I strip jIRCii's GUI to only the essentials?
 
-34. Why don't you allow plugins written in Java, C, Python, Visual Basic etc.?
+35. Why don't you allow plugins written in Java, C, Python, Visual Basic etc.?
 
-35. Will you ever charge money for jIRCii?
-36. Can I get the jIRCii source code?
-37. Can I use portions of jIRCii's source code in my GPL project?
-38. What do the release designations (stable, beta) mean?
-39. How do I embed jIRCii into my website?
+36. Will you ever charge money for jIRCii?
+37. Can I get the jIRCii source code?
+38. Can I use portions of jIRCii's source code in my GPL project?
+39. What do the release designations (stable, beta) mean?
+40. How do I embed jIRCii into my website?
 
-40. What development environment do you use?
-41. Why write another Java IRC Client?
-42. What clients did you rip^H^H^H receive inspiration from?
-43. How long has jIRCii been in development?
-44. Why don't you wait until you have more changes to do a release?
+41. What development environment do you use?
+42. Why write another Java IRC Client?
+43. What clients did you rip^H^H^H receive inspiration from?
+44. How long has jIRCii been in development?
+45. Why don't you wait until you have more changes to do a release?
 
-45. I disabled my jircii menubar, how do I get it back?
-46. How do I reset the jIRCii settings?
-47. My jIRCii window flashes or acts crazy occasionally, what's wrong?
+46. I disabled my jircii menubar, how do I get it back?
+47. How do I reset the jIRCii settings?
+48. My jIRCii window flashes or acts crazy occasionally, what's wrong?
 
 If a question you would like answered is not here then post your question to 
 the jIRCii Message Board at http://jircii.hick.org/jirc/wwwboard.prl
@@ -225,19 +226,23 @@ Begin jIRCii FAQ:
     paste.  Or you can use the cut, copy, paste keyboard shortcuts specific
     to your operating system.
 
-12. I can't cut text with Ctrl+X, what's wrong?
+12. How do I cycle channels in the status window?
 
-    Beleive it or not this actually isn't a bug.  jIRCii binds Ctrl+X by
-    default to switch the current active query in case you are IRC'ing out
-    of your status window (i.e. all auto /window options turned off).  
+    In the past, jIRCii bound Ctrl+X to do this ala BitchX.  Many Windows 
+    users complained that they could not cut text and rogue contributors
+    removed this feature.  
 
-    This is consistent with the Ctrl+X binding used by BitchX.  If you would
-    like Ctrl+X to provide the normal service of cutting text, paste the
-    following into notepad, save it, and load it into jIRCii:
+    To try to ease the pain, Ctrl+Z has been bound to the previous behavior
+    of Ctrl+X.  jIRCii binds Ctrl+Z by default to switch the current active 
+    query in case you are IRC'ing out of your status window (i.e. all auto 
+    /window options turned off).  
+
+    If you would like Ctrl+X to provide the service of cycling active channels, 
+    paste the following into notepad, save it, and load it into jIRCii:
 
     bind Ctrl+X
     {
-       cutSelectedText();
+       cycleQuery();
     }
 
 13. Where does jIRCii store its settings?
@@ -581,7 +586,37 @@ Begin jIRCii FAQ:
     configurations for your window backgrounds.  This is the only eye candy
     you'll get so enjoy it.
 
-34. Why don't you allow plugins written in Java, C, Python, Visual Basic etc.?
+34. How do I strip jIRCii's GUI to only the essentials?
+
+    Yes, the true power of jIRCii is you can have a GUI client that feels like
+    mIRC or you can strip it down to the bare essentials so you feel like you
+    are irc'ing out of a terminal window.  The choice of which extreme and to
+    which extent is yours.  
+
+    To disable all of the GUI elements in jIRCii:
+    a. Select View->Options->Auto /Window
+    b. Disable auto /window for everything (you can reenable this stuff later
+       but ideally, I assume you want to IRC out of one window, correct?)
+    c. Select the "GUI Setup" item from the left hand side tree control.
+    d. Uncheck all items under "Interface Elements"
+    e. Select the ""Switchbar" item from the left hand side tree control.
+    f. Uncheck "Enable Switchbar"
+    g. Click "Ok".
+
+    Now on some operating systems, upon restarting jIRCii, you will notice
+    a 1 pixel border around the jIRCii window.  If you want to get rid of this
+    (afterall, every pixel is valuable) then type the following in a jIRCii
+    window:
+
+    h. /eval setProperty("notabs.border", 0);
+
+    Now comes the final step:
+
+    i. restart jIRCii for everything to take effect.
+
+    Before you know it, you'll be irc'ing console style.  pHEAR!
+
+35. Why don't you allow plugins written in Java, C, Python, Visual Basic etc.?
 
     Some people have asked me why I use sleep and not some masterpeice of 
     a language like Python.  Short answer is this:
@@ -606,12 +641,12 @@ Begin jIRCii FAQ:
 
     As for plugins and such.  Why not just modify the source code?
 
-35. Will you ever charge money for jIRCii?
+36. Will you ever charge money for jIRCii?
 
     No.  jIRCii is my gift to the IRC community.  Therefor I can't charge
     money for the client.  However I may charge for shipping and handling.
 
-36. Can I get the jIRCii source code?
+37. Can I get the jIRCii source code?
 
     Yes!  jIRCii is an open source client.  jIRCii source code and 
     binaries are released under the artistic license.  
@@ -635,7 +670,7 @@ Begin jIRCii FAQ:
     source project so long as I receive some form of credit for the code
     I wrote.  If you modify it please note that too.
 
-37. Can I use portions of jIRCii's source code in my GPL project?
+38. Can I use portions of jIRCii's source code in my GPL project?
 
     Short answer, yes.  I grant you permission to use any jIRCii code "I
     wrote" licensed under the artistic license in your GPL project and to
@@ -645,7 +680,7 @@ Begin jIRCii FAQ:
     of the license feels like a bit of a lock-in to me.  However feel 
     free to do what you need to do.  :)
 
-38. What do the release designations (stable, beta) mean?
+39. What do the release designations (stable, beta) mean?
 
     No one has asked me this yet. However I'm going to answer because I'm 
     sure someone is curious. 
@@ -657,7 +692,7 @@ Begin jIRCii FAQ:
     recently released beta. As such stable releases are considered stable 
     since they've been tested by people other than me. 
 
-39. How do I embed jIRCii into my website?
+40. How do I embed jIRCii into my website?
 
     You can do this by using the jIRCii launch service.  jIRCii launch
     service provides a way of specifying an irc server and a channel when
@@ -671,7 +706,7 @@ Begin jIRCii FAQ:
     More info about jIRCii launch service can be found at:
     http://jircii.hick.org/jirc/link.prl
 
-40. What development environment do you use?
+41. What development environment do you use?
 
     Don't laugh, I use pico as my text editor.  I should be shot.  Or
     maybe given an award for writing over 40,000 lines of code in pico.
@@ -695,11 +730,11 @@ Begin jIRCii FAQ:
     10.3.4.  jIRCii development in the past has been done on Linux using
     the same type of environment and on Windows using editplus.  
 
-41. Why write another Java IRC Client?
+42. Why write another Java IRC Client?
 
     I don't own a TV or a playstation and I needed something to do.
 
-42. What clients did you rip^H^H^H receive inspiration from?
+43. What clients did you rip^H^H^H receive inspiration from?
 
     Years ago back when I was an IRC scripter.  I wrote an addon called
     mIRCii.  mIRCii was essentially a multi-server addon for mIRC.  You
@@ -729,7 +764,7 @@ Begin jIRCii FAQ:
     mIRC gets points for heavy influence by default.  Since mIRC is the 
     client most people use.
 
-43. How long has jIRCii been in development?
+44. How long has jIRCii been in development?
 
     I started writing jIRCii when I was in high school.  This was mostly
     an effort to learn Java.  jIRC was my senior project for my high school
@@ -784,7 +819,7 @@ Begin jIRCii FAQ:
     Short answer:  I've been working on this client for a looong freaking
     time.  
 
-44. Why don't you wait until you have more changes to do a release?
+45. Why don't you wait until you have more changes to do a release?
 
     Good question.  You may notice the main package jIRCii classes are 
     stored in is named "rero".  I named the jIRCii package this because
@@ -808,7 +843,7 @@ Begin jIRCii FAQ:
     then I recommend downloading a released labeled stable and just
     waiting until the next stable release ignoring betas in between.  
 
-45. I disabled my jircii menubar, how do I get it back?
+46. I disabled my jircii menubar, how do I get it back?
 
     Open up the options dialog using Alt+O.  From there navigate to 
     "GUI Setup" near the bottom.  Make sure the box "Show menubar" is
@@ -818,7 +853,7 @@ Begin jIRCii FAQ:
     This could be due to a rogue script that got loaded.  The best thing 
     to do in this case is to reset your jIRCii settings.
 
-46. How do I reset the jIRCii settings?
+47. How do I reset the jIRCii settings?
 
     You should only need to do this if your jIRCii settings become really 
     messed up.  Symptoms of messed up settings include nothing happening
@@ -840,7 +875,7 @@ Begin jIRCii FAQ:
  
     Do a file search for .jIRC and delete it.   
 
-47. My jIRCii window flashes or acts crazy occasionally, what's wrong?
+48. My jIRCii window flashes or acts crazy occasionally, what's wrong?
 
     Java uses a lot of video card hardware tricks to enhance performance.
     Unfortunately buggy video card drivers can cause problems with the
