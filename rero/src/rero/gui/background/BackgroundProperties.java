@@ -96,6 +96,14 @@ public class BackgroundProperties implements ClientStateListener
          image          = null;
          transform      = null;
       }
+
+      /* we still want to redo all of this if we're not relative to the desktop and the style calls for transforming
+         relative to the window.  after all this function is called when something changes to the window */ 
+      if (!isRelative && (bgStyle == BackgroundUtil.STYLE_FILL || bgStyle == BackgroundUtil.STYLE_STRETCHED))
+      {
+         image = null;
+         transform = null;
+      }
    }
 
    public Image getImage(Component c)

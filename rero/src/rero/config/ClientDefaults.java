@@ -78,7 +78,7 @@ public class ClientDefaults
 
    public static final boolean update_ial     = true;
 
-   public static final String  version_string = "10.12.06";
+   public static final String  version_string = "03.24.07";
 
    static
    {
