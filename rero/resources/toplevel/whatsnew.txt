@@ -1,3 +1,8 @@
+Beta    41 last minute update 25 Mar 07 :)
+====
+- Small last minute update to unbreak a potential issue with script
+  debugging.  This really only affects scripters.  My apologies.
+
 Beta    41 release 24 Mar 07
 ====
 - Updated to Sleep 2.1-b14 (is it even released yet?).  Lots of changes.
