@@ -57,7 +57,7 @@ cp resources/resource/menus.irc temp/extra/menus.irc
 # Create Generic jIRCii Package
 #
 mv temp jIRCii
-tar zcf ./jerk.tgz ./jIRCii
+tar zcf ./jerk.tgz jIRCii
 
 #
 # Create Windows jIRCii Package
