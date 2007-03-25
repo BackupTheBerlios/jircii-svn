@@ -570,7 +570,7 @@ public class ClientUtils
 
     public static File getFile(String file)
     {
-        if (file.charAt(0) == '~' && System.getProperty("user.home") != null)
+        if (file.length() > 0 && file.charAt(0) == '~' && System.getProperty("user.home") != null)
         {
             return new File(System.getProperty("user.home").toString(), file.substring(1));
         }
