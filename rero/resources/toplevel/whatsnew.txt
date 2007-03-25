@@ -2,6 +2,8 @@ Beta    41 last minute update 25 Mar 07 :)
 ====
 - Small last minute update to unbreak a potential issue with script
   debugging.  This really only affects scripters.  My apologies.
+- Added a jircii.xpm icon image for Linux users to the extra/ directory
+  submitted by mneptok, so thank him if you get a chance.
 
 Beta    41 release 24 Mar 07
 ====
