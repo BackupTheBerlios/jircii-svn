@@ -241,12 +241,19 @@ public class ClientState
    {
       String temp = state.getProperty(key);
 
-      if (temp == null)
+      if (temp == null || temp.length() == 0)
       {
          return defaultValue;
       }
 
-      return Float.parseFloat(temp);
+      try
+      {
+         return Float.parseFloat(temp);
+      }
+      catch (Exception ex)
+      {
+         return defaultValue;
+      }
    }
 
    public void setFloat(String key, float value)
@@ -258,12 +265,19 @@ public class ClientState
    {
       String temp = state.getProperty(key);
 
-      if (temp == null)
+      if (temp == null || temp.length() == 0)
       {
          return defaultValue;
       }
-
-      return Integer.parseInt(temp);
+      
+      try
+      {
+         return Integer.parseInt(temp);
+      }
+      catch (Exception ex)
+      {
+         return defaultValue;
+      }
    }
 
    public void setInteger(String key, int value)
