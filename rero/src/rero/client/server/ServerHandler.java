@@ -61,6 +61,7 @@ public class ServerHandler extends Feature implements FrameworkConstants, Socket
    {
       data.reset();
       notify.reset();
+      data.setMyNick("<Unknown>");
 
       restoreInformation = null;
    }
@@ -135,7 +136,7 @@ public class ServerHandler extends Feature implements FrameworkConstants, Socket
 
            if (rero.test.QuickConnect.IsQuickConnect())
            {
-              user = ClientState.getClientState().getString("user.rname", "jIRCii Web User: http://jirc.hick.org/");
+              user = ClientState.getClientState().getString("user.rname", "jIRCii Web User: http://jircii.hick.org/");
               nick = ClientState.getClientState().getString("user.nick",  rero.test.QuickConnect.GetInformation().getNickname());
            }
            else if ((System.currentTimeMillis() % 5) == 0) // haveing some more fun...
@@ -147,6 +148,11 @@ public class ServerHandler extends Feature implements FrameworkConstants, Socket
            {
               user = ClientState.getClientState().getString("user.rname", ClientUtils.tagline());
               nick = ClientState.getClientState().getString("user.nick", "IRCFrEAK");
+           }
+
+           if (restoreInformation != null)
+           {
+              nick = restoreInformation.getNick();
            }
 
            getCapabilities().sendln("USER " + parms[0] + " " + parms[1] + " " + parms[1] +  " :" + user);
@@ -162,13 +168,15 @@ public class ServerHandler extends Feature implements FrameworkConstants, Socket
        {
            boolean isDone = false;
 
+           getCapabilities().getOutputCapabilities().fireSetAll(ClientUtils.getEventHashMap(ev.data.hostname, ev.message), "IRC_DISCONNECT");
+
            if (data.getMyUser().getChannels().size() > 0)
            {
-               getCapabilities().getOutputCapabilities().fireSetAll(ClientUtils.getEventHashMap(ev.data.hostname, ev.message), "IRC_DISCONNECT");
-
                if (ClientState.getClientState().isOption("option.reconnect", ClientDefaults.option_reconnect))
                {
-                  restoreInformation = data.getMyUser();
+                  System.out.println("Reconnecting is an option");
+
+                  restoreInformation = data.getMyUser().copy();
                   restoreServer      = ev.data.hostname;
  
                   getCapabilities().getOutputCapabilities().fireSetAll(ClientUtils.getEventHashMap(ev.data.hostname, ev.message), "IRC_RECONNECT");
@@ -178,13 +186,10 @@ public class ServerHandler extends Feature implements FrameworkConstants, Socket
                   isDone = true;
                }
            }
-           else
-           {
-               getCapabilities().getOutputCapabilities().fireSetStatus(ClientUtils.getEventHashMap(ev.data.hostname, ev.message), "IRC_DISCONNECT");
-           }
 
            data.reset();
            notify.reset();
+           data.setMyNick("<Unknown>");
 
            if (restoreInformation != null && !isDone)
            {

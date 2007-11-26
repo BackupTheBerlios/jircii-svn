@@ -1,4 +1,4 @@
-Beta    42 release 25 Nov 07
+Beta    42 release 26 Nov 07
 ====
 - Fixed a MacOS X 10.5 (leopard) issue with font metrics.  This is a work
   around to force jIRCii to use the Quartz renderer in lieu of the Sun
@@ -13,7 +13,9 @@ Beta    42 release 25 Nov 07
   ideally I'd like to eliminate this issue but it will take some code
   restructuring to do this.  this is mostly an issue on MacOS X where
   menubar changes take effect immediately (unlike other platforms *ahem*)
-
+- on disconnect the statusbar now immediately shows nick as <Unknown>
+- bound Meta+H and Meta+O to open the help and option dialogs
+- reconnect now uses the last nickname you held; not your default nick
 
 Beta    41 last minute update 25 Mar 07 :)
 ====

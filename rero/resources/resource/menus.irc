@@ -75,6 +75,16 @@ bind Alt+O
    showOptionDialog("");
 }
 
+bind Meta+O
+{
+   showOptionDialog("");
+}   
+
+bind Meta+H
+{
+   showHelpDialog("");
+}
+
 bind Escape
 {
    setInputText($active, "");

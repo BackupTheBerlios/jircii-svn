@@ -16,6 +16,15 @@ public class User implements Comparable, FrameworkConstants
     public void setNick(String n) { nickname = n; }
     public String getNick() { return nickname; }
 
+    public User copy()
+    {
+       User temp = new User(nickname);
+       temp.channels = new HashMap(channels);
+       temp.address  = address;
+       temp.idle     = idle;
+       return temp;
+    }
+
     public int compareTo(Object b)
     {
        User bb;

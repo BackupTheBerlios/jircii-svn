@@ -1,5 +1,5 @@
  ------- -------------------- ---------   ---------------  ------- ---------
-jIRCii - Beta (41) 03.24.07 - README
+jIRCii - Beta (42) 03.26.07 - README
 -  ------------- -------- -   ---------------- --       -    -     -     - - -
 
 The official jIRCii homepage is at: http://jircii.hick.org
@@ -11,11 +11,6 @@ For help and information about jIRCii run the application and view the
 Help menu.  
 
 The jIRCii code and binaries are released under the artistic license.  
-
-The source code is available on my personal homepage under the projects 
-section:
-
-http://www.hick.org/~raffi/projects.html
 
 Enjoy.
 
@@ -63,7 +58,7 @@ Running and Installation
    You can also specify an irc:// URL on the jIRCii command line to specify
    a irc server and channel you want jIRCii to join on startup:
 
-   java -jar jerk.jar irc://irc.freenode.net/jircii
+   java -jar jerk.jar irc://irc.prison.net/jircii
 
    === Windows ===
 

@@ -1,4 +1,4 @@
-jircii faq - distributed with jircii 03.24.07:
+jircii faq - distributed with jircii 11.26.07:
 
                .sS$$Ss.                           .sS$$Ss. .sS$$Ss.
                $$$$$$$$                           $$$$$$$$ $$$$$$$$
@@ -9,7 +9,7 @@ jircii faq - distributed with jircii 03.24.07:
          $$$$$$ $$$$$$ $$$$$$ $$$$$$ $$$$$$ $$$$$$ $$$$$$   $$$$$$
          $$$$$$ $$$$$$ $$$$$$ $$$$$$ $$$$$$        $$$$$$   $$$$$$
   """""" $$$$$$ $$$$$$ $$$$$$        $$$$$$ $$$$$$ $$$$$$   $$$$$$
-  $$$$$$ $$$$$$ $$$$$$ $$$$$$ 032407 $$$$$$ $$$$$$ $$$$$$   $$$$$$
+  $$$$$$ $$$$$$ $$$$$$ $$$$$$ 112607 $$$$$$ $$$$$$ $$$$$$   $$$$$$
   $$$$$$ $$$$$$ $$$$$$ $$$$$$        `?$$$$s$$$$P' $$$$$$   $$$$$$
   `?$$$$s$$$$P'                                        
 
@@ -77,9 +77,11 @@ Questions:
 47. How do I reset the jIRCii settings?
 48. My jIRCii window flashes or acts crazy occasionally, what's wrong?
 
-If a question you would like answered is not here then post your question to 
-the jIRCii Message Board at http://jircii.hick.org/jirc/wwwboard.prl
+49. How do I pronounce jIRCii?
+50. How do I report bugs, feature requests, etc.?
+51. Where can I find you on IRC?
 
+If a question you would like answered is not here then email rsmudge@gmail.com
 
 Begin jIRCii FAQ:
 
@@ -117,16 +119,6 @@ Begin jIRCii FAQ:
     Resource Center.  You can download jIRCii addons, scripts, and themes
     at: http://jircii.hick.org/
 
-    Assuming a nuclear blast hits the data center hick.org is in, or 
-    someone stops paying the bill then a more permanent archive with 
-    jIRCii is available on sourceforge.net:
-
-    http://sourceforge.net/projects/jircii/
-
-    The latest version of jIRCii is always mirrored at:
-
-    http://jircii.leenux.net/
-
  3. How do I create a shortcut for jIRCii on Windows?
 
     a. Right click on the desktop, select New, then select Create Shortcut
@@ -163,16 +155,8 @@ Begin jIRCii FAQ:
 
  7. Is there any way to minimize jIRCii to the system tray?
 
-    To add system tray support to jIRCii there isn't really a native java 
-    way to do this.  However there are several easy to use applications
-    available that will allow you to add this functionality to jIRCii:
-
-    TrayIt -- http://www.teamcti.com/trayit/trayit.htm (my favorite)
-    Trayconizer -- http://www.whitsoftdev.com/trayconizer/
-    PowerMenu -- http://www.veridicus.com/tummy/programming/powermenu/
-
-    Special thanks to [crimz] for doing the legwork on this question and 
-    providing most of the answer.
+    [Serge] has written an addon script called jIRCii-tray.zip and it is
+    available at: http://jircii.hick.org/scripts.html
 
  8. How do I make Windows web browsers use jIRCii for irc:// links?
 
@@ -338,7 +322,7 @@ Begin jIRCii FAQ:
   
     For more information about the time/date format of formatDate() check out
     Appendix D of the Sleep Language Fundamentals:
-    http://jirc.hick.org/jirc/tutorial.prl?sleeplang#15
+    http://sleep.hick.org/documentation.html
 
 18. What is the difference between a .THM and a .IRC file?
 
@@ -436,7 +420,7 @@ Begin jIRCii FAQ:
    it.  Fortunately it has already been scripted.  You can download 
    flash.irc, an addon script that adds this functionality at:
 
-   http://jircii.hick.org/cgi-bin/jirc.cgi?ACTION=VIEW&PAGE=contrib    
+   http://jircii.hick.org/scripts.html
 
 27. How do I specify my own local IP address information for DCCs?
 
@@ -694,17 +678,28 @@ Begin jIRCii FAQ:
 
 40. How do I embed jIRCii into my website?
 
-    You can do this by using the jIRCii launch service.  jIRCii launch
-    service provides a way of specifying an irc server and a channel when
-    launching jIRCii via the web.  When jIRCii is launched this way it 
-    will immediately connect to a specified server and channel with 
-    0-configuration.
+    jIRCii is coded to be packaged and deployed via Java Webstart.  I used
+    to provide a signed jerk.jar file and hosting for this purpose.
+
+    At this time my hosting is a bit of a mess and my free certificate has
+    expired.  If there is demand for this feature email me and maybe we
+    can work something out.   rsmudge@gmail.com
+
+    If you want to embed jIRCii into your website on your own then follow
+    these steps:
+
+    1. obtain jerk.jar
+    2. sign it (as jIRCii requires full permissions from Java webstart)
+    3. create a .JNLP file; for an example, download: 
+       http://openjdk.java.net/irc/openjdk.jnlp
+    4. post your signed jerk.jar and .JNLP file to your website.  
+
+    You are now ready to rock.  More details on Webstart can be found at:
+
+    http://java.sun.com/docs/books/tutorial/deployment/webstart/index.html
 
     This feature does require that your web site users have Java 1.4.2 or
     later installed.
-
-    More info about jIRCii launch service can be found at:
-    http://jircii.hick.org/jirc/link.prl
 
 41. What development environment do you use?
 
@@ -894,3 +889,22 @@ Begin jIRCii FAQ:
     The above is actually one line of text, I've broken it up for the sake
     of readability.
  
+49. How do I pronounce jIRCii?
+
+    jIRCii is named after the infamous UNIX IRC client: ircii.  I pronounce
+    it jay-eye-are-cee-two.  
+
+50. How do I report bugs, feature requests, etc.?
+
+    At this time we don't have a message board or issue tracker.  Your best
+    option is to email me: rsmudge@gmail.com
+
+    Another option is to come to #jIRCii on EFNet.  A number of jIRCii users
+    idle on this channel and complain about what I haven't fixed yet.  They
+    are sort of a support group for users with complaints.  You might like
+    them.
+
+51. Where can I find you on IRC?
+
+    I'm on EFNet (irc.prison.net, irc.mzima.net, etc.) in #jIRCii.  
+
