@@ -28,7 +28,6 @@ public class SessionManager extends JTabbedPane implements ClientWindowListener,
    protected HashMap      sessions = new HashMap();
    protected IRCSession   active   = null;
    protected JFrame       frame    = null;
-   protected JMenuBar     menu     = null;
    protected MenuBridge   bridge   = null;
    protected PopupManager popups   = null;
    protected KeyBindings  keyb     = null;
@@ -52,7 +51,7 @@ public class SessionManager extends JTabbedPane implements ClientWindowListener,
          {
             if (ClientState.getClientState().isOption("ui.showbar", ClientDefaults.ui_showbar))
             {
-               menu = new JMenuBar();
+               JMenuBar menu = new JMenuBar();
                bridge.installMenubar(menu);
                frame.setJMenuBar(menu);
             }
@@ -146,13 +145,11 @@ public class SessionManager extends JTabbedPane implements ClientWindowListener,
          }
       });
 
-      menu = new JMenuBar();
-
       frame = _frame;
 
       if (ClientState.getClientState().isOption("ui.showbar", ClientDefaults.ui_showbar))
       {
-         frame.setJMenuBar(menu);
+         frame.setJMenuBar(new JMenuBar());
       }
 
       if (getMouseListeners().length > 0)
@@ -205,6 +202,7 @@ public class SessionManager extends JTabbedPane implements ClientWindowListener,
          getComponents()[x].addMouseListener(popups);
       }  */
 
+      propertyChanged(null, null);
       revalidate();
 
       if (ClientState.getClientState().getString("user.nick", null) == null && !QuickConnect.IsQuickConnect())
