@@ -209,7 +209,7 @@ public class ProcessEvents extends Feature implements FrameworkConstants, ChatLi
          }
          if (type.equals("SOURCE"))
          {
-            getCapabilities().sendln("NOTICE " + nick + " :" + (char)1 + "SOURCE http://jirc.hick.org" + (char)1);
+            getCapabilities().sendln("NOTICE " + nick + " :" + (char)1 + "SOURCE http://jircii.hick.org" + (char)1);
          }
          if (type.equals("TIME"))
          {

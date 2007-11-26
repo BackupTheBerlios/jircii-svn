@@ -33,7 +33,7 @@ j::/join #jIRC::Joins the specified channel.  If you are already on that channel
 join::/join #jIRC::Joins the specified channel.  If you are already on that channel, jIRC will set the status window query to the specified channel::[#]channel - channel to join/query::+key - channel key
 k::/k JakieChan you suck!::kicks user from current channel with the specified reason.::nick - user to kick::+reason - specified kick message.
 kb::/kb JakieChan you suck!::kicks and bans user from current channel with the specified reason.::nick - user to kick::+reason - specified kick message.
-kick::/kick #jIRC tanto I'll add a timer later!::kicks a user from the specified channel with the specified reason::+channel - channel to kick user from::nick - user to kick::+reason - specified kick message.
+kick::/kick #jIRC tanto I'll add a timer later!::kicks a user from the specified channel with the specified reason::channel - channel to kick user from::nick - user to kick::+reason - specified kick message.
 l::/l #mIRCscripts::leaves the specifed channel::+#channel - channel to leave.
 list::/list *mp3*::retrieves a list of channels from the server::+-gui - dump channel list to a window::+filter - wildcard to filter list of channels with.
 load::/load bitchx.irc::loads a specified sleep script, if no file is specified /load lists the currently loaded scripts.::+file.irc - name of sleep script to load.

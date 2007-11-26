@@ -3,6 +3,7 @@
 <br>jIRCii has been a work in progress for a long time now.  I originally started it as a project to learn java while in high school.  I tinkered with it as a hobby throughout college.  I didn't make that final push to create a release quality product until now though.  Anyways with such a long history as a project there are to many people to thank so I'm going to keep this list short.
 <br>
 <br><b>Development Team</b>
+<br>Raphael Mudge (<i>`butane</i>) &lt;-- me :)
 <br>Serge Baranov (<i>Serge</i>)
 <br>Andreas Ravnestad (<i>oracel</i>)
 <br>
@@ -21,9 +22,6 @@
 <br>
 <br><b>Tijiez</b></font>
 <br>I owe a thanks as well to Tijiez for running the jIRCii mirror site at <a href="http://jircii.leenux.net">http://jircii.leenux.net</a>.  Tijiez has had a huge influence on jIRCii through a series of constant complaints and feature requests.
-<br>
-<br><b>www.irchelp.org/</b></font>
-<br>I'd also like to acknowledge <a href="http://www.irchelp.org">www.irchelp.org</a>.  They run a very informative website full of information for the beginning irc user.  I've used some of there work here in the jIRCii help file.  Hopefully they don't mind :)
 <br>
 <br><b>Tjerk Vonck</b></font>
 <br>I owe a shout out to <a href="http://www.mirc.co.uk">Tjerk Vonck</a> for his excellent servers.ini file.  I wouldn't want to mantain that monster.  jIRCii uses the mIRC servers.ini format for its server list.  Thanks for mantaining that file!

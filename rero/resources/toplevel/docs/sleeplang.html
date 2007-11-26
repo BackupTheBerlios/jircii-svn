@@ -226,6 +226,22 @@ created with no value.  This local variable has nothing to do with the global va
 <var>$decision</var> was then assigned the value "not guilty".  When the subroutine verdict finished executing the local variable
 <var>$decision</var> went away.  The global variable <var>$decision</var> was not touched.</p>
 
+<h3>Scalar Identity</h3>
+
+<p>In general Sleep tries to hide the type of the data you're working with.  You can use strings, numbers, and objects interchangeably 
+in many cases.</p>
+
+<p>Sleep has built-in array and hash (dictionary) data structures for storing scalars.  The concept of scalar identity was invented to
+help with manipulating and querying these data structures.  For example the <code>&amp;addAll</code> function is a way to union two
+arrays together.  Scalars are judged as being equivalent through scalar identity.</p>
+
+<p>If a scalar holds a reference to a value (i.e. a hash, an object, or an array) then the identity of that scalar is the reference 
+itself.  Otherwise the identity is based on the string form of the value.</p>
+
+<p>The <code>=~</code> operator exists for checking if two scalars share the same identity.  Really though you only need to know about
+this concept to understand how the <code>in</code> predicate works and how <code>&amp;addAll</code>, <code>&amp;retainAll</code>, and
+<code>&amp;removeAll</code> work.</p>
+
 <h2><a name="2">If-Else Statements</a></h2>
 
 <p>If-Else statements let you compare different values and execute a certain part of the script based on the result of the 
@@ -318,8 +334,20 @@ statement.</p>
   <th>Description</th>
  </tr>
  <tr>
+  <td>in</td>
+  <td>true if scalar v1 identity exists in array/generator v2</td>
+ </tr>
+ <tr>
   <td>is</td>
   <td>true if scalar object reference v1 equals object reference v2</td>
+ </tr>
+ <tr>  
+  <td>isa</td>
+  <td>true if scalar object reference v1 is an instance of the Class referenced by scalar v2</td>
+ </tr>
+ <tr>  
+  <td>=~</td>
+  <td>true if scalar v1 identity is equal to scalar v2 identity</td>
  </tr>
 </table>
 
@@ -347,6 +375,8 @@ if ($null is $null)
 {
    # the string "test" is not contained in the string "walrus"
 }</pre>
+
+<p>The <code>isa</code> predicate is covered later in the <i>Class Literals</i> subsection of this document.</p>
 
 <h3>Combining Comparisons</h3>
 
@@ -435,6 +465,31 @@ only if the condition is true.  The third parameter is returned if and only if t
 <p><var>$value</var> would be "Calculation took 2 seconds" if $x is equal to 2.  If <var>$x</var> was equal to 0 then 
 <var>$value</var> would be "Calculation took 1 second".  The iff example above checks if <var>$x</var> is greater than 1.  If it 
 is then "s" is returned.  Otherwise "" is returned.</p>
+
+<h3>Assertions</h3>
+
+<p>Now that you know about predicates and conditions, I can introduce assertions.  Assertions are a really basic debugging mechanism.  An assertion is a quick way to check that a condition is true.  If the condition isn't true, the current script will exit with an error message.  The syntax for an assertion is:</p>
+
+<pre>assert <b>comparison</b>;</pre>
+
+<p>Assertions also allow a message to be attached.  The attached message is echoed whenever an assertion fails.</p>
+
+<pre>assert <b>comparison</b> : <b>message</b>;</pre>
+
+<p>Assertions are great for doing a last minute sanity check of some condition.  Can you tell what is wrong with this code snippet?</P>
+
+<pre>sub fact
+{
+   return iff($1 == 0, 1, $1 * fact($1 - 1));
+}</pre>
+
+<p>If someone were to call fact with a negative argument, the script would go into an infinite loop potentially crashing Sleep and/or the app hosting it.  An assertion can provide a quick sanity check to protect against this.</p>
+
+<pre>sub fact
+{
+   assert $1 >= 0 : "invalid arg for fact: $1";
+   return iff($1 == 0, 1, $1 * fact($1 - 1));
+}</pre>
 
 <h2><a name="3">Loops</a></h2>
 
@@ -730,6 +785,33 @@ subroutine is factorial:</p>
    return $1 * fact($1 - 1)
 }</pre>
 
+<h3>Inline Subroutines</h3>
+
+<p>An inline subroutine is Sleep's solution to the macro.  An inline subroutine executes within the current function context as if it manually
+existed there.  Local and closure variable scopes are shared with the current function.  Any attempt to yield, return, or callcc a value from an 
+inline function will directly affect the parent.</p>
+
+<p>Parameters passed to inline subroutines are numbered from <var>$1</var> ... <var>$n</var>.  <var>$this</var> and friends refer to the current
+function and not the inline function.</p>
+
+<p>Inline functions have utility for abstracting complex callcc, yield, or return behavior.  They are declared with the inline keyword.</p>
+
+<pre>inline printx
+{
+   println("\$x is $x");
+}
+
+sub foo
+{
+   local('$x');
+   $x = 0x31337;
+   printx();
+}</pre>
+
+<p>Inline subroutines do not return values themselves.  Any attempt to use an inline function call in
+an expression will result in <var>$null</var>.  Any attempt to use an inline function call that saves function state (yield, callcc) will result
+in an unusable continuation.</p>
+
 <h3>Nesting Subroutines</h3>
 
 <p>Everything in sleep is evaluated in a (semi) straight forward manner.  When sleep executes a statement that consists of the 
@@ -986,7 +1068,7 @@ hash just copies the reference.  Both %hashe's will point to the same data.  A c
 it.</p>
 
 <p>To obtain an @array of all of the keys in a hash you can use the keys() function with the %hash as the parameter.   To remove 
-a key from a hash you can use remove(%hash, "key").</P>
+a value from a hash you can use remove(%hash, "value").</P>
 
 <p>To remove a key key from a hash simply set the value to $null.</p>
 
@@ -1015,6 +1097,33 @@ blah("ice cream!!!", $first => "Raphael", $last => "Mudge");
 blah($first => "Raphael", "ice cream!!!", $last => "Mudge");</pre>
 
 <p>The example above prints 'My name is Raphael Mudge, and I like ice cream!!!' three times.</p>
+
+<p>Built-in functions that expect a key/value pair will accept either a key/value expression or a string of the form
+"key=value".</p>
+
+<h4>Scalar References</h4>
+
+<p>Many times you may find yourself passing a key/value pair with the same key/value.  This is most often done to move
+a scalar between scopes.  This is very common with fork, lambda, and let.  To save you some typing Sleep has a special
+syntax for specifying a scalar be passed by name as a parameter.  Simply prefix the scalar with a backslash.</p>
+
+<pre>sub foo
+{
+   local('$name');
+   $name = "Raphael";
+   bar(\$name);
+}
+
+bar
+{
+   println("Name is: $name");
+}
+
+foo();</pre>
+
+<p>In the example above <var>$name</var> is local to <code>&amp;foo</code>.  Normally to pass <var>$name</var> into the this
+scope of <code>&amp;bar</code> you would have to use <code>$name => $name</code>.  The scalar reference <code>\$name</code>
+is equivalent to that expression.</p>
 
 <h3>Multidimensional Hashes/Arrays</h3>
 
@@ -1307,6 +1416,20 @@ closef($process);</pre>
 <p>Calling closef on a process will kill the process.  The above program executes the UNIX command ls -al which lists all of the 
 files in the current directory with some details.</p>
 
+<h4>Quick Execution</h4>
+
+<p>Similar to Perl, Sleep also supports quick execution of a process via a string enclosed in backticks.  Any string enclosed in
+backticks is evaluated (as if it was a parsed literal) and the contents is then executed.  The output of the executed command is
+returned as an array.</p>  
+
+<pre>foreach $file (`ls -1`)
+{
+   # do something with the file...
+}</pre>
+
+<p>Any errors from trying to execute the command are available via <code>&amp;checkError</code>.  If the process returns a non-zero
+value, this will also be available with <code>&amp;checkError</code>.</p>
+
 <h3>Buffers</h3>
 
 <p>For those times when speed is a necessity Sleep provides the loveable byte buffer.  A buffer is simply
@@ -1580,6 +1703,29 @@ sleep.classpath accessible as systemProperties()["sleep.classpath"].</p>
 
 <p>If the jar filename includes spaces, you can surround it with single or double quotes.</p>
 
+<h4>Class Literals</h4>
+
+<p>Sleep has a special literal form for specifying Java classes within scripts.  The hat symbol followed by a string is 
+expanded into the appropriate class using the current list of imports at script compile time.  As an example <code>^String</code>
+expands to the result of <code>[Class forName: "java.lang.String"]</code>.  Class literals can be used to compare scalar types
+against eachother, to specify a desired class in a casting function, and more.</p>
+
+<p>Inner classes are referenced with a dollar sign between the parent class and the inner class name i.e.:
+<code>^Map$Entry</code> references the Entry class that belongs to the Map class.</p>
+
+<p>For example to check if an exception is an IOException before acting on it:</p>
+
+<pre>import java.io.IOException;
+
+$handle = openf("fjosfjs");
+if (checkError($error) && $error isa ^IOException)
+{
+   println("Could not open file: " . [$error getCause]);
+}</pre>
+
+<p>The <code>isa</code> predicate is used to check if the value on the left hand side is an instance of the class on the 
+right hand side.  It is analagous to Java's instanceof predicate.</p>
+
 <h3><a name="interfaces"></a>Sleep Interfaces</h3>
 
 <p>A neat feature of HOES is how interfaces can be quickly and easily created and passed to Java objects.  A Java interface
@@ -1621,6 +1767,8 @@ specified as a 0th parameter.  The parameters 1..n are the actual parameters pas
 <p>Above, the <var>&button_pressed</var> subroutine is acting as a java.awt.event.ActionListener interface.  The 
 only message passed to ActionListener interfaces is the actionPerformed message.  The button_pressed subroutine is passed as a 
 closure parameter in this line: <code>[$button addActionListener:&button_pressed];</code>.</p>
+
+<p>Sleep backed instantiations of Java interfaces can also be created with the <code>&amp;newInstance</code> function.</p>
 
 <p>Any uncaught exceptions originating from a Sleep script will bubble up to the Java caller of the Sleep interface.</p>
 
@@ -1847,6 +1995,43 @@ Value is 999</pre>
 evaluate an expression each iteration of a loop where as foreach is iterating over a closure reference.  The difference is
 pretty much in the implementation, the end result is the same.</p>
 
+<h4>The Callcc Command</h4>
+
+<p>Similar to coroutines are continuations.  A paused function object can be thought of as the future stuff to execute (or the
+continuation) of the function.  The callcc command syntactically resembles yield and return except a function parameter is required.</p>
+
+<p>callcc will save the current function state into a object.  The specified function will the be called with the current function continuation
+as a parameter.  Control flow will be moved to the specified function.  callcc can be thought of as a functional-level goto.</p>
+
+<p>The syntax for callcc is:</p>
+
+<p><code>callcc <b>closure</b></code>;</p>
+
+<p>The return value of the specified closure will be the return value of the current function.  The specified closure receives the continuation of 
+the current function as the <var>$1</var> parameter.</p>
+
+<p>The following is a simple example of callcc demonstrating the producer/consumer problem:</p>
+
+<pre>$buffer  = $null;
+
+sub produce {
+   for ($x = 0; $x < 3; $x++) {
+      println("Produce: $x * 3");
+      $buffer = $x * 3;
+      callcc &consume;
+   }
+}
+
+sub consume {
+   println("Consume: $buffer");
+   callcc $1; # resume the calling function
+}
+
+produce();</pre>
+
+<p>Callcc and yield use the same internal mechanisms.  The practical difference between callcc and yield is that callcc expects a function parameter and this
+function parameter is immediately invoked with the saved state of the calling function.</p>
+
 <h2><a name="11">Function Library</a></h2>
 
 <p>This appendix is a list of the application neutral built-in functions for sleep.  I expect this list to grow as time goes on.  
@@ -1868,6 +2053,9 @@ some a hash (%), and others a scalar ($).  Functions that have no return value w
 as many arguments as you are willing to specify.</p>
 
 <p>Parameters specified as <code>@|&</code> represent that either an @array can be passed or a &generator function.  A generator function is a closure that iterates over a sequence with the yield keyword and returns $null when no values are left to iterate over.</p>
+
+<p>A <code>^</code> indicates a literal Class value i.e. <code>^String</code>.  This is used to indicate that a function expects
+a class literal as an argument (or offers one as a return value).</p>
 
 <p>Note, the $ is not part of the function name.  It is solely shorthand for specifying the return type of the function.</p>
 
@@ -1896,10 +2084,11 @@ as many arguments as you are willing to specify.</p>
  </tr>
  <tr>
   <td>$</td>
-  <td>cast(@array, 't', ...)</td>
-  <td>casts @array into an object scalar representing a native java array of type t where t can be b = byte, c = char, d = 
-double, f = float, h = short, i = int, l = long, z = boolean, * = any object type.  Arguments ... are optional and used 
-to represent the dimensions of the array.</td>
+  <td>cast(@array, 't'|^Class, ...)</td>
+  <td>casts @array into an object scalar representing a native java array of type t where t can be b = byte, c = char, d =
+double, f = float, h = short, i = int, l = long, o = java.lang.Object, z = boolean, * = any object type.  Optionally a
+^Class literal can be specified and Sleep will create an array of that type.  Arguments ... are optional and used to
+represent the dimensions of the array.</td>
  </tr>
  <tr>
   <td></td>
@@ -1918,8 +2107,8 @@ to represent the dimensions of the array.</td>
  </tr>
  <tr>
   <td>@</td>
-  <td>flatten(@array)</td>
-  <td>returns a copy of a multidimensional(?) @array flattened into a one dimensional array</td>
+  <td>flatten(@|&amp;)</td>
+  <td>returns a copy of a multidimensional(?) @array or &amp;generator flattened into a one dimensional array (only array elements are flattened)</td>
  </tr>
  <tr>
   <td>@</td>
@@ -1942,7 +2131,7 @@ to represent the dimensions of the array.</td>
   <td>I probably should have learned from python and not added this but here it is anyways.  Applies &amp;closure to first two elements of @array or &generator.  Takes the resulting value and applies it to the next element of @array or &generator, so on and so forth.  Returns one value.</td>
  </tr>
  <tr>
-  <td></td>
+  <td>@</td>
   <td>remove(@array, $scalar, ...)</td>
   <td>removes each specified $scalar from @array.  if no parameters are passed the active element in the current foreach loop is removed.</td>
  </tr>
@@ -1952,9 +2141,9 @@ to represent the dimensions of the array.</td>
   <td>removes all elements of @b from @a. equivalent to the different of @a and @b</td>
  </tr>
  <tr>
-  <td>$</td>
-  <td>removeAt(@arrray, index)</td>
-  <td>removes the element at index from @array.</td>
+  <td></td>
+  <td>removeAt(@arrray, index, ...)</td>
+  <td>removes the elements at the specified indices.</td>
  </tr>
  <tr>
   <td>@</td>
@@ -2182,6 +2371,11 @@ specify the format parameter see <a href="#15">Appendix D - Date/Time Formatting
  </tr>  
 
  <tr>
+   <td>%</td>
+   <td>add(%hash, key => "value", ...)</td>
+   <td>adds specified key/values to the hash.</td>
+ </tr> 
+ <tr>
   <td></td>
   <td>clear(%hash)</td>
   <td>clears %hash</td>
@@ -2198,6 +2392,11 @@ specify the format parameter see <a href="#15">Appendix D - Date/Time Formatting
  </tr>
  <tr>
   <td>%</td>
+  <td>ohash(blah => "value", ...)</td>
+  <td>instantiates an ordered hash with the specified values.  ordered hashes mantain key insertion order.  keys can be updated without changing order.</td>
+ </tr>
+ <tr>
+  <td>%</td>
   <td>putAll(%hash, @|&amp;, [@|&amp;])</td>
   <td>populates the hash with the specified iterators.  If only one iterator is specified then the second argument
   is assumed to be the same as the first.  The first iterator is iterated over to obtain the keys for the hash
@@ -2205,8 +2404,18 @@ specify the format parameter see <a href="#15">Appendix D - Date/Time Formatting
  </tr>
  <tr>
   <td></td>
-  <td>remove(%hash, $key, ...)</td>
-  <td>removes all specified keys from %hash</td>
+  <td>remove(%hash, $value, ...)</td>
+  <td>removes all specified values from %hash</td>
+ </tr>
+ <tr>
+  <td></td>
+  <td>removeAt(%hash, "key", ...)</td>
+  <td>removes the specified keys from the hash.</td>
+ </tr>
+ <tr>
+  <td>$</td>
+  <td>size(%hash)</td>
+  <td>returns the number of elements in %hash</td>
  </tr>
  <tr>
   <td>@</td>
@@ -2264,9 +2473,11 @@ specify the format parameter see <a href="#15">Appendix D - Date/Time Formatting
  </tr>
  <tr>
   <td>$</td>
-  <td>connect("host", port, [timeout], [&amp;closure])</td>
+  <td>connect("host", port, [timeout], [&amp;closure], ...)</td>
   <td>connects to the specified host:port and returns a $handle.  Check for issues connecting to a host with checkError().  If 
-     &amp;closure is specified, this call will not block.  &amp;closure will be called when a connection is established.</td>
+     &amp;closure is specified, this call will not block.  &amp;closure will be called when a connection is established.  multiple key value pairs
+can be specified to set parameters of the connection: linger => (the value of SO_LINGER (how long (ms) the socket waits for a TCP reset before
+actually closing.); lport => (the local port number to bind to); laddr => (the local address to bind to)</td>
  </tr>
  <tr>
   <td>$</td>
@@ -2299,10 +2510,13 @@ specify the format parameter see <a href="#15">Appendix D - Date/Time Formatting
  </tr>
  <tr>
   <td>$</td>
-  <td>listen(port, [timeout], [$host], [&amp;closure])</td>
+  <td>listen(port, [timeout], [$host], [&amp;closure], ...)</td>
   <td>listens for a connection on the specified port.  Check for listening issues with the checkError() function.  If 
       &amp;closure is specified, this call will not block.  &amp;closure will be called when a connection is established.  
-      The specified scalar $host will be set to the name of the host that connects (if successful).</td>
+      The specified scalar $host will be set to the name of the host that connects (if successful).  multiple key value pairs can be specified to
+set parameters of the connection: linger => (the value of SO_LINGER (how long (ms) the socket waits for a TCP reset before actually closing.);
+lport => (the local port number to bind to); laddr => (the local address to bind to); and backlog => (the number of connections to queue while
+waiting for a subsequent call of listen(...) to accept a connection.)</td>
  </tr>
  <tr>
   <td></td>
@@ -2381,6 +2595,11 @@ calling the closure.  the closure will be called for the last read even if &lt; 
   <td>$</td>
   <td>setEncoding($handle, "charset name")</td>
   <td>sets the character set to encode/decode written/read characters with the specified handle.</td>
+ </tr>
+ <tr>
+  <td>$</td>
+  <td>sizeof('format')</td>
+  <td>using the specified data format string, calculates an estimated size of the data.</td>
  </tr>
  <tr>
   <td>$</td>
@@ -2568,6 +2787,11 @@ will be returned by &amp;wait.  if $handle is a process, the return value of the
   <td>returns the rounded positive square root of $scalar</td>
  </tr>
  <tr>
+   <td>$</td>
+   <td>srand($scalar)</td>
+   <td>seeds the random number generator with the specified scalar (interpreted as a long)</td>
+ </tr>
+ <tr>
   <td>$</td>
   <td>tan($scalar)</td>
   <td>returns the tangent value of angle $scalar (radians)</td>
@@ -2622,8 +2846,13 @@ will be returned by &amp;wait.  if $handle is a process, the return value of the
  </tr>
  <tr>
   <td>$</td>
-  <td>join("string", @array)</td>
-  <td>joins the elements of @array with "string"</td>
+  <td>lindexOf("string", "substr", [start])</td>
+  <td>returns the last index of "substr" inside of "string" looking backwards from the specified start index.</td>
+ </tr>
+ <tr>
+  <td>$</td>
+  <td>join("string", @|&amp;)</td>
+  <td>joins the elements of @array or &amp;generator with "string"</td>
  </tr>
  <tr>
   <td>$</td>
@@ -2727,14 +2956,20 @@ n-m substrings will be returned.</td>
  </tr>
  <tr>
   <td>$</td>
-  <td>casti($scalar, 't')</td>
+  <td>casti($scalar, 't'|^Class)</td>
   <td>casts $scalar into an object scalar representing a native java value of type t where t can be b = byte, c = char, d = 
-      double, f = float, h = short, i = int, l = long, z = boolean.</td>
+      double, f = float, h = short, i = int, l = long, o = java.lang.Object, z = boolean.  Optionally a ^Class literal can be
+      specified in place of a type string.</td>
  </tr>
  <tr>
   <td>$</td>
   <td>debug(level)</td>
-  <td>explicitly enables the specified debug level for this script: 0 - no debugging; 1 - show only critical errors (default); 2 - show all messages flagged for retrieval with checkError(); 4 - show first time use of non-declared variables; 8 - trace all function calls (collects profiler statistics); 24 - trace only for the purpose of collecting profiler statistics; 34 - "throw" all messages flagged for use with checkError() - this allows use of try/catch to deal with errors.  any of the levels can be |'d together.</td>
+  <td>explicitly enables the specified debug level for this script: 0 - no debugging; 1 - show only critical
+errors (default); 2 - show all messages flagged for retrieval with checkError(); 4 - show first time use of
+non-declared variables; 8 - trace all function calls (collects profiler statistics); 24 - trace only for the
+purpose of collecting profiler statistics; 34 - "throw" all messages flagged for use with checkError() - this
+allows use of try/catch to deal with errors; 64 - trace all logical comparisons.  any of the levels can be |'d 
+together.</td>
  </tr>
  <tr>
   <td>$</td>
@@ -2743,7 +2978,7 @@ n-m substrings will be returned.</td>
  </tr>
  <tr>
   <td>$</td>
-  <td>exit()</td>
+  <td>exit(["reason"])</td>
   <td>causes the currently executing script context to exit.</td>
  </tr>
  <tr>
@@ -2798,6 +3033,11 @@ n-m substrings will be returned.</td>
   <td>parses the specified string and declares all variables in the string as local variables.</td>
  </tr>
  <tr>
+  <td>$</td>
+  <td>newInstance(@|^Interface, &closure)</td>
+  <td>Creates a sleep closure backed instance of the specified java interface class (or classes if an array is used).</td>
+ </tr>
+ <tr>
   <td>@</td>
   <td>profile()</td>
   <td>returns the profiler statistics for the current script environment.  Profile statistics will only be collected if DEBUG_TRACE_CALLS (8) or DEBUG_TRACE_PROFILE_ONLY (24) is set.</td>
@@ -2814,7 +3054,7 @@ n-m substrings will be returned.</td>
  </tr>
  <tr>
   <td></td>
-  <td>setField(class|$object, field => value, ...)</td>
+  <td>setField(^class|$object, field => value, ...)</td>
   <td>sets any number of public/protected fields of the specified class or instance of $object to a corresponding value.</td>
  </tr>
  <tr>
@@ -2837,10 +3077,15 @@ n-m substrings will be returned.</td>
   <td>this('$x $y')</td>
   <td>parses the specified string and declares all variables in the string as variables specific to the current closure.</td>
  </tr>
+ <tr>   
+  <td>$</td>
+  <td>typeOf($scalar)</td>
+  <td>returns the Java ^Class backing the specified scalar.</td>
+ </tr>
  <tr>
   <td></td>
-  <td>use("Loadable class")</td>
-  <td>loads the specified class into the current script environment.  Classes specified as package.Name are loaded from the Java classpath.  Classes can also be specified as filenames without the .class extension.  The specified class must be a Loadable bridge (i.e. it implements sleep.interfaces.Loadable).</td>
+  <td>use("Loadable"|^Loadable)</td>
+  <td>loads the specified class into the current script environment.  Classes specified as package.Name are loaded from the Java classpath.  Classes can also be specified as filenames without the .class extension.  The specified class must be a Loadable bridge (i.e. it implements sleep.interfaces.Loadable).  Optionally a class literal can be specified as an argument and Sleep will instantiate an instance of that class and install it as a bridge into the current script environment.  This is a safer way to use this function as the class name can be checked at script compile time.</td>
  </tr>
  <tr>
   <td></td>
