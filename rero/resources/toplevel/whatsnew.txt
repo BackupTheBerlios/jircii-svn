@@ -7,7 +7,9 @@ Beta    42 release 25 Nov 07
   http://sleep.hick.org/changelog.html
 - updated CTCP SOURCE reply and internal help documentation to reflect
   current information and URLs
-
+- added a WALLOPS and SEND_WALLOPS sets; updated the default.irc script to
+  include these.  per request of drakx
+- fixed /wallops
 
 Beta    41 last minute update 25 Mar 07 :)
 ====

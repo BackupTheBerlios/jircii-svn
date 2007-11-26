@@ -341,6 +341,7 @@ set PRIVMSG
 {
    return "\C34 $+ *\B $+ $nick $+ \B*\C17 $parms";
 }
+
 set SEND_MSG 
 {
    if (-iswindow $target)
@@ -1001,6 +1002,12 @@ on msg
    $_LAST_MESSAGE = $nick;
 }
 
+set WALLOPS
+{
+   return "\c35 $+ =\b $+ $nick $+ \b:\b<ircops>\b=\c17 $parms";
+}
 
-
-
+set SEND_WALLOPS
+{
+   return "\c35 $+ -> =\b<ircops>\b= $+ \c17 $parms";
+}

@@ -115,6 +115,7 @@ public class BuiltInCommands extends Feature implements ClientCommand
    public static final int VOICE      = 81848594;        // implemented
    public static final int WALL       = 2656714;         // implemented
    public static final int WALLEX     = -1741862915;     // implemented
+   public static final int WALLOPS    = 1836833928;      // implemented
    public static final int WHOIS      = 82569544;        // implemented
    public static final int WHOLEFT    = 2039998629;
    public static final int WI         = 2770;            // implemented
@@ -724,6 +725,10 @@ public class BuiltInCommands extends Feature implements ClientCommand
 
             getCapabilities().getOutputCapabilities().fireSetActive(ClientUtils.getEventHashMap(boozer, tokens.getTokenFrom(1)), "SEND_WALLEX");
 
+            break;
+         case WALLOPS:
+            getCapabilities().getOutputCapabilities().fireSetStatus(ClientUtils.getEventHashMap("<ircops>", parms), "SEND_WALLOPS");
+            getCapabilities().sendln("WALLOPS :" + parms);
             break;
          case WHOIS:
          case WI:
