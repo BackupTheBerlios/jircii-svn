@@ -41,6 +41,8 @@
 			<string>$JAVAROOT/jerk.jar</string>
 		<key>Properties</key>
 		<dict>
+                        <key>apple.awt.graphics.UseQuartz</key>
+                        <string>true</string>
 			<key>apple.awt.showGrowBox</key>
 			<string>false</string>
 			<key>com.apple.smallTabs</key>

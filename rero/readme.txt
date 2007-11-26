@@ -3,9 +3,9 @@ This is just a short, sweet, and simple readme for the actual source code.
 This code should be reasonably stable.
 
 If you need to contact me, my name is Raphael, I wrote most of this code. 
-My email address is raffi@hick.org, my url is http://www.hick.org/~raffi.
+My email address is rsmudge@gmail.com
 
-The official jIRCii homepage is at http://jirc.hick.org/
+The official jIRCii homepage is at http://jircii.hick.org/
 
 You will need Apache Ant to compile my source code.  I use version 1.5.1.
 Ant is easy to install and is available at http://ant.apache.org
@@ -37,7 +37,7 @@ you like.  That is when I started the jIRC project.
 The sleep library is (c) 2004-2007 Raphael Mudge.  Sleep is distributed under 
 the LGPL license.  I like sleep.  
 
-The sleep library is available at http://jirc.hick.org/sleep/
+The sleep library is available at http://sleep.hick.org/
 
 All of the jIRCii source code is released under the artistic license.  See 
 license.txt for more details.

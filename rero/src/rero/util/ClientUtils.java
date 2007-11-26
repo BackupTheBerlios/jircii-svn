@@ -63,7 +63,7 @@ public class ClientUtils
             "Fat butane, grubbin' on French fries",
             "Clean. Christian. Comprehensive.",
             "If idiots could fly, IRC would be an airport",
-            "I'm a *p0rn* star"
+            "been around the world and found that only stupid people are breeding"
         };
         int r = ctime() % taglines.length;
         return taglines[r];

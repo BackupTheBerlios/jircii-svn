@@ -1,3 +1,11 @@
+Beta    42 release 25 Nov 07
+====
+- Fixed a MacOS X 10.5 (leopard) issue with font metrics.  This is a work
+  around to force jIRCii to use the Quartz renderer in lieu of the Sun
+  renderer.  I don't know why the Sun one is broken.  Sun: what is up?
+- Upgraded to Sleep 2.1-b20.  Lots of changes.  Again view the changelog:
+  http://sleep.hick.org/changelog.html
+
 Beta    41 last minute update 25 Mar 07 :)
 ====
 - Small last minute update to unbreak a potential issue with script
