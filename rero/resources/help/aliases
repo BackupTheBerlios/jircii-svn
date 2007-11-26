@@ -75,8 +75,8 @@ ver::/ver tanto::requests version information from specified nick/channel.::+tar
 voice::/voice tijiez::gives voice (+v) privileges to specified users.  You may specify up to 4 nicks (uses nick completion)::nick - user to give voice to.::+nick... - other users to give voice to.
 wall::/wall hrm...::write all ops, sends a /notice to all the channel operators (+o) on the current channel.::text - message to send.
 wallex::/wallex JakieChan I think chan likes men.::write all except - sends a /notice to everyone on the active channel except the specified nicks.::nick1,nick2 - users who do not receive the notice::text - message to send
+wallops::/wallops argh, my server was just owned::writes a message to all irc operators on the server::message - the message to send
 whois::/whois `butane::looks up information on the specified user from the server.::nick - user to look up information on.
 wi::/wi `butane::looks up information on the specified user from the server.::nick - user to look up information on.
-wallops::/wallops argh, my server was just owned::writes a message to all irc operators on the server::message - the message to send
 window::/window #mIRC::creates a new window for the specified nick/#channel/=nick.::target - target to open a window for.
 ww::/ww blue-elf_::looks up information on who the specified user was.::nick - user to look up information on.
