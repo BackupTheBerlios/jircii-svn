@@ -8,8 +8,7 @@ Beta    42 release 25 Nov 07
 - updated CTCP SOURCE reply and internal help documentation to reflect
   current information and URLs
 - added a WALLOPS and SEND_WALLOPS sets; updated the default.irc script to
-  include these.  per request of drakx
-- fixed /wallops
+  include these.  also fixed /wallops; per request of drakx
 
 Beta    41 last minute update 25 Mar 07 :)
 ====
