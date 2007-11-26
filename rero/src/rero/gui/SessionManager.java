@@ -33,6 +33,9 @@ public class SessionManager extends JTabbedPane implements ClientWindowListener,
    protected PopupManager popups   = null;
    protected KeyBindings  keyb     = null;
 
+   protected String       lastscript = "";
+   protected long         lastref    = 0;
+
    protected static GlobalCapabilities global; 
 
    public static GlobalCapabilities getGlobalCapabilities()
@@ -43,23 +46,20 @@ public class SessionManager extends JTabbedPane implements ClientWindowListener,
    public void propertyChanged(String property, String parameter)
    {
       bridge = (MenuBridge)getActiveSession().getCapabilities().getDataStructure("menuBridge");
-      
-      SwingUtilities.invokeLater(new Runnable()
+      rero.util.ClientUtils.invokeLater(new Runnable()
       {
          public void run()
          {
             if (ClientState.getClientState().isOption("ui.showbar", ClientDefaults.ui_showbar))
             {
-               if (frame.getJMenuBar() == null)
-                  frame.setJMenuBar(menu);
+               menu = new JMenuBar();
+               bridge.installMenubar(menu);
+               frame.setJMenuBar(menu);
             }
             else
             {
                frame.setJMenuBar(null);
             }
-
-            bridge.installMenubar(menu);
-            menu.repaint();
             frame.validate();
          }
       });
@@ -71,8 +71,9 @@ public class SessionManager extends JTabbedPane implements ClientWindowListener,
 
       if (getActiveSession() != null)
       {
-         MenuBridge temp = (MenuBridge)getActiveSession().getCapabilities().getDataStructure("menuBridge");
-         temp.installMenubar(menu);
+         propertyChanged(null, null);
+//         MenuBridge temp = (MenuBridge)getActiveSession().getCapabilities().getDataStructure("menuBridge");
+//         temp.installMenubar(menu);
          GraphicalToolbar.stateChanged(); // CHEATING!!!!
 
          getActiveSession().getCapabilities().dispatchEvent(switchEventHashMap);

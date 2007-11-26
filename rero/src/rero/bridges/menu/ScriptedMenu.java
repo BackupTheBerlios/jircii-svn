@@ -84,6 +84,6 @@ public class ScriptedMenu extends JMenu implements MenuListener, MenuBridgeParen
 
    public void menuCanceled(MenuEvent e) 
    { 
-        removeAll();
+       removeAll();
    }
 }

@@ -188,8 +188,6 @@ public class MenuBridge implements Environment, Function, Loadable
 
     public void installMenubar(JMenuBar bar)
     {
-       bar.removeAll();
- 
        Iterator i = menubarMenus.values().iterator();
        while (i.hasNext())
        {
