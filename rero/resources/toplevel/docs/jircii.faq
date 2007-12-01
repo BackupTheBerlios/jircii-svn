@@ -1,4 +1,4 @@
-jircii faq - distributed with jircii 11.26.07:
+jircii - frequently asked questions:
 
                .sS$$Ss.                           .sS$$Ss. .sS$$Ss.
                $$$$$$$$                           $$$$$$$$ $$$$$$$$
@@ -9,7 +9,7 @@ jircii faq - distributed with jircii 11.26.07:
          $$$$$$ $$$$$$ $$$$$$ $$$$$$ $$$$$$ $$$$$$ $$$$$$   $$$$$$
          $$$$$$ $$$$$$ $$$$$$ $$$$$$ $$$$$$        $$$$$$   $$$$$$
   """""" $$$$$$ $$$$$$ $$$$$$        $$$$$$ $$$$$$ $$$$$$   $$$$$$
-  $$$$$$ $$$$$$ $$$$$$ $$$$$$ 112607 $$$$$$ $$$$$$ $$$$$$   $$$$$$
+  $$$$$$ $$$$$$ $$$$$$ $$$$$$ 120107 $$$$$$ $$$$$$ $$$$$$   $$$$$$
   $$$$$$ $$$$$$ $$$$$$ $$$$$$        `?$$$$s$$$$P' $$$$$$   $$$$$$
   `?$$$$s$$$$P'                                        
 
@@ -80,6 +80,10 @@ Questions:
 49. How do I pronounce jIRCii?
 50. How do I report bugs, feature requests, etc.?
 51. Where can I find you on IRC?
+
+52. Why can't I use Terminal and other fonts in jIRCii?
+53. Can I use old school terminal-style box drawing characters in my script?
+54. Can jIRCii display ANSI colors?
 
 If a question you would like answered is not here then email rsmudge@gmail.com
 
@@ -907,4 +911,31 @@ Begin jIRCii FAQ:
 51. Where can I find you on IRC?
 
     I'm on EFNet (irc.prison.net, irc.mzima.net, etc.) in #jIRCii.  
+
+52. Why can't I use Terminal and other fonts in jIRCii?
+
+    Java supports only true type fonts (.ttf) files.  This is a disadvantage
+    because yes, you can't use fonts such as Terminal.
+
+    However it is also a major advantage.  Many ttf fonts support much of the
+    unicode character set.  Meaning, if you have the write mapping any 
+    true type font can be used to display any character you would like.
+
+53. Can I use old school terminal-style box drawing characters in my script?
+
+    Yes.  Since jIRCii displays text in unicode it is possible to display
+    Cp437 (IBM Codepage 437) terminal style box drawing chars in your 
+    script.
+
+    There are two options for this.  1) you can find a unicode character
+    table and just specify the individual characters with \uNNNN to use
+    them in your script.  2) you could simply use the buildCp437String()
+    function built into jIRCii to remap a string of characters into
+    the what you would expect if you were using a Terminal font.  
+
+54. Can jIRCii display ANSI colors?
+
+    At this time, the answer is no.  However this capability can be
+    scripted.  I have no intention to add this support to jIRCii at this
+    time.
 
