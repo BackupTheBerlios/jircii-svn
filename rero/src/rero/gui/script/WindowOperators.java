@@ -30,7 +30,7 @@ public class WindowOperators implements Predicate, Function, Loadable
       session = _session;
    }
 
-   public boolean scriptLoaded(ScriptInstance script)
+   public void scriptLoaded(ScriptInstance script)
    {
       String[] contents = new String[] { 
 
@@ -74,7 +74,6 @@ public class WindowOperators implements Predicate, Function, Loadable
 
       script.getScriptEnvironment().getEnvironment().put("&setButtonColor", new setButtonColor());
       script.getScriptEnvironment().getEnvironment().put("&getButtonColor", new getButtonColor());
-      return true;
    }
 
    private class getButtonColor implements Function
@@ -129,9 +128,8 @@ public class WindowOperators implements Predicate, Function, Loadable
       }
    }
 
-   public boolean scriptUnloaded(ScriptInstance script)
+   public void scriptUnloaded(ScriptInstance script)
    {
-      return true;
    }
 
    public Scalar evaluate(final String function, final ScriptInstance script, Stack locals)

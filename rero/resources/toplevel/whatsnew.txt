@@ -1,3 +1,17 @@
+Beta    43
+====
+- fixed alpha order of some aliases in the Help -> Commands menu
+- jIRCii now creates the DCC receive directory if the directory
+  does not exist.
+- replaced call to skip with in Send.java with skipFully provided by
+  nanaki at gmail.com using Find Bugs http://findbugs.sourceforge.net/
+- implemented /kill <nick> <reason> command
+- updated jIRCii to Sleep 2.1-b23 API compatability (thanks Sleep 
+  maintainer for breaking Loadable API, oh wait, thats me).
+- updated scripting engine to Sleep 2.1-b23.  Many changes that will aid
+  those of you who use jIRCii as a platform for developing apps that 
+  crunch massive amounts of data.
+
 Beta    42 release 26 Nov 07
 ====
 - Fixed a MacOS X 10.5 (leopard) issue with font metrics.  This is a work

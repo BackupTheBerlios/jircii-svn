@@ -6,8 +6,8 @@ chat::/chat blue-elf::sends a DCC chat request to specified nick::nick - person 
 cls::/cls::clears the current window.
 clear::/clear::clears the current window.
 clearall::/clearall::clears all of the windows.
-ctcp::/ctcp `butane VERSION::sends a specified ctcp request to a user::nick - user to send the request to::command - request to send to user.
 cping::/cping tanto::sends a ctcp ping request to the specified nick/channel.::+target - nick/channel to send ping to
+ctcp::/ctcp `butane VERSION::sends a specified ctcp request to a user::nick - user to send the request to::command - request to send to user.
 creply::/creply Tobias VERSION x-chat: paid Windows version::sends a ctcp reply to the target::target - who to send reply to::type - type of ctcp reply to send::+parms - parameters to send
 cycle::/cycle::leaves and joins the current/specified channel::+#channel - channel to cycle
 dcc::/dcc send JakieChan ~/jerksrc.tar<br>/dcc chat tanto<br>/dcc accept blue-elf<br>/dcc close JakieChan::DCC stands for Direct Client Connection.  It is a way of sending and receiving files from other users on IRC.  It also provides facilities for chatting with another user outside of the IRC environment.::+stats - show dcc statistics in a window::send|chat|close|accept - type of dcc command to send.::nick - user to send dcc request to.::+file - filename to send
@@ -34,6 +34,7 @@ join::/join #jIRC::Joins the specified channel.  If you are already on that chan
 k::/k JakieChan you suck!::kicks user from current channel with the specified reason.::nick - user to kick::+reason - specified kick message.
 kb::/kb JakieChan you suck!::kicks and bans user from current channel with the specified reason.::nick - user to kick::+reason - specified kick message.
 kick::/kick #jIRC tanto I'll add a timer later!::kicks a user from the specified channel with the specified reason::channel - channel to kick user from::nick - user to kick::+reason - specified kick message.
+kill::/kill drakx does it work ok?::disconnects the specified user from the server.  Must be an IRC operator for this to work::user - user to disconnect::+reason - reason to disconnect them
 l::/l #mIRCscripts::leaves the specifed channel::+#channel - channel to leave.
 list::/list *mp3*::retrieves a list of channels from the server::+-gui - dump channel list to a window::+filter - wildcard to filter list of channels with.
 load::/load bitchx.irc::loads a specified sleep script, if no file is specified /load lists the currently loaded scripts.::+file.irc - name of sleep script to load.

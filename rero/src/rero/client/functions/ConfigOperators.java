@@ -17,7 +17,7 @@ public class ConfigOperators extends Feature implements Loadable
       getCapabilities().getScriptCore().addBridge(this);
    }
 
-   public boolean scriptLoaded(ScriptInstance script)
+   public void scriptLoaded(ScriptInstance script)
    {
       script.getScriptEnvironment().getEnvironment().put("&getProperty",      new getProperty());
       script.getScriptEnvironment().getEnvironment().put("&getPropertyList",  new getPropertyList());
@@ -28,13 +28,10 @@ public class ConfigOperators extends Feature implements Loadable
 
       script.getScriptEnvironment().getEnvironment().put("-isSetT", new isSet1());
       script.getScriptEnvironment().getEnvironment().put("-isSetF", new isSet2());
-
-      return true;
    }
 
-   public boolean scriptUnloaded(ScriptInstance script)
+   public void scriptUnloaded(ScriptInstance script)
    {
-      return true;
    }
 
    private static class getPropertyList implements Function

@@ -23,7 +23,7 @@ public class UserOperators extends Feature implements Predicate, Function, Loada
       data = (InternalDataList)getCapabilities().getDataStructure("clientInformation");
    }
 
-   public boolean scriptLoaded(ScriptInstance script)
+   public void scriptLoaded(ScriptInstance script)
    {
       String[] contents = new String[] { 
           "&searchAddressList",
@@ -37,13 +37,10 @@ public class UserOperators extends Feature implements Predicate, Function, Loada
       {
          script.getScriptEnvironment().getEnvironment().put(contents[x], this);
       }       
-
-      return true;
    }
 
-   public boolean scriptUnloaded(ScriptInstance script)
+   public void scriptUnloaded(ScriptInstance script)
    {
-      return true;
    }
 
    public Scalar evaluate(String function, ScriptInstance script, Stack locals)

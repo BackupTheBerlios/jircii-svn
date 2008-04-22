@@ -29,7 +29,7 @@ public class BuiltInOperators extends Feature implements Predicate, Function, Lo
       commands = (UserHandler)getCapabilities().getDataStructure("commands");
    }
 
-   public boolean scriptLoaded(ScriptInstance script)
+   public void scriptLoaded(ScriptInstance script)
    {
       String[] contents = new String[] { 
           "&call",
@@ -63,8 +63,6 @@ public class BuiltInOperators extends Feature implements Predicate, Function, Lo
       script.getScriptEnvironment().getEnvironment().put("&parseSet", new parseSet());
       script.getScriptEnvironment().getEnvironment().put("&fireEvent", new fireEvent());
       script.getScriptEnvironment().getEnvironment().put("&echoColumns", new echoColumns());
-
-      return true;
    }
 
    private class echoColumns implements Function
@@ -165,9 +163,8 @@ public class BuiltInOperators extends Feature implements Predicate, Function, Lo
       }
    }
 
-   public boolean scriptUnloaded(ScriptInstance script)
+   public void scriptUnloaded(ScriptInstance script)
    {
-      return true;
    }
 
    public Scalar evaluate(String function, ScriptInstance script, Stack locals)

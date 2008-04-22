@@ -16,18 +16,15 @@ public class TimerOperators extends Feature implements Loadable
       getCapabilities().getScriptCore().addBridge(this);
    }
 
-   public boolean scriptLoaded(ScriptInstance script)
+   public void scriptLoaded(ScriptInstance script)
    {
       script.getScriptEnvironment().getEnvironment().put("&addTimer", new addTimer());
       script.getScriptEnvironment().getEnvironment().put("&stopTimer", new stopTimer());
       script.getScriptEnvironment().getEnvironment().put("&setTimerResolution", new setResolution());
-
-      return true;
    }
 
-   public boolean scriptUnloaded(ScriptInstance script)
+   public void scriptUnloaded(ScriptInstance script)
    {
-      return true;
    }
 
    private class addTimer implements Function

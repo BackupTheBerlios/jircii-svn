@@ -120,6 +120,18 @@ public class Send extends ProtocolDCC
        return DCC_SEND;
     }
 
+    /** provided by nanaki@gmail.com using http://findbugs.sourceforge.net/ */
+    private static void skipFully(InputStream in, long nBytes) throws IOException
+    {
+       long remaining = nBytes;
+       while (remaining != 0)
+       {
+          long skipped = in.skip(remaining);
+          if (skipped == 0) throw new EOFException();
+          remaining -= skipped;
+       }
+    }
+
     public void run()
     {
        if (socket == null || !socket.isConnected())
@@ -148,7 +160,7 @@ public class Send extends ProtocolDCC
        try
        {
           fileStream = new FileInputStream(dumpFrom);
-          fileStream.skip(sentSize);
+          skipFully(fileStream, sentSize);
 
           istream = new DataInputStream(socket.getInputStream());
           ostream = socket.getOutputStream();

@@ -23,6 +23,10 @@
 <br>
 <br>If you are using /dcc send, /send, /load, etc. it is possible to tab complete the filename as well.  Just type the first few characters of the path, hit tab, and jIRCii will expand it for you.  Keep hitting tab to cycle through your options.
 <br>
+<br><b>Tab Channel Completion</b></font>
+<br>
+<br>By now you probably realized jIRCii tab completes nearly everything.  To tab-complete the current channel type #&lt;TAB&gt; and the current channel will appear in the editbox.
+<br>
 <br><b>Quickly Edit a Topic</b></font>
 <br>
 <br>To quickly edit a channel topic simply type /topic in the editbox and then hit the Tab key.  This will bring the channel topic up in the editbox ready for quick editing.

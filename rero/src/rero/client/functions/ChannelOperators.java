@@ -24,7 +24,7 @@ public class ChannelOperators extends Feature implements Predicate, Function, Lo
     data = (InternalDataList) getCapabilities().getDataStructure("clientInformation");
   }
 
-  public boolean scriptLoaded(ScriptInstance script) {
+  public void scriptLoaded(ScriptInstance script) {
     String[] contents = new String[]{
       "ison",      /** predicates */
       "isop",
@@ -49,12 +49,9 @@ public class ChannelOperators extends Feature implements Predicate, Function, Lo
     for (int x = 0; x < contents.length; x++) {
       script.getScriptEnvironment().getEnvironment().put(contents[x], this);
     }
-
-    return true;
   }
 
-  public boolean scriptUnloaded(ScriptInstance script) {
-    return true;
+  public void scriptUnloaded(ScriptInstance script) {
   }
 
   public Scalar evaluate(String function, ScriptInstance script, Stack locals) {

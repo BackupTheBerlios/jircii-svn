@@ -21,7 +21,7 @@ public class AliasEnvironment implements Loadable, Environment
     // in this case will be sharing the same environment so I'm safe to do this.   Sleep itself assumes that
     // scripts may end up being isolated from eachother.
     //
-    public boolean scriptUnloaded (ScriptInstance si)
+    public void scriptUnloaded (ScriptInstance si)
     {
         String key;
 
@@ -47,14 +47,11 @@ public class AliasEnvironment implements Loadable, Environment
               {
                  aliases.put(key, alias);
               }
-              
            }
         }
-
-        return true;
     }
 
-    public boolean scriptLoaded (ScriptInstance si)
+    public void scriptLoaded (ScriptInstance si)
     {
         Hashtable env = si.getScriptEnvironment().getEnvironment(); // assuming the environment is shared. hah right
 
@@ -62,8 +59,6 @@ public class AliasEnvironment implements Loadable, Environment
         // tell the environment that we want aliases to be bound here
         //
         env.put("alias",   this);
-
-        return true;
     }
 
     public void bindFunction(ScriptInstance si, String type, String name, Block code)

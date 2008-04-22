@@ -27,7 +27,7 @@ public class UIOperators implements Function, Loadable
       session = _session;
    }
 
-   public boolean scriptLoaded(ScriptInstance script)
+   public void scriptLoaded(ScriptInstance script)
    {
       String[] contents = new String[] { 
           "&refreshMenubar",
@@ -44,8 +44,6 @@ public class UIOperators implements Function, Loadable
 
       script.getScriptEnvironment().getEnvironment().put("&showSortedList", new openSortedWindow());
       script.getScriptEnvironment().getEnvironment().put("&refreshData", new refreshData());
-
-      return true;
    }
 
    private class openSortedWindow implements Function
@@ -85,9 +83,8 @@ public class UIOperators implements Function, Loadable
       }
    }
 
-   public boolean scriptUnloaded(ScriptInstance script)
+   public void scriptUnloaded(ScriptInstance script)
    {
-      return true;
    }
 
    public Scalar evaluate(String function, ScriptInstance script, Stack locals)

@@ -29,7 +29,7 @@ public class UtilOperators extends Feature implements Loadable
       getCapabilities().getScriptCore().addBridge(this);
    }
 
-   public boolean scriptLoaded(ScriptInstance script)
+   public void scriptLoaded(ScriptInstance script)
    {
       script.getScriptEnvironment().getEnvironment().put("&formatBytes",    new formatBytes());
 
@@ -72,8 +72,6 @@ public class UtilOperators extends Feature implements Loadable
       script.getScriptEnvironment().getEnvironment().put("&fileCompleteAll", new fileCompleteAll());
 
       script.getScriptEnvironment().getEnvironment().put("&buildCP437String", new buildString());
-
-      return true;
    }
 
     private static HashMap bridges = new HashMap();
@@ -134,9 +132,8 @@ public class UtilOperators extends Feature implements Loadable
        }
     }
 
-   public boolean scriptUnloaded(ScriptInstance script)
+   public void scriptUnloaded(ScriptInstance script)
    {
-      return true;
    }
 
    private static class buildString implements Function

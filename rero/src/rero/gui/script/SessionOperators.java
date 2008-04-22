@@ -28,7 +28,7 @@ public class SessionOperators implements Loadable
       return session.getCapabilities();
    }
 
-   public boolean scriptLoaded(ScriptInstance script)
+   public void scriptLoaded(ScriptInstance script)
    {
       Hashtable env = script.getScriptEnvironment().getEnvironment();
 
@@ -54,8 +54,6 @@ public class SessionOperators implements Loadable
 
       env.put("&getLogFile", new getLogFile());
       env.put("&logMessage", new logMessage());
-      
-      return true;
    }
 
    private class getLogFile implements Function
@@ -130,9 +128,8 @@ public class SessionOperators implements Loadable
       }
    }
 
-   public boolean scriptUnloaded(ScriptInstance script)
+   public void scriptUnloaded(ScriptInstance script)
    {
-      return true;
    }
 
    private class getSessionText implements Function

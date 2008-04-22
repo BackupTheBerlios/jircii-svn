@@ -145,7 +145,7 @@ public class MenuBridge implements Environment, Function, Loadable
        return null;
     }
 
-    public boolean scriptLoaded(ScriptInstance si)
+    public void scriptLoaded(ScriptInstance si)
     {
        Hashtable env = si.getScriptEnvironment().getEnvironment();
        env.put("item", this); 
@@ -155,8 +155,6 @@ public class MenuBridge implements Environment, Function, Loadable
        env.put("&addItem", this);
        env.put("&addSeparator", this);
        env.put("&removeMenubarItem", this);
-
-       return true;
     }
  
     public JPopupMenu getPopupMenu(String description, HashMap data)
@@ -213,8 +211,7 @@ public class MenuBridge implements Environment, Function, Loadable
        }
     }
 
-    public boolean scriptUnloaded(ScriptInstance si)
+    public void scriptUnloaded(ScriptInstance si)
     {
-       return true;
     }
 }

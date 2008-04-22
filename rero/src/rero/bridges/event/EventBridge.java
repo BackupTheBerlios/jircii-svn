@@ -58,7 +58,7 @@ public class EventBridge implements Loadable, Environment, PredicateEnvironment,
         framework = f;
     }
 
-    public boolean scriptUnloaded (ScriptInstance si)
+    public void scriptUnloaded (ScriptInstance si)
     {
         if (unloadEvents.get(si) != null)
         {
@@ -72,24 +72,15 @@ public class EventBridge implements Loadable, Environment, PredicateEnvironment,
               si.getScriptEnvironment().getScriptVariables().popLocalLevel();
            }
         }
-
-        //
-        // listeners check themselves to make sure the associated script is still loaded.
-        // If its not they automatically request to be removed.  Theres one way around that
-        // unload problem.
-        //
-        return true;
     }
 
-    public boolean scriptLoaded (ScriptInstance si)
+    public void scriptLoaded (ScriptInstance si)
     {
         Hashtable _env = si.getScriptEnvironment().getEnvironment();
         _env.put("on",   this); // since we implement both interfaces this should be okay.
         _env.put("wait", this); 
 
 //        environment = si.getScriptEnvironment();
-
-        return true;
     }
 
     /** adds another type of "event" for the event bridge to manage.  By default events are just registered with the irc 

@@ -22,7 +22,7 @@ public class ServerOperators extends Feature implements Loadable
       getCapabilities().getScriptCore().addBridge(this);
    }
 
-   public boolean scriptLoaded(ScriptInstance script)
+   public void scriptLoaded(ScriptInstance script)
    {
       script.getScriptEnvironment().getEnvironment().put("&getAllServers", new getAllServers());
       script.getScriptEnvironment().getEnvironment().put("&getAllNetworks", new getAllNetworks());
@@ -38,13 +38,10 @@ public class ServerOperators extends Feature implements Loadable
       script.getScriptEnvironment().getEnvironment().put("&serverInfoDescription", new serverInfoDescription());
       script.getScriptEnvironment().getEnvironment().put("&serverInfoConnectPort", new serverInfoConnectPort());
       script.getScriptEnvironment().getEnvironment().put("&serverInfoCommand", new serverInfoCommand());
-
-      return true;
    }
 
-   public boolean scriptUnloaded(ScriptInstance script)
+   public void scriptUnloaded(ScriptInstance script)
    {
-      return true;
    }
 
    private static class getAllServers implements Function

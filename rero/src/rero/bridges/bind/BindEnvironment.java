@@ -32,12 +32,11 @@ public class BindEnvironment extends AliasEnvironment
         aliases.put(name.toUpperCase(), mybind);
     }
 
-    public boolean scriptLoaded (ScriptInstance si)
+    public void scriptLoaded (ScriptInstance si)
     {
         Hashtable env = si.getScriptEnvironment().getEnvironment(); // assuming the environment is shared. hah right
 
         env.put("bind",   this);
-        return true;
     }
 
     public ScriptedBind getBinding(String description)

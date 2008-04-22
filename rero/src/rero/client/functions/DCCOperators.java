@@ -22,7 +22,7 @@ public class DCCOperators extends Feature implements Loadable
       getCapabilities().getScriptCore().addBridge(this);
    }
 
-   public boolean scriptLoaded(ScriptInstance script)
+   public void scriptLoaded(ScriptInstance script)
    {
       script.getScriptEnvironment().getEnvironment().put("&getActiveConnections", new getActiveConnections());
       script.getScriptEnvironment().getEnvironment().put("&getWaitingConnections", new getWaitingConnections());
@@ -62,13 +62,10 @@ public class DCCOperators extends Feature implements Loadable
 
       script.getScriptEnvironment().getEnvironment().put("&localip", new localip());
       script.getScriptEnvironment().getEnvironment().put("&getNextPort", new getNextPort());
-
-      return true;
    }
 
-   public boolean scriptUnloaded(ScriptInstance script)
+   public void scriptUnloaded(ScriptInstance script)
    {
-      return true;
    }
 
    private class localip implements Function

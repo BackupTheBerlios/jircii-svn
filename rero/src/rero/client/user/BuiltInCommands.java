@@ -69,6 +69,7 @@ public class BuiltInCommands extends Feature implements ClientCommand
    public static final int K          = 75;             // implemented
    public static final int KB         = 2391;           // implemented
    public static final int KICK       = 2306630;        // implemented
+   public static final int KILL       = 2306910;        // implemented
    public static final int L          = 76;             // implemented
    public static final int LEAVE      = 72308375;       // implemented
    public static final int LIST       = 2336926;        // implemented
@@ -357,6 +358,16 @@ public class BuiltInCommands extends Feature implements ClientCommand
             }
 
             getCapabilities().sendln("KICK " + tokens.getToken(0) + " " + tokens.getToken(1) + " :" + temp);
+            break;
+         case KILL:
+            temp = ClientState.getClientState().getString("kill.message", "I know... I'm a \002jIRC\002");
+
+            if (tokens.getTotalTokens() > 1)
+            {
+               temp = tokens.getTokenFrom(1);
+            }
+
+            getCapabilities().sendln("KILL " + tokens.getToken(0) + " :" + temp);
             break;
          case LIST:
             if (tokens.getTotalTokens() == 1)

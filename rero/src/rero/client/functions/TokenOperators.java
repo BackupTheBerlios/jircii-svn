@@ -18,7 +18,7 @@ public class TokenOperators extends Feature implements Loadable
       getCapabilities().getScriptCore().addBridge(this);
    }
 
-   public boolean scriptLoaded(ScriptInstance script)
+   public void scriptLoaded(ScriptInstance script)
    {
       script.getScriptEnvironment().getEnvironment().put("&tokenize",    new tokenize());
       script.getScriptEnvironment().getEnvironment().put("&getToken",    new getToken());
@@ -32,13 +32,10 @@ public class TokenOperators extends Feature implements Loadable
       script.getScriptEnvironment().getEnvironment().put("&findToken",      new findToken());
 
       script.getScriptEnvironment().getEnvironment().put("istoken",  new isToken());
-
-      return true;
    }
 
-   public boolean scriptUnloaded(ScriptInstance script)
+   public void scriptUnloaded(ScriptInstance script)
    {
-      return true;
    }
 
    private static TokenizedString extractTokens(Stack locals)

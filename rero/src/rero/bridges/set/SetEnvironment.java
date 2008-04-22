@@ -39,12 +39,11 @@ public class SetEnvironment extends AliasEnvironment
         aliases.put(name, myset);
     }
 
-    public boolean scriptLoaded (ScriptInstance si)
+    public void scriptLoaded (ScriptInstance si)
     {
         Hashtable env = si.getScriptEnvironment().getEnvironment(); // assuming the environment is shared. hah right
 
         env.put("set",   this);
-        return true;
     }
 
     public boolean isSet(String name)

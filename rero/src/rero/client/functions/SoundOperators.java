@@ -18,18 +18,16 @@ public class SoundOperators extends Feature implements Loadable
       getCapabilities().getScriptCore().addBridge(this);
    }
 
-   public boolean scriptLoaded(ScriptInstance script)
+   public void scriptLoaded(ScriptInstance script)
    {
       script.getScriptEnvironment().getEnvironment().put("&loadSound", new loadSound());
       script.getScriptEnvironment().getEnvironment().put("&soundPlay", new soundPlay());
       script.getScriptEnvironment().getEnvironment().put("&soundLoop", new soundLoop());
       script.getScriptEnvironment().getEnvironment().put("&soundStop", new soundStop());
-      return true;
    }
 
-   public boolean scriptUnloaded(ScriptInstance script)
+   public void scriptUnloaded(ScriptInstance script)
    {
-      return true;
    }
 
    private static class loadSound implements Function

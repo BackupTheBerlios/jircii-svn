@@ -141,16 +141,14 @@ public class ScriptCore implements Loadable
 
    // === Implement Interfaces ==============================================================================
 
-   public boolean scriptLoaded(ScriptInstance si)
+   public void scriptLoaded(ScriptInstance si)
    {
       si.setScriptVariables(variables);
       ClientState.getClientState().fireChange("loaded.scripts", si.getName());
-      return true;
    }
    
-   public boolean scriptUnloaded(ScriptInstance si)
+   public void scriptUnloaded(ScriptInstance si)
    {
       ClientState.getClientState().fireChange("loaded.scripts", si.getName());
-      return true;
    }
 }
