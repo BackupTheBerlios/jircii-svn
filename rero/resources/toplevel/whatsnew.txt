@@ -1,4 +1,4 @@
-Beta    43
+Beta    43 release 9 May 08
 ====
 - fixed alpha order of some aliases in the Help -> Commands menu
 - jIRCii now creates the DCC receive directory if the directory
@@ -6,11 +6,9 @@ Beta    43
 - replaced call to skip with in Send.java with skipFully provided by
   nanaki at gmail.com using Find Bugs http://findbugs.sourceforge.net/
 - implemented /kill <nick> <reason> command
-- updated jIRCii to Sleep 2.1-b23 API compatability (thanks Sleep 
-  maintainer for breaking Loadable API, oh wait, thats me).
-- updated scripting engine to Sleep 2.1-b25.  Many changes that will aid
-  those of you who use jIRCii as a platform for developing apps that 
-  crunch massive amounts of data.
+- updated scripting engine to Sleep 2.1-b25.  
+- added a check to the word wrapping code to prevent infinite recursion
+  when the window becomes too small.
 
 Beta    42 release 26 Nov 07
 ====

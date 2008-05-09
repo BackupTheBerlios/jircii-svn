@@ -202,6 +202,8 @@ public class WrappedContainer
 
    public static AttributedText[] wrap(AttributedString textData, int maxWidth)
    {
+      if (maxWidth < 100) { return new AttributedText[0]; } 
+
       TokenizedString tokens  = textData.getTokens();
  
       LinkedList data = new LinkedList();
