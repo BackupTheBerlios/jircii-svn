@@ -5,7 +5,7 @@ This code should be reasonably stable.
 If you need to contact me, my name is Raphael, I wrote most of this code. 
 My email address is rsmudge@gmail.com
 
-The official jIRCii homepage is at http://jircii.hick.org/
+The official jIRCii homepage is at http://jircii.dashnine.org/
 
 You will need Apache Ant to compile my source code.  I use version 1.5.1.
 Ant is easy to install and is available at http://ant.apache.org
@@ -33,13 +33,13 @@ To Build JavaDoc for jIRCii (dumped to the docs/api directory)
 [raffi@beardsley ~/rero]$ ant docs
 
 To be safe:
-This code is (c) 2004-2007 Raphael Mudge.  We can go back as far as 1999 if 
+This code is (c) 2004-2008 Raphael Mudge.  We can go back as far as 1999 if 
 you like.  That is when I started the jIRC project.  
 
-The sleep library is (c) 2004-2007 Raphael Mudge.  Sleep is distributed under 
+The sleep library is (c) 2004-2008 Raphael Mudge.  Sleep is distributed under 
 the LGPL license.  I like sleep.  
 
-The sleep library is available at http://sleep.hick.org/
+The sleep library is available at http://sleep.dashnine.org/
 
 All of the jIRCii source code is released under the artistic license.  See 
 license.txt for more details.
