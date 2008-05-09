@@ -8,7 +8,7 @@ Beta    43
 - implemented /kill <nick> <reason> command
 - updated jIRCii to Sleep 2.1-b23 API compatability (thanks Sleep 
   maintainer for breaking Loadable API, oh wait, thats me).
-- updated scripting engine to Sleep 2.1-b23.  Many changes that will aid
+- updated scripting engine to Sleep 2.1-b25.  Many changes that will aid
   those of you who use jIRCii as a platform for developing apps that 
   crunch massive amounts of data.
 

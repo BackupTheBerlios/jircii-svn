@@ -85,12 +85,12 @@ public class UtilOperators extends Feature implements Loadable
 
           if (l.size() == 2)
           {
-             parent    = BridgeUtilities.getFile(l);
+             parent    = BridgeUtilities.getFile(l, si);
              className = BridgeUtilities.getString(l, "");
           }
           else
           {
-             File a    = BridgeUtilities.getFile(l);
+             File a    = BridgeUtilities.getFile(l, si);
              parent    = a.getParentFile();
              className = a.getName();
           }

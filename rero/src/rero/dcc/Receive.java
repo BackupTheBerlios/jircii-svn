@@ -148,9 +148,9 @@ public class Receive extends ProtocolDCC
        {
           boolean appendToFile = startSize != 0;
 
-          if (!dumpTo.exists())
+          if (!dumpTo.getParentFile().exists())
           {
-             dumpTo.mkdirs(); /* create the dcc receive directory if it does not exist */
+             dumpTo.getParentFile().mkdirs(); /* create the dcc receive directory if it does not exist */
           }
  
           fileStream = new FileOutputStream(dumpTo, appendToFile);
