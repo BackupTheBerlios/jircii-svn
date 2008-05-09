@@ -122,7 +122,7 @@
 <br>
 <br>In the above example Ctrl represents the control key.  The + means both keys have to be pressed at the same time in this case the second key is S.  
 <br>
-<br>Numerous shortcut combinations can be made using +.  Ctrl and Alt represent the Control and Alt keys respectively.  Nearly any key combination A-Z, F1-F12, enter, home etc. can be bound.  See the <a href="http://jircii.hick.org/jirc/tutorial.prl?scriptjirc">jIRCii Scripting Reference</a> for more details.
+<br>Numerous shortcut combinations can be made using +.  Ctrl and Alt represent the Control and Alt keys respectively.  Nearly any key combination A-Z, F1-F12, enter, home etc. can be bound.  See the <a href="http://jircii.dashnine.org/download/scriptjirc.pdf">jIRCii Scripting Reference</a> for more details.
 <br>
 <br><center><small>[ <a href="http://www/#toc">contents</a> | <a href="http://www/#part1">1</a> | <a href="http://www/#part2">2</a> | <a href="http://www/#part3">3</a> | <a href="http://www/#part4">4</a> ]</small></center></p>
 <br>
@@ -214,9 +214,9 @@
 <br>
 <br><b><a name="part4"><font color="#000099" size="+1">4. Where to go from here</font></a></b>
 <br>
-<br>This tutorial is merely meant to be a starting point for writing jIRCii scripts.  You now know enough to understand what a basic script is doing.  The next logical step is to learn more about sleep.  Sleep is the scripting language behind jIRCii.  The <a href="http://sleep.hick.org/documentation.html">Sleep Language Reference</a> is a very fast paced reference / tutorial.
+<br>This tutorial is merely meant to be a starting point for writing jIRCii scripts.  You now know enough to understand what a basic script is doing.  The next logical step is to learn more about sleep.  Sleep is the scripting language behind jIRCii.  The <a href="http://sleep.dashnine.org/manual">Sleep 2.1 Manual</a> has a tutorial to start with.
 <br>
-<br>Once you have an understanding of Sleep you may want to read the <a href="http://jircii.hick.org/download/scriptjirc.pdf">jIRCii Scripting Reference</a>.  The <a href="http://jircii.hick.org/download/scriptjirc.pdf">jIRCii Scripting Reference</a> covers all of the jIRCii specific stuff in Sleep.. 
+<br>Once you have an understanding of Sleep you may want to read the <a href="http://jircii.dashnine.org/download/scriptjirc.pdf">jIRCii Scripting Reference</a>.  The <a href="http://jircii.dashnine.org/download/scriptjirc.pdf">jIRCii Scripting Reference</a> covers all of the jIRCii specific stuff in Sleep.. 
 <br>
 <br>After you read these documents you can further your learning by looking at other jIRCii scripts.  Just download a script from the jIRCii homepage, open it in your favorite text editor, and start learning.  
 <br>

@@ -119,9 +119,8 @@ Begin jIRCii FAQ:
  
  2. Where can I get jIRCii?
 
-    The folks over at hick.org have been cool enough to host the jIRCii
-    Resource Center.  You can download jIRCii addons, scripts, and themes
-    at: http://jircii.hick.org/
+    You can download jIRCii addons, scripts, and themes
+    at: http://jircii.dashnine.org/
 
  3. How do I create a shortcut for jIRCii on Windows?
 
@@ -160,7 +159,7 @@ Begin jIRCii FAQ:
  7. Is there any way to minimize jIRCii to the system tray?
 
     [Serge] has written an addon script called jIRCii-tray.zip and it is
-    available at: http://jircii.hick.org/scripts.html
+    available at: http://jircii.dashnine.org/scripts.html
 
  8. How do I make Windows web browsers use jIRCii for irc:// links?
 
@@ -325,8 +324,7 @@ Begin jIRCii FAQ:
     in 24 hour format.  mm of course means the minutes. 
   
     For more information about the time/date format of formatDate() check out
-    Appendix D of the Sleep Language Fundamentals:
-    http://sleep.hick.org/documentation.html
+    the Sleep 2.1 Manual: http://sleep.dashnine.org/
 
 18. What is the difference between a .THM and a .IRC file?
 
@@ -424,7 +422,7 @@ Begin jIRCii FAQ:
    it.  Fortunately it has already been scripted.  You can download 
    flash.irc, an addon script that adds this functionality at:
 
-   http://jircii.hick.org/scripts.html
+   http://sleep.dashnine.org/scripts.html
 
 27. How do I specify my own local IP address information for DCCs?
 
@@ -640,12 +638,12 @@ Begin jIRCii FAQ:
     binaries are released under the artistic license.  
 
     You can download the source code at:
-    http://jircii.hick.org/
+    http://jircii.dashnine.org/
 
     The Sleep source code is available for download as well at the 
     Sleep Scripting Project:
 
-    http://sleep.hick.org/
+    http://sleep.dashnine.org/
 
     Sleep is now released under the LGPL.  jIRCii uses the Sleep version
     02.28.05.  Sleep 2.0 is in beta and not used in jIRCii yet. 
