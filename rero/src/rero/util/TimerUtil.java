@@ -37,22 +37,37 @@ public class TimerUtil implements Runnable
       {
          try
          {
+             List goodToGo = new LinkedList();
+
+             /* clean up the internal timer list and find which timers are ready to execute */
+
              Iterator i = timers.iterator();
              while (i.hasNext())
              {
                 TimedEvent temp = (TimedEvent)i.next();
                 if (temp.isValid())
-                  {
+                {
                      if (temp.isReady())
-                     {  
-                        temp.timerExecute();
+                     { 
+                        goodToGo.add(temp); 
                      }
-                  }
-                  else
-                  {
+                }
+                else
+                {
                      i.remove();
-                  }
-            }
+                }
+             }
+
+             /* execute the timers that are ready */
+
+             i = goodToGo.iterator();
+             while (i.hasNext())
+             {
+                TimedEvent temp = (TimedEvent)i.next();
+                temp.timerExecute();
+             }
+
+             /* sleep for the prescribed resolution */
 
             Thread.sleep(resolution);
          }

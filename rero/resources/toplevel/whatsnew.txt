@@ -23,6 +23,9 @@ Beta    44
   asking user to select a server
 - fixed Sleep bug with sublist used on read-only arrays (this was 
   breaking /names in some jIRCii scripts)
+- reworked timer code to prevent concurrent modification exceptions
+  caused by timers making timers or stopping timers during their
+  execution
 
 Beta    43 release 9 May 08
 ====
