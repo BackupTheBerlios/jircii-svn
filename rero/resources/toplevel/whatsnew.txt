@@ -29,6 +29,8 @@ Beta    44
 - jircii MDI mode now opens windows maximized if the last active window
   is maximized
 
+[Note to Serge: you may want to recompile your addons]
+
 Beta    43 release 9 May 08
 ====
 - fixed alpha order of some aliases in the Help -> Commands menu

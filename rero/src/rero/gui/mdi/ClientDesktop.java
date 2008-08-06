@@ -131,12 +131,15 @@ public class ClientDesktop extends WindowManager implements ClientWindowListener
           JInternalFrame f = desktop.getSelectedFrame();
           if (f != null && f.isMaximum())
           {
+              doActivate(temp);
               ((JInternalFrame)ev.getSource()).setMaximum(true);
           }
+          else
+          {
+              doActivate(temp);
+          }
        }
-       catch (Exception ex) { }
-
-       doActivate(temp);
+       catch (Exception ex) { ex.printStackTrace(); }
     }
 
     public void onClose(ClientWindowEvent ev) 
