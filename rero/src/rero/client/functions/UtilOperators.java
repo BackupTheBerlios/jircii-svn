@@ -61,6 +61,7 @@ public class UtilOperators extends Feature implements Loadable
       script.getScriptEnvironment().getEnvironment().put("&getScriptResource",       new getScriptResource());
 
       script.getScriptEnvironment().getEnvironment().put("&strip",       new strip());
+      script.getScriptEnvironment().getEnvironment().put("&strwidth",    new strwidth());
       script.getScriptEnvironment().getEnvironment().put("&versionString",       new versionString());
 
       script.getScriptEnvironment().getEnvironment().put("&exit", new exit());
@@ -74,6 +75,14 @@ public class UtilOperators extends Feature implements Loadable
       script.getScriptEnvironment().getEnvironment().put("&buildCP437String", new buildString());
    }
 
+   private static class strwidth implements Function
+   {
+      public Scalar evaluate(String name, ScriptInstance script, Stack locals)
+      {
+          return SleepUtils.getScalar(TextSource.fontMetrics.stringWidth(BridgeUtilities.getString(locals, "")));
+      }
+   }
+  
     private static HashMap bridges = new HashMap();
 
     private static class f2_use implements Function

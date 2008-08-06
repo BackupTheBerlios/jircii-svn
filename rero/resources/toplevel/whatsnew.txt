@@ -10,6 +10,15 @@ Beta    44
   -- &subarray was renamed to &sublist; &subarray still works just
      be aware that the docs will refer to &sublist
 
+- replaced jIRCii scripting PDF with HTML version, thanks to Dan Fare
+  (aka phos) for making that happen.
+- fixed a Sleep bug that was causing &parseSet to freak out in certain
+  cases (this was causing the version reply not halting issue found in
+  Slurge)
+- added &getWindowSize("window name") to get the width of the specified
+  window (in pixels)
+- added &strwidth('some string') to get the width of the specified string
+  (in pixels) using the current font metrics
 
 Beta    43 release 9 May 08
 ====

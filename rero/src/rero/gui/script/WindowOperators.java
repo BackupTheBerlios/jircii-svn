@@ -40,6 +40,8 @@ public class WindowOperators implements Predicate, Function, Loadable
           "&setWindowTitle",
           "&getWindowTitle",
 
+          "&getWindowSize",
+
           "&renameWindow",
 
           "&getSelectedText",
@@ -156,6 +158,17 @@ public class WindowOperators implements Predicate, Function, Loadable
          {
              session.getWindow(a).getDisplay().scroll(b);
          }
+      }
+      else if (function.equals("&getWindowSize") && locals.size() == 1)
+      {
+         String window = locals.pop().toString();
+         
+         if (session.getWindow(window) != null)
+         {
+            return SleepUtils.getScalar(session.getWindow(window).getWidth());
+         }
+
+         return SleepUtils.getEmptyScalar();
       }
       else if (function.equals("&getWindowTitle") && locals.size() == 1)
       {
