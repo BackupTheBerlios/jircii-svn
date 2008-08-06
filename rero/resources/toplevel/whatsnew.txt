@@ -1,3 +1,16 @@
+Beta    44
+====
+- updated scripting engine to Sleep 2.1-u2, over 50 logged improvements
+  and feature changes.  If it doesn't break your script you are bound
+  to like it.  Here are the compatability changes to watch out for:
+
+  -- this release catches more syntax errors, beware this may affect you
+  -- &indexOf now returns $null when no matches were found, check for
+     this with the is operator i.e. if (indexOf($str, " ") is $null)
+  -- &subarray was renamed to &sublist; &subarray still works just
+     be aware that the docs will refer to &sublist
+
+
 Beta    43 release 9 May 08
 ====
 - fixed alpha order of some aliases in the Help -> Commands menu

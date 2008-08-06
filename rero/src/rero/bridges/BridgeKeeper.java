@@ -9,6 +9,7 @@ import rero.bridges.alias.*;
 import rero.bridges.set.*;
 import rero.bridges.bind.*;
 import rero.bridges.menu.*;
+import rero.bridges.subs.*;
 
 import sleep.interfaces.*;
 import sleep.runtime.*;
@@ -19,12 +20,13 @@ public class BridgeKeeper
 
    public BridgeKeeper()
    {
-      scriptBridges    = new Loadable[5];
+      scriptBridges    = new Loadable[6];
       scriptBridges[0] = new EventBridge();
       scriptBridges[1] = new AliasEnvironment();
       scriptBridges[2] = new SetEnvironment();
       scriptBridges[3] = new BindEnvironment();
       scriptBridges[4] = new MenuBridge();
+      scriptBridges[5] = new SubroutineEnvironment();
    }
 
    // === Process Imports ===================================================================================
