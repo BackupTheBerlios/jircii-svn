@@ -19,6 +19,10 @@ Beta    44
   window (in pixels)
 - added &strwidth('some string') to get the width of the specified string
   (in pixels) using the current font metrics
+- trying to connect with no server selected will now bring up a dialog
+  asking user to select a server
+- fixed Sleep bug with sublist used on read-only arrays (this was 
+  breaking /names in some jIRCii scripts)
 
 Beta    43 release 9 May 08
 ====

@@ -139,11 +139,17 @@ public class ServerList extends JPanel implements DItem
             {
                 SessionManager.getGlobalCapabilities().createNewServer();
             }
-            Server       connectToMe = (Server)list.getSelectedValue();
 
-            SessionManager.getGlobalCapabilities().getActiveSession().executeCommand(connectToMe.getCommand());
-
-            capabilities.closeDialog();
+            if (list.getSelectedValue() != null)
+            {
+               Server       connectToMe = (Server)list.getSelectedValue();
+               SessionManager.getGlobalCapabilities().getActiveSession().executeCommand(connectToMe.getCommand());
+               capabilities.closeDialog();
+            }
+            else
+            {
+               JOptionPane.showMessageDialog(null, "Please select a server", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
    }
 
    public void setParent(DParent parent)
