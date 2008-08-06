@@ -26,6 +26,8 @@ Beta    44
 - reworked timer code to prevent concurrent modification exceptions
   caused by timers making timers or stopping timers during their
   execution
+- jircii MDI mode now opens windows maximized if the last active window
+  is maximized
 
 Beta    43 release 9 May 08
 ====

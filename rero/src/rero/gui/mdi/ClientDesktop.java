@@ -124,6 +124,18 @@ public class ClientDesktop extends WindowManager implements ClientWindowListener
     public void onOpen(ClientWindowEvent ev) 
     { 
        StatusWindow temp = getWindowFor(ev.getSource());
+
+       try
+       {
+          /* check if current window is maxed, if it is, maximize the new one */
+          JInternalFrame f = desktop.getSelectedFrame();
+          if (f != null && f.isMaximum())
+          {
+              ((JInternalFrame)ev.getSource()).setMaximum(true);
+          }
+       }
+       catch (Exception ex) { }
+
        doActivate(temp);
     }
 
