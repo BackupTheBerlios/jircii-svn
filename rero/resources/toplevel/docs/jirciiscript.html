@@ -13,13 +13,13 @@
      h1
      {
         font-size: 1.25em;
-        color: darkblue;
+        color: #2222FF;
      }
 
      h2
      {
         font-size: 1.15em;
-        color: #2222FF;
+        color: darkblue;
      }
 
      h3
@@ -1634,76 +1634,80 @@ special name: %STATUS%.</p>
     <td>cuts and copies selected text in the current window editbox</td>
   </tr>
   <tr>
-    <td>$ getSelectedText("target")</td>
-    <td>returns the selected text from the editbox in the specified window</td>
-  </tr>
-  <tr>
-    <td>removeSelectedText()</td>
-    <td>clears selected text from the editbox in the current window</td>
-  </tr>
-  <tr>
-    <td>pasteText()</td>
-    <td>pastes text from clipboard</td>
-  </tr>
-  <tr>
-    <td>$ getSelectedUser("target")</td>
-    <td>returns the selected nickname in the target channel window listbox</td>
-  </tr>
-  <tr>
-    <td>@ getSelectedUsers("target")</td>
-    <td>returns all of the selected users in the target channel window listbox.</td>
-  </tr>
-  <tr>
     <td>$ getButtonColor(target)</td>
     <td>returns the color of the switchbar button text</td>
-  </tr>
-  <tr>
-    <td>$&nbsp;setButtonColor(target,&nbsp;aarrggbb)</td>
-    <td>sets the color of the switchbar button text</td>
   </tr>
   <tr>
     <td>$ getCursorPosition(target)</td>
     <td>returns the position of the editbox cursor</td>
   </tr>
   <tr>
-    <td>setCursorPosition(target, n)</td>
-    <td>sets the position of the editbox cursor</td>
-  </tr>
-  <tr>
     <td>$ getInputText(target)</td>
     <td>returns the text in the editbox for the target</td>
   </tr>
   <tr>
-    <td>setInputText(target, text)</td>
-    <td>sets the editbox text for the specified target</td>
+    <td>$ getSelectedText("target")</td>
+    <td>returns the selected text from the editbox in the specified window</td>
+  </tr>
+  <tr>
+    <td>@ getSelectedUsers("target")</td>
+    <td>returns all of the selected users in the target channel window listbox.</td>
   </tr>
   <tr>
     <td>$ getWindowPrompt(target)</td>
     <td>returns the text for the targets window prompt</td>
   </tr>
   <tr>
-    <td>setWindowPrompt(target, text)</td>
-    <td>sets the window prompt for the specified window</td>
+    <td>getWindowSize(target)</td>
+    <td>returns the with of the specified window in pixels</td>
   </tr>
   <tr>
     <td>$ getWindowTitle([target])</td>
     <td>returns the titlebar text for the specified window. If target is not specified returns the text of the jIRCii titlebar.</td>
   </tr>
   <tr>
-    <td>setWindowTitle([target], text)</td>
-    <td>sets the titlebar text for the specified window. Defaults to setting text for the jIRCii titlebar.</td>
-  </tr>
-  <tr>
-    <td>renameWindow(target, title)</td>
-    <td>renames target to specified title, right now this works only on query windows</td>
+    <td>pasteText()</td>
+    <td>pastes text from clipboard</td>
   </tr>
   <tr>
     <td>refreshWindow(target)</td>
     <td>updates the statusbar and repaint the window immediately.</td>
   </tr>
   <tr>
+    <td>removeSelectedText()</td>
+    <td>clears selected text from the editbox in the current window</td>
+  </tr>
+  <tr>
+    <td>renameWindow(target, title)</td>
+    <td>renames target to specified title, right now this works only on query windows</td>
+  </tr>
+  <tr>
     <td>scrollWindow(target, +/-n)</td>
     <td>scrolls the text up (-n) or down (+n) some lines</td>
+  </tr>
+  <tr>
+    <td>$&nbsp;setButtonColor(target,&nbsp;aarrggbb)</td>
+    <td>sets the color of the switchbar button text</td>
+  </tr>
+  <tr>
+    <td>setCursorPosition(target, n)</td>
+    <td>sets the position of the editbox cursor</td>
+  </tr>
+  <tr>
+    <td>setInputText(target, text)</td>
+    <td>sets the editbox text for the specified target</td>
+  </tr>
+  <tr>
+    <td>$ getSelectedUser("target")</td>
+    <td>returns the selected nickname in the target channel window listbox</td>
+  </tr>
+  <tr>
+    <td>setWindowPrompt(target, text)</td>
+    <td>sets the window prompt for the specified window</td>
+  </tr>
+  <tr>
+    <td>setWindowTitle([target], text)</td>
+    <td>sets the titlebar text for the specified window. Defaults to setting text for the jIRCii titlebar.</td>
   </tr>
 </table>
 
@@ -2188,6 +2192,10 @@ bold is a brighter version of the current color while reverse is a darker versio
   <tr>
     <td>$ strip(text)</td>
     <td>returns a copy of text with all of the formatting codes stripped out.</td>
+  </tr>
+  <tr>
+    <td>$ strwidth(text)</td>
+    <td>returns the width of text in pixels.</td>
   </tr>
 </table>
 

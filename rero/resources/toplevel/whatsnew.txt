@@ -10,8 +10,8 @@ Beta    44
   -- &subarray was renamed to &sublist; &subarray still works just
      be aware that the docs will refer to &sublist
 
-- replaced jIRCii scripting PDF with HTML version, thanks to Dan Fare
-  (aka phos) for making that happen.
+- replaced jIRCii Scripting PDF with a clean HTML version.  Thanks to
+  Dan Fare for getting this started
 - fixed a Sleep bug that was causing &parseSet to freak out in certain
   cases (this was causing the version reply not halting issue found in
   Slurge)
