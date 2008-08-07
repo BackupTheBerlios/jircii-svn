@@ -1,4 +1,4 @@
-Beta    44
+Beta    44 release 7 Aug 08
 ====
 - updated scripting engine to Sleep 2.1-u2, over 50 logged improvements
   and feature changes.  If it doesn't break your script you are bound
@@ -28,6 +28,10 @@ Beta    44
   execution
 - jircii MDI mode now opens windows maximized if the last active window
   is maximized
+- timers now quit when an IRC session is closed
+- fixed several roadblocks preventing jIRCii from releasing memory when
+  an IRC session is closed.  this change should make jIRCii much more
+  stable when running for long periods of time.
 
 [Note to Serge: you may want to recompile your addons]
 

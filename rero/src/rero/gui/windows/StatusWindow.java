@@ -43,6 +43,10 @@ public class StatusWindow extends BackgroundPanel implements IRCAwareComponent, 
    {
       if (display != null)
         display.clear();
+
+      input.cleanup();
+
+      removeAll();
    }
 
    public void touch()

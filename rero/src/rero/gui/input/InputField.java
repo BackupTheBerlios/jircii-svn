@@ -46,6 +46,22 @@ public class InputField extends JTextField implements KeyListener, ActionListene
 
   protected InputBorder indent;
 
+  public void cleanup()
+  {
+      /* apparently this unholy triad of stuff is responsible for Java
+         holding on to each session... */
+
+      listeners = null;
+
+      getParent().remove(this);
+
+      MouseListener mickey[] = getMouseListeners();
+      for (int x = 0; x < mickey.length; x++)
+      {
+         removeMouseListener(mickey[x]);
+      }
+  }
+
   public void mouseClicked(MouseEvent ev) {
     if (ev.getButton() == MouseEvent.BUTTON1 && ev.isShiftDown() && indent != null) {
       AttributedText temp =

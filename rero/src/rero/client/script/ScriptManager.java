@@ -267,6 +267,16 @@ public class ScriptManager extends Feature implements ClientStateListener, Runti
         }
     }
 
+    public void cleanup()
+    {
+        Iterator i = loader.getScripts().iterator();
+        while (i.hasNext())
+        {
+           ScriptInstance script = (ScriptInstance)i.next();
+           script.setUnloaded(); /* tell the script its dead */
+        }
+    }
+
     public void loadScripts()
     {
         //
