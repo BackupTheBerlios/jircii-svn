@@ -1,8 +1,8 @@
  ------- -------------------- ---------   ---------------  ------- ---------
-jIRCii - Beta (43) 05.09.08 - README
+jIRCii - Beta (44) 08.07.08 - README
 -  ------------- -------- -   ---------------- --       -    -     -     - - -
 
-The official jIRCii homepage is at: http://jircii.hick.org
+The official jIRCii homepage is at: http://jircii.dashnine.org
 
 jIRCii is cross platform.  Any desktop platform with the Java 1.4.2+
 runtime environment should be able to run jIRCii without any problems.  

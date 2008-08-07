@@ -9,7 +9,7 @@ jircii - frequently asked questions:
          $$$$$$ $$$$$$ $$$$$$ $$$$$$ $$$$$$ $$$$$$ $$$$$$   $$$$$$
          $$$$$$ $$$$$$ $$$$$$ $$$$$$ $$$$$$        $$$$$$   $$$$$$
   """""" $$$$$$ $$$$$$ $$$$$$        $$$$$$ $$$$$$ $$$$$$   $$$$$$
-  $$$$$$ $$$$$$ $$$$$$ $$$$$$ 120107 $$$$$$ $$$$$$ $$$$$$   $$$$$$
+  $$$$$$ $$$$$$ $$$$$$ $$$$$$ 080708 $$$$$$ $$$$$$ $$$$$$   $$$$$$
   $$$$$$ $$$$$$ $$$$$$ $$$$$$        `?$$$$s$$$$P' $$$$$$   $$$$$$
   `?$$$$s$$$$P'                                        
 
@@ -84,6 +84,8 @@ Questions:
 52. Why can't I use Terminal and other fonts in jIRCii?
 53. Can I use old school terminal-style box drawing characters in my script?
 54. Can jIRCii display ANSI colors?
+
+55. This script __________ doesn't work in the latest jIRCii, what happened?
 
 If a question you would like answered is not here then email rsmudge@gmail.com
 
@@ -937,3 +939,11 @@ Begin jIRCii FAQ:
     scripted.  I have no intention to add this support to jIRCii at this
     time.
 
+55. This script __________ doesn't work in the latest jIRCii, what happened?
+
+    The newest version of jIRCii uses the newest version of Sleep.  Overall
+    Sleep has had outstanding backwards compatability with old jIRCii scripts.
+    However the new version is much better about reporting errors.  If Sleep
+    is catching something now, chances are it was a bug or weird side effect
+    waiting to happen.  If you need help fixing these issues pop by #jIRCii
+    on EFNet.  We'll try to to help you out.

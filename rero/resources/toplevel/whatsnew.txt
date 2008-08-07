@@ -1,6 +1,6 @@
 Beta    44 release 7 Aug 08
 ====
-- updated scripting engine to Sleep 2.1-u2, over 50 logged improvements
+- updated scripting engine to Sleep 2.1-u2.5, over 50 logged improvements
   and feature changes.  If it doesn't break your script you are bound
   to like it.  Here are the compatability changes to watch out for:
 
