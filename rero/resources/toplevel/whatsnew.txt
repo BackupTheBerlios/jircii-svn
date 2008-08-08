@@ -1,3 +1,8 @@
+Beta    44 release 7 Aug 08 (10:00pm)
+====
+- Fixed a bug preventing /list -gui window from being closed.  I couldn't
+  let this one wait until the next release.
+
 Beta    44 release 7 Aug 08
 ====
 - updated scripting engine to Sleep 2.1-u2.5, over 50 logged improvements

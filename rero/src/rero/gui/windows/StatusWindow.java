@@ -44,7 +44,10 @@ public class StatusWindow extends BackgroundPanel implements IRCAwareComponent, 
       if (display != null)
         display.clear();
 
-      input.cleanup();
+      if (input != null)
+      {
+         input.cleanup();
+      }
 
       removeAll();
    }
