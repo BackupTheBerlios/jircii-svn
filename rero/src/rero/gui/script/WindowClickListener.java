@@ -20,7 +20,7 @@ public class WindowClickListener extends ScriptedEventListener implements ClickL
       eventData.put("$item",  ev.getClickedText());
       eventData.put("$parms", ev.getContext());
       eventData.put("$data",  ev.getClickedText() + " " + ev.getContext());
-      eventData.put("$mouse", ev.getEvent().paramString());
+      eventData.put("$mouse", ev.getEvent());
       eventData.put("$clicks", new Integer(ev.getEvent().getClickCount()).toString());
 
       if (dispatchEvent(eventData) == rero.ircfw.interfaces.ChatListener.EVENT_HALT)

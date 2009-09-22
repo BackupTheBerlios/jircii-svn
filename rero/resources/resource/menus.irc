@@ -620,6 +620,15 @@ bind Alt+Right
    activateWindow(@windows[($x + 1) % size(@windows)]);
 }
 
+bind Ctrl+Tab
+{
+   local('@windows $x');
+   @windows = getWindows();
+
+   for ($x = 0; @windows[$x] ne getActiveWindow() && $x < size(@windows); $x++) { }
+
+   activateWindow(@windows[($x + 1) % size(@windows)]);
+}
 
 bind Ctrl+Left
 {

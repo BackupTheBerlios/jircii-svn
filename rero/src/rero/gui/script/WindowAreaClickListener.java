@@ -17,7 +17,7 @@ public class WindowAreaClickListener extends ScriptedEventListener implements Cl
 
     HashMap eventData = new HashMap();
     eventData.put("$item", ev.getContext());
-    eventData.put("$mouse", event.paramString());
+    eventData.put("$mouse", event);
     eventData.put("$clicks", new Integer(event.getClickCount()).toString());
 
     if (dispatchEvent(eventData) == ChatListener.EVENT_HALT) {

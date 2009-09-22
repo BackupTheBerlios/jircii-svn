@@ -61,6 +61,7 @@ public class ClientUtils
         String taglines[] = {
             "highly caffeinated",
             "Fat butane, grubbin' on French fries",
+            "No rest for the wicked",
             "Clean. Christian. Comprehensive.",
         };
         int r = ctime() % taglines.length;
@@ -428,7 +429,7 @@ public class ClientUtils
 
     public static boolean isChannel(String target)
     {
-       return (target.length() > 0 && (target.charAt(0) == '#' || target.charAt(0) == '&'));
+       return (target.length() > 0 && "#&!+".indexOf(target.charAt(0)) > -1);
     }
 
     public static int ctime()

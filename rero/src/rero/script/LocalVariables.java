@@ -22,6 +22,7 @@ package rero.script;
  
 import sleep.interfaces.*;
 import sleep.runtime.*;
+import sleep.engine.ObjectUtilities;
 
 import rero.ircfw.interfaces.FrameworkConstants; // we take advantage of the $parms constant.
 
@@ -58,7 +59,7 @@ public class LocalVariables implements Variable
               parmsValue = (String)_data.get(key);
           }
 
-          data.put(key, SleepUtils.getScalar((String)_data.get(key)) );
+          data.put(key, ObjectUtilities.BuildScalar(true, _data.get(key)));
        }
     }
 

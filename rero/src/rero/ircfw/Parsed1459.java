@@ -59,7 +59,7 @@ public class Parsed1459 implements FrameworkConstants
    protected static String hostPattern2   = "(.+?)";
 
    protected static String hostPattern    = "([\\w\\-\\=]++[[\\.|\\:][\\w\\-\\=]++]*)";
-   protected static String channelPattern = "([\\#|\\&]\\S++)";
+   protected static String channelPattern = "([\\#|\\&|\\!|\\+]\\S++)";
 
    // ([\-|\[|\]|\\|\`|\^|\{|\}|\w|\-]++)!(([\~\w\-]++)@([\w\-]++[\.[\w\-]++]*))
 
@@ -148,7 +148,7 @@ public class Parsed1459 implements FrameworkConstants
        }
        else
        {
-           if (((data.charAt(1) == '#') || (data.charAt(1) == '&')) && data.indexOf(' ') == -1)
+           if ( "#&+!".indexOf(data.charAt(1)) > -1 && data.indexOf(' ') == -1 )
            {
                // the parameter is a channel, this is put in place for broke assed ircds
                // that don't know any better... grr.
@@ -200,7 +200,16 @@ public class Parsed1459 implements FrameworkConstants
        }
        else
        {
-          eventInformation.put($PARMS$, "");
+          /* fix a bug with NICK event if necessary */
+          if ("NICK".equals((String)eventInformation.get($EVENT$)))
+          {
+             eventInformation.put($DATA$, "<null> " + parmsString.toString());
+             eventInformation.put($PARMS$, parmsString.toString());
+          }
+          else
+          {
+             eventInformation.put($PARMS$, "");
+          }
        }  
 
        return eventInformation;

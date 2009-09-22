@@ -9,7 +9,7 @@ jircii - frequently asked questions:
          $$$$$$ $$$$$$ $$$$$$ $$$$$$ $$$$$$ $$$$$$ $$$$$$   $$$$$$
          $$$$$$ $$$$$$ $$$$$$ $$$$$$ $$$$$$        $$$$$$   $$$$$$
   """""" $$$$$$ $$$$$$ $$$$$$        $$$$$$ $$$$$$ $$$$$$   $$$$$$
-  $$$$$$ $$$$$$ $$$$$$ $$$$$$ 080708 $$$$$$ $$$$$$ $$$$$$   $$$$$$
+  $$$$$$ $$$$$$ $$$$$$ $$$$$$ 092209 $$$$$$ $$$$$$ $$$$$$   $$$$$$
   $$$$$$ $$$$$$ $$$$$$ $$$$$$        `?$$$$s$$$$P' $$$$$$   $$$$$$
   `?$$$$s$$$$P'                                        
 
@@ -424,7 +424,7 @@ Begin jIRCii FAQ:
    it.  Fortunately it has already been scripted.  You can download 
    flash.irc, an addon script that adds this functionality at:
 
-   http://sleep.dashnine.org/scripts.html
+   http://jircii.dashnine.org/scripts.html
 
 27. How do I specify my own local IP address information for DCCs?
 
@@ -596,7 +596,7 @@ Begin jIRCii FAQ:
     (afterall, every pixel is valuable) then type the following in a jIRCii
     window:
 
-    h. /eval setProperty("notabs.border", 0);
+    h. /eval setProperty("notabs.border", 0)
 
     Now comes the final step:
 
@@ -647,8 +647,7 @@ Begin jIRCii FAQ:
 
     http://sleep.dashnine.org/
 
-    Sleep is now released under the LGPL.  jIRCii uses the Sleep version
-    02.28.05.  Sleep 2.0 is in beta and not used in jIRCii yet. 
+    Sleep is now released under the LGPL.  
 
     See license.txt for more information on what freedoms the artistic 
     license grants you.  

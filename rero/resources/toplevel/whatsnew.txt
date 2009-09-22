@@ -1,8 +1,16 @@
-Beta    44 release 7 Aug 08 (10:00pm)
+Beta    45 release 22 Sept 09
 ====
 - Fixed a bug preventing /list -gui window from being closed.  I couldn't
   let this one wait until the next release.
 - Fixed tab command completion
+- Upgraded to Sleep 2.1u4, several bug fixes and a few new features.  
+- $mouse variable in on click/dclick events is now a java.awt.event.MouseEvent 
+  object.  You can now call Java methods on this object if you need to.
+- Ctrl+Tab now cycles jIRCii windows (similar to Ctrl+Right Arrow)
+- fixed a bug with nick changes breaking jIRCii on InspIRCd servers
+- jIRCii now supports ! and + channels.  Thanks creative IRCDs!  You're
+  really innovating now.
+- default script now shows channel part messages (when specified)
 
 Beta    44 release 7 Aug 08
 ====

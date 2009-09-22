@@ -173,8 +173,15 @@ set USER_QUIT
 }
 
 set CHANNEL_PART 
-{ 
-   return "\C18*\B*\B* $nick has left: $target"; 
+{
+   if ($parms eq "")
+   {
+      return "\C18*\B*\B* $nick has left: $target"; 
+   } 
+   else
+   {
+      return "\C18*\B*\B* $nick has left: $target \B(\B $+ $parms $+ \B)"; 
+   }
 }
 
 set CHANNEL_TEXT 
